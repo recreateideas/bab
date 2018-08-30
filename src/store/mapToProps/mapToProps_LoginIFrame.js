@@ -55,14 +55,20 @@ const mapDispatchToProps = (dispatch) => {
             }
             dispatch(action);
         },
-
         setCollectionToStore: (collection) => {
             const action = {
                 type: constants.LOGINIFRAME_SET_COLLECTION,
                 collection: collection
             }
             dispatch(action);
-        }
+        },
+        setResultsToStore: (results) => {
+            const action = {
+                type: constants.LOGINIFRAME_SET_RESULTS,
+                queryResults: results
+            }
+            dispatch(action);
+        },
     }
 }
 

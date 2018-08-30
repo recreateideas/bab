@@ -54,7 +54,7 @@ class LoginIFrame extends React.Component {
                 console.log(res);
                 console.log(res.data.userFound);
                 const userFound = res.data.userFound;
-                if (userFound) this.loginUser(data.userDetails[0]._id,data.userDetails[0].email,data.userDetails[0].nickname);
+                if (userFound) this.loginUser(res.data.userDetails[0]._id,res.data.userDetails[0].email,res.data.userDetails[0].nickname);
                 else this.handleLoginRejection();
             }
             catch (err) {
@@ -187,6 +187,7 @@ class LoginIFrame extends React.Component {
         dbDisconnect(e, this);
         this.forgetUser();
         this.props.recordUserObjectToStore(emptyUser);
+        this.props.setResultsToStore([]);
         this.setValidationState('register', 'passWord', { matchingPasswords: null, message: ' ', });
         this.setValidationState('register', 'registerEmail', { EmailValidate: null, message: ' ', });
         this.setValidationState('login', 'loginEmail', { EmailValidate: null, message: ' ', });

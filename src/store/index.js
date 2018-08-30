@@ -67,6 +67,8 @@ const reducer = (state = initialState, action) => {  // 1 is the initial state i
             return Object.assign({}, state, { user: { ...state.user, loggedIn: action.loggedIn}});
         case constants.LOGINIFRAME_RECORD_USER_OBJECT:
             return Object.assign({}, state, { user: Object.assign({},action.user )});
+        case constants.LOGINIFRAME_SET_RESULTS:
+            return Object.assign({}, state, { mongo_results: action.queryResults });
 
         case constants.TOOLS_APPLY_LOADED_STATE:
             return Object.assign({}, state, action.loadedContent);
