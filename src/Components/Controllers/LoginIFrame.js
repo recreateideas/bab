@@ -54,7 +54,7 @@ class LoginIFrame extends React.Component {
                 console.log(res);
                 console.log(res.data.userFound);
                 const userFound = res.data.userFound;
-                if (userFound) this.loginUser(res.data);
+                if (userFound) this.loginUser(data.userDetails[0]._id,data.userDetails[0].email,data.userDetails[0].nickname);
                 else this.handleLoginRejection();
             }
             catch (err) {
@@ -85,7 +85,8 @@ class LoginIFrame extends React.Component {
                         details: registerDetails
                     })
                 console.log(res.data);
-                this.sendLoginRequest();
+                const userInserted = res.data.userInserted;
+                if (userInserted) this.loginUser(res.data._id,res.data.email,res.data.nickname);
             }
             catch (err) {
                 console.log(err);
@@ -99,13 +100,12 @@ class LoginIFrame extends React.Component {
         console.log('rejected');
     }
 
-    loginUser(data) {
+    loginUser(id,email,nickname) {
         console.log('log me in');
-        console.log(data);
         this.props.loginUserToStore(true);
-        this.props.recordUserDetailsToStore('ID', data.userDetails[0]._id);
-        this.props.recordUserDetailsToStore('loginEmail', data.userDetails[0].email);
-        this.props.recordUserDetailsToStore('nickName', data.userDetails[0].nickname);
+        this.props.recordUserDetailsToStore('ID', id);
+        this.props.recordUserDetailsToStore('loginEmail', email);
+        this.props.recordUserDetailsToStore('nickName', nickname);
     }
 
     validateRegistrForSubmission() {
