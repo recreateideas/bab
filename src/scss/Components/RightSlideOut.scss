@@ -1,0 +1,68 @@
+$rightSlideOut_toggle_width: 50px;
+$rightSlideOut_inner_width: 100px;
+$transition-rules: right 0.2s ease-in-out;
+
+#loginiFrame.loggedInFrame{
+    $iFrameWidth_LoggedIn:350px;
+    width: $iFrameWidth_LoggedIn !important;
+    margin-left: calc(-1 * #{$iFrameWidth_LoggedIn} / 2) !important;
+}
+
+#loggedInGrid{
+    text-align: center;
+    position: relative;
+    width: auto;
+    .greenText{
+        color: green;
+    }
+    ul {
+        padding-left: 0px !important;
+    }
+    .loginBottomButtons{
+        margin-top: 10px;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+    }
+}
+
+#rightSlideOut_toggle {
+    position: absolute;
+    left: -$rightSlideOut_toggle_width;
+    width: $rightSlideOut_toggle_width;
+    background: rgba(131, 84, 236,0.5);
+    min-height: 70px;
+    max-width: $rightSlideOut_toggle_width;
+    border-top-left-radius: 110px;
+    border-bottom-left-radius: 110px; 
+    text-align: center;
+    padding-top: 7px;
+    padding-left: 3px;
+}
+
+#rightSlideOut {
+    position: fixed;
+    background: #999;
+    border-bottom-left-radius: 11px; 
+    height: 500px;
+    min-height: 500px;
+    top: 12px;
+    width: $rightSlideOut_inner_width;
+    right: -$rightSlideOut_inner_width;
+    transition: $transition-rules;
+    -o-transition: $transition-rules;
+    -ms-transition: $transition-rules;
+    -moz-transition: $transition-rules;
+    -webkit-transition: $transition-rules;
+}
+
+#rightSlideOut_inner {
+    padding: 20px;
+}
+
+#rightSlideOut:hover {
+    right: 0px;
+    #rightSlideOut_toggle {
+        background: #8354EC;
+    }
+}

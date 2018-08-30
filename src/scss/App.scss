@@ -1,0 +1,54 @@
+@import "./node_modules/react-datepicker/src/stylesheets/datepicker.scss";
+@import 'helpers/parameters';
+@import 'helpers/functions';
+@import 'helpers/mixins.button';
+@import 'themes/json.scss';
+@import 'themes/fonts.scss';
+@import 'themes/layouts.scss';
+@import 'components/Body.scss';
+@import 'components/DateTimePicker.scss';
+@import 'components/QueryComponents.scss';
+@import 'components/Sidebar.scss';
+@import 'components/StageFormLine.scss';
+@import 'components/Tabs.scss';
+@import 'components/ToggleSwitch.scss';
+@import 'components/RightSlideOut.scss';
+@import 'components/LoginIFrame.scss';
+
+
+.borderlessButton {
+    cursor: pointer;
+    border: solid 3px #333;
+    border-radius: 100%;
+    padding-left: 3.5px;
+    padding-top: 8px;
+    width: 67px;
+    height: 67px;
+    .iconButton {
+        width:50px;
+        text-shadow: grey 2px 2px;
+        &:active,&:focus{
+            text-shadow: #555 2px 2px;
+            color: #777;
+        }
+    }
+    &:hover{
+        background-color: rgba(0,0,0,.1);
+    }
+    &.loggedInBorder{
+        padding-left: 6px;
+        background-color: rgba(1, 90, 1,.15);
+        .iconButton {
+            color: rgb(1, 90, 1);
+            text-shadow: #7b8877 2px 2px;
+            &:active,&:focus{
+                text-shadow: #555 2px 2px;
+                color: rgb(70, 104, 70);
+            }
+        }
+    }
+}
+
+.loggedInImage {
+    width: 230px;
+}
