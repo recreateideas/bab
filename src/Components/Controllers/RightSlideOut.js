@@ -48,11 +48,20 @@ class RightSlideOut extends Component {
                             <FontAwesome name='users' size='3x' className={`iconButton ${hideLoggedOut}`} />
                             <FontAwesome name='user-check' size='3x' className={`iconButton loggedInButton ${hideLoggedIn}`} />
                         </div>
-                        <div id='increaseFont' className={'fontButton'} onClick={this.props.increaseFont}>
-                            <h4>+</h4>
+                        {/* <hr className="slideSeparator" /> */}
+                        <div className='toolContainer'>
+                            <div className='slideOutDescriptionContainer'><p className='slideOutDescription'>font size</p></div>
+                            <div id='increaseFont' className={'fontButton'} onClick={this.props.increaseFont}>
+                                <h4>+</h4>
+                            </div>
+                            <div><p className='fontSize'>{this.props.fontSize}</p></div>
+                            <div id='decreaseFont' className={'fontButton'} onClick={this.props.decreaseFont}>
+                                <h4>&#8722;</h4>
+                            </div>
                         </div>
-                        <div id='decreaseFont' className={'fontButton'} onClick={this.props.decreaseFont}>
-                            <h4>&#8722;</h4>
+                        {/* <hr className="slideSeparator" /> */}
+                        <div className='toolContainer'>
+                            <div className='slideOutDescriptionContainer'><p className='slideOutDescription'>tools</p></div>
                         </div>
                     </div>
                 </div>
@@ -67,7 +76,9 @@ class RightSlideOut extends Component {
 
 
 RightSlideOut.propTypes = {
-
+    decreaseFont: PropTypes.func,
+    increaseFont: PropTypes.func,
+    fontSize: PropTypes.number,
 };
 
 export default connect(

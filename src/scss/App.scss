@@ -14,8 +14,51 @@
 @import 'components/ToggleSwitch.scss';
 @import 'components/RightSlideOut.scss';
 @import 'components/LoginIFrame.scss';
+$fontButtonColor:#8354EC;
+$fontSizeColor: grey;
 
-
+#rightSlideOut_inner {
+    padding: 7px;
+    text-align: center;
+    .toolContainer{
+        margin-top: 10px;
+        border: solid 1px #777;
+        border-radius: 7px;
+        padding: 5px;
+        background: #999;
+    }
+    hr.slideSeparator {
+        border-top: 1px solid #777 !important;
+        margin-bottom: 5px;
+        margin-top: 10px;
+        &:after {
+            content: '\002665';
+            display: inline-block;
+            position: relative;
+            top: -15px;
+            padding: 0 10px;
+            background: grey;
+            color: #8c8b8b;
+            font-size: 18px;
+            width: 50px;
+        }
+    }
+    .slideOutDescriptionContainer {
+        text-align: center;
+        p.slideOutDescription {
+            color: #555;
+            font-style: italic;
+            white-space: nowrap;
+        }
+    }
+    .fontSize {
+        font-size: 16px;
+        text-shadow: 2px 0 $fontSizeColor, 0 2px $fontSizeColor, 0px 0 $fontSizeColor, 0 -0px $fontSizeColor;
+        margin-bottom: 2px !important;
+        top: 4px;
+        position: relative;
+    }
+}
 
 .fontButton {
     border-radius: 100%;
@@ -23,11 +66,11 @@
     min-width: 30px !important;
     height: 30px !important;
     cursor: pointer;
-    margin-left: 23px;
+    margin-left: 12px;
     h4 {
         font-size: 26px;
         font-weight: 900;
         color: #333;
-        text-shadow: -1px 0 purple, 0 1px purple, 1px 0 purple, 0 -1px purple;
+        text-shadow: -1px 0 $fontButtonColor, 0 1px $fontButtonColor, 1px 0 $fontButtonColor, 0 -1px $fontButtonColor;
     }
 }

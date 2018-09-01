@@ -1,5 +1,5 @@
 $rightSlideOut_toggle_width: 50px;
-$rightSlideOut_inner_width: 100px;
+$rightSlideOut_inner_width: 80px;
 $transition-rules: right 0.2s ease-in-out;
 
 #loginiFrame.loggedInFrame{
@@ -41,14 +41,18 @@ $transition-rules: right 0.2s ease-in-out;
 }
 
 #rightSlideOut {
+    &::selection { 
+        background: transparent !important;
+    }
     position: fixed;
-    background: #999;
-    border-bottom-left-radius: 11px; 
+    background: #888;
+    border-bottom-left-radius: 40px; 
     height: 500px;
     min-height: 500px;
     top: 12px;
     width: $rightSlideOut_inner_width;
-    right: -$rightSlideOut_inner_width;
+    // right: -$rightSlideOut_inner_width;
+    right: -0px;
     transition: $transition-rules;
     -o-transition: $transition-rules;
     -ms-transition: $transition-rules;
@@ -57,7 +61,7 @@ $transition-rules: right 0.2s ease-in-out;
 }
 
 #rightSlideOut_inner {
-    padding: 20px;
+    padding: 10px;
 }
 
 #rightSlideOut:hover {
@@ -87,8 +91,8 @@ $transition-rules: right 0.2s ease-in-out;
             background-color: rgba(0,0,0,.1);
         }
         &.loggedInBorder{
-            padding-left: 6px;
-            background-color: rgba(1, 90, 1,.15);
+            padding-left: 1px;
+            background-color: rgba(3, 242, 63, 0.15);
             .iconButton {
                 color: rgb(1, 90, 1);
                 text-shadow: #7b8877 2px 2px;
