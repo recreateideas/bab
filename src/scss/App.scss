@@ -16,39 +16,18 @@
 @import 'components/LoginIFrame.scss';
 
 
-.borderlessButton {
-    cursor: pointer;
-    border: solid 3px #333;
-    border-radius: 100%;
-    padding-left: 3.5px;
-    padding-top: 8px;
-    width: 67px;
-    height: 67px;
-    .iconButton {
-        width:50px;
-        text-shadow: grey 2px 2px;
-        &:active,&:focus{
-            text-shadow: #555 2px 2px;
-            color: #777;
-        }
-    }
-    &:hover{
-        background-color: rgba(0,0,0,.1);
-    }
-    &.loggedInBorder{
-        padding-left: 6px;
-        background-color: rgba(1, 90, 1,.15);
-        .iconButton {
-            color: rgb(1, 90, 1);
-            text-shadow: #7b8877 2px 2px;
-            &:active,&:focus{
-                text-shadow: #555 2px 2px;
-                color: rgb(70, 104, 70);
-            }
-        }
-    }
-}
 
-.loggedInImage {
-    width: 230px;
+.fontButton {
+    border-radius: 100%;
+    width: 30px !important;
+    min-width: 30px !important;
+    height: 30px !important;
+    cursor: pointer;
+    margin-left: 23px;
+    h4 {
+        font-size: 26px;
+        font-weight: 900;
+        color: #333;
+        text-shadow: -1px 0 purple, 0 1px purple, 1px 0 purple, 0 -1px purple;
+    }
 }

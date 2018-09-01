@@ -1,28 +1,33 @@
-
-
-#mongo_results{
-    position: relative;
-    left:7%;
-    background-color: rgba(0,0,0,0) !important;
+:root {
+    --json-font-size: 14px;
 }
 
-.json-pretty{
+#mongo_results {
+    position: relative;
+    left: 7%;
+    background-color: rgba(0, 0, 0, 0) !important;
+}
+
+.json-pretty {
     color: #b7b8b6;
     font-weight: 600;
-    font-size: 15px;
-    border: solid 0px rgba(0,0,0,0)!important;
-    outline-color: rgba(0,0,0,0);
+    font-size: var(--json-font-size);
+    border: solid 0px rgba(0, 0, 0, 0) !important;
+    outline-color: rgba(0, 0, 0, 0);
 }
-.json-key{
-        color: #66a5ad;
-        font-weight: inherit;
-    }
 
-    .json-value {
-        color: #a482f1;/* #7da3a1;*/
-        font-weight: inherit;
-    }
-  .json-string {
-        color: #6fb98f;
-        font-weight: inherit;
-    }
+.json-key {
+    color: #66a5ad;
+    font-weight: inherit;
+}
+
+.json-value {
+    color: #a482f1;
+    /* #7da3a1;*/
+    font-weight: inherit;
+}
+
+.json-string {
+    color: #6fb98f;
+    font-weight: inherit;
+}

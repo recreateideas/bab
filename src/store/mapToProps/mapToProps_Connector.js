@@ -4,6 +4,7 @@ const mapStateToProps = (state) => { // use this also to select what propsApp sh
     // console.log('@@ APP -> mapStateToProps');
     return {
         storeConnection: state.connection,
+        storeUser: state.user,
         storeUserLoggedIn: state.user.loggedIn,
         // storeConnectionMessage: state.connectionMessage,
         // storeIsConnected: state.isDBConnected
@@ -35,14 +36,6 @@ const mapDispatchToProps = (dispatch) => {
             }
             dispatch(action);
         },
-        // setConnectionMessageToStore: (message) => {
-        //     // console.log(message);
-        //     const action = {
-        //         type: constants.CONNECTOR_SET_MESSAGE,
-        //         connectionMessage: message
-        //     }
-        //     dispatch(action);
-        // },
         setCollectionToStore: (collection) => {
             const action = {
                 type: constants.CONNECTOR_SET_COLLECTION,

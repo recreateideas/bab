@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { Grid, Row, Col } from 'react-bootstrap';
 import axios from 'axios';
 import { validateFile, validateContent } from '../../tools/fileManagers';
-import { dbDisconnect, dbConnect } from '../DBClientUtils/DBClientUtils';
+import { dbDisconnect, dbConnect, updateUserField } from '../DBClientUtils/DBClientUtils';
 import PropTypes from 'prop-types';
 import 'regenerator-runtime';
 import 'babel-polyfill';
@@ -42,7 +42,7 @@ class Connector extends React.Component {
     }
 
     recordConnectionParams(e) {
-        console.log(e.target.id);
+        // console.log(e.target.id);
         const value = e.target.value;
         this.props.setConnectionParametersToStore(e.target.id, value);
     }
@@ -53,9 +53,14 @@ class Connector extends React.Component {
         //add user login check
         switch (connect) {
             case true:
-                if (isUserLoggedIn) {
+                if (isUserLoggedIn/* && check permissions*/) {
                     dbConnect(e, this);
-                    // this.dbConnect(e);
+                    updateUserField({
+                        user: this.userDetails(),
+                        data:{
+                            lastConnectionTime: new Date()
+                        }
+                    },this)
                 } else {
                     this.props.setConnectionParametersToStore('connectionStatus', 'LoggedOut');
                     this.props.setConnectionParametersToStore('connectionMessage', 'Almost! (you need to be logged in to access your databases.)');
@@ -65,6 +70,13 @@ class Connector extends React.Component {
                 // this.dbDisconnect(e);
                 dbDisconnect(e, this);
                 break;
+        }
+    }
+
+    userDetails(){
+        return {
+            _id: this.props.storeUser.ID,
+            email: this.props.storeUser.loginEmail,
         }
     }
 
@@ -87,7 +99,7 @@ class Connector extends React.Component {
 
     handleFilesSelect(e) {
         const files = e.target.files; // FileList object
-        console.log(e.target.value);
+        // console.log(e.target.value);
         [...files].forEach(file => {
             if (validateFile(file, { maxSize: 4, excludeFormat: '[.*]+' })) { //validateContent
                 const reader = new FileReader();
@@ -166,7 +178,7 @@ class Connector extends React.Component {
         const displayField = sshMode === 'file' ? 'hidden' : 'show';
         const enableInput = this.props.storeConnection.isDBConnected === false || this.props.storeConnection.isDBConnected === undefined ? '' : 'inActiveDB';
         const enableButtonEvents = this.props.storeConnection.isDBConnected === false || this.props.storeConnection.isDBConnected === undefined ? '' : 'removeEvents';
-        console.log(this.props.storeConnection.connectionStatus);
+        // console.log(this.props.storeConnection.connectionStatus);
         return (
             <div id='connectorContainer' className='featureContainer'>
                 <div className='connectorTitle'>

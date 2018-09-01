@@ -55,7 +55,7 @@ const dbConnect = async (e,component)=> {
 };
 
 
-const fetchResults = async (component) => {
+const fetchResults = async component => {
     const db = component.props.storeDB;
     const collection = component.props.storeCollection;
     const mongo_object = component.props.storeMongoObject;
@@ -85,5 +85,12 @@ const fetchResults = async (component) => {
     }
 };
 
+const updateUserField = async ( payload, component ) => {
+    console.log(payload.data);
+    console.log(payload.user);
+    const res = await axios.post(`${process.env.REMOTE_HOST}:${process.env.REMOTE_PORT}/users/update`,payload);
+    console.log(res);
+}
 
-export { dbDisconnect, dbConnect, fetchResults};
+
+export { dbDisconnect, dbConnect, fetchResults, updateUserField};

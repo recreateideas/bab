@@ -7,6 +7,21 @@ import PropTypes from 'prop-types';
 
 class Background extends React.Component {
 
+    constructor(){
+        super();
+        this.json = React.createRef();
+    }
+
+    increaseFont() {
+        const json = this.json;
+        console.log(json);
+    }
+
+    decreaseFont() {
+        const json = this.json;
+        console.log(json);
+    }
+
     render() {
         let resultClass;
         // console.log(this.props.storeResults);
@@ -17,12 +32,15 @@ class Background extends React.Component {
         console.log(window.location.pathname);
         return (
             <div>
-                <JSONPretty id='mongo_results' json={this.props.storeResults} className={resultClass}></JSONPretty>
+                <JSONPretty ref={this.json} id='mongo_results' json={this.props.storeResults} className={resultClass}></JSONPretty>
                 < div className='headerTitle'>
                     <img src={require('../../images/baboon_white_monkey.png')} alt='logo' className='baboonLogo' />
                     {/* <img src={require('../../images/slideright_label.png')} alt='logo' className='baboonLogo' />v */}
                 </div>
-                <RightSlideOut/>
+                <RightSlideOut
+                    increaseFont={this.increaseFont.bind(this)}
+                    decreaseFont={this.decreaseFont.bind(this)}
+                />
             </div>
         )
     }
