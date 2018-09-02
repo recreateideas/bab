@@ -64,10 +64,7 @@ const buildCSVData = (obj, objKey, keysArray, valuesArray, index) => {
 }
 
 const addPairToArray = (array, key, value) => {
-    let keyValueObject = {
-        key: key,
-        value: value
-    };
+    let keyValueObject = {key,value};
     array.push(keyValueObject);
 } 
 

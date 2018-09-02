@@ -38,6 +38,7 @@ $transition-rules: right 0.2s ease-in-out;
     text-align: center;
     padding-top: 7px;
     padding-left: 3px;
+    top:10px;
 }
 
 #rightSlideOut {
@@ -45,19 +46,20 @@ $transition-rules: right 0.2s ease-in-out;
         background: transparent !important;
     }
     position: fixed;
-    background: #888;
+    background: #999;
     border-bottom-left-radius: 40px; 
     height: 500px;
     min-height: 500px;
-    top: 12px;
+    top: 0px;
     width: $rightSlideOut_inner_width;
     // right: -$rightSlideOut_inner_width;
     right: -0px;
     transition: $transition-rules;
-    -o-transition: $transition-rules;
-    -ms-transition: $transition-rules;
-    -moz-transition: $transition-rules;
-    -webkit-transition: $transition-rules;
+    padding-bottom: 25px;
+    // -o-transition: $transition-rules;
+    // -ms-transition: $transition-rules;
+    // -moz-transition: $transition-rules;
+    // -webkit-transition: $transition-rules;
 }
 
 #rightSlideOut_inner {
@@ -71,38 +73,6 @@ $transition-rules: right 0.2s ease-in-out;
     }
 }
 
-.borderlessButton {
-    cursor: pointer;
-    border: solid 3px #333;
-    border-radius: 100%;
-    padding-left: 3.5px;
-    padding-top: 8px;
-    width: 67px;
-    height: 67px;
-        .iconButton {
-            width:50px;
-            text-shadow: grey 2px 2px;
-            &:active,&:focus{
-                text-shadow: #555 2px 2px;
-                color: #777;
-            }
-        }
-        &:hover{
-            background-color: rgba(0,0,0,.1);
-        }
-        &.loggedInBorder{
-            padding-left: 1px;
-            background-color: rgba(3, 242, 63, 0.15);
-            .iconButton {
-                color: rgb(1, 90, 1);
-                text-shadow: #7b8877 2px 2px;
-                &:active,&:focus{
-                    text-shadow: #555 2px 2px;
-                    color: rgb(70, 104, 70);
-                }
-            }
-        }
-    }
 
     .loggedInImage {
         width: 230px;

@@ -78,24 +78,28 @@ class ToolsTab extends React.Component {
     saveQuery() {
         let fullState = this.props.storeAllState;
         const fileContent = this.prepareStateForExport(fullState);
-        downloadFile({
-            content: fileContent,
-            extension: 'bab',
-            filename: `baboon_query${+new Date()}.bab`
-        });
+        if(fileContent){
+            downloadFile({
+                content: fileContent,
+                extension: 'bab',
+                filename: `baboon_query${+new Date()}.bab`
+            });
+        }
         // console.log(fileContent);
     }
 
     prepareStateForExport(fullState){
-        // delete fullState.config;
-        delete fullState.greeting;
-        delete fullState.isDBConnected;
-        delete fullState.DBcollections;
-        delete fullState.connectionMessage;
-        delete fullState.db;
-        delete fullState.mongo_results;
-        delete fullState.user;
-        return JSON.stringify(fullState);
+        if(fullState){
+            // delete fullState.config;
+            delete fullState.greeting;
+            delete fullState.isDBConnected;
+            delete fullState.DBcollections;
+            delete fullState.connectionMessage;
+            delete fullState.db;
+            delete fullState.mongo_results;
+            delete fullState.user;
+            return JSON.stringify(fullState);
+        } else return null;
     };
 
     saveResults(){

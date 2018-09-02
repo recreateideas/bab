@@ -16,16 +16,15 @@
 @import 'components/LoginIFrame.scss';
 $fontButtonColor:#8354EC;
 $fontSizeColor: grey;
-
 #rightSlideOut_inner {
     padding: 7px;
     text-align: center;
-    .toolContainer{
+    .toolContainer {
         margin-top: 10px;
         border: solid 1px #777;
         border-radius: 7px;
         padding: 5px;
-        background: #999;
+        background: #bbb;
     }
     hr.slideSeparator {
         border-top: 1px solid #777 !important;
@@ -48,15 +47,29 @@ $fontSizeColor: grey;
         p.slideOutDescription {
             color: #555;
             font-style: italic;
-            white-space: nowrap;
+            white-space: nowrap; // margin-bottom: 15px;
         }
     }
     .fontSize {
         font-size: 16px;
         text-shadow: 2px 0 $fontSizeColor, 0 2px $fontSizeColor, 0px 0 $fontSizeColor, 0 -0px $fontSizeColor;
         margin-bottom: 2px !important;
-        top: 4px;
+        top: 2px;
         position: relative;
+    }
+    ul#quickToolsList {
+        list-style: none;
+        padding-left: 0px;
+        margin-top: 15px;
+        li {
+            margin-top: 10px;
+        }
+    }
+    .inactiveButtonIcon {
+        color: grey;
+        pointer-events: none;
+        cursor: no-drop !important;
+        text-shadow: 0px 0px;
     }
 }
 
@@ -67,10 +80,69 @@ $fontSizeColor: grey;
     height: 30px !important;
     cursor: pointer;
     margin-left: 12px;
-    h4 {
-        font-size: 26px;
-        font-weight: 900;
-        color: #333;
-        text-shadow: -1px 0 $fontButtonColor, 0 1px $fontButtonColor, 1px 0 $fontButtonColor, 0 -1px $fontButtonColor;
+    margin-bottom: 5px;
+    font-size: 26px;
+    font-weight: 900;
+    color: #333;
+    text-shadow: -1px 0 $fontButtonColor, 0 1px $fontButtonColor, 1px 0 $fontButtonColor, 0 -1px $fontButtonColor;
+}
+
+.iconButton {
+    cursor: pointer;
+    text-shadow: -1px 0 #8354EC, 0 1px #8354EC, 1px 0 #8354EC, 0 -1px #8354EC;
+}
+
+.borderlessButton {
+    cursor: pointer;
+    border: solid 3px #333;
+    border-radius: 100%;
+    padding-right: 3.5px;
+    padding-top: 8px;
+    width: 67px;
+    height: 67px;
+    .iconButton {
+        width: 50px;
+        text-shadow: grey 2px 2px;
+        &:active,
+        &:focus {
+            text-shadow: #555 2px 2px;
+            color: #777;
+        }
+        &:hover {
+            background-color: rgba(0, 0, 0, .1);
+        }
+    }
+    &:hover {
+        background-color: rgba(0, 0, 0, .1);
+    }
+    &.loggedInBorder {
+        padding-left: 1px;
+        background-color: rgba(3, 242, 63, 0.15);
+        .iconButton {
+            color: rgb(1, 90, 1);
+            text-shadow: #7b8877 2px 2px;
+            top: -2px;
+            position: relative;
+            &:active,
+            &:focus {
+                text-shadow: #555 2px 2px;
+                color: rgb(70, 104, 70);
+            }
+        }
+    }
+}
+
+ul#userPanel {
+    list-style: none;
+    padding-left: 0px;
+    top: -2px;
+    position: relative;
+    #nicknameWrapper {
+        margin-top: 11px;
+        p {
+            color: #396f8e;
+            word-break: break-all;
+            line-height: 0.7em;
+        }
     }
 }

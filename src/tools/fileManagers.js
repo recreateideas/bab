@@ -56,6 +56,7 @@ const downloadFile = args => {
 
     saveResultsToCSV = QueryResults => {
         let fileContent = OBJtoCSVConverter(QueryResults);
+        console.log(fileContent);
         downloadFile({
             content: fileContent,
             extension: 'csv',
