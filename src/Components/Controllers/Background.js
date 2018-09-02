@@ -34,10 +34,12 @@ class Background extends React.Component {
 
     formatUglyJSON(json){
         let html = JSON.stringify(json);
-        html = html.replace(/\{"/g,'{"<span class="json-key">')
-        html = html.replace(/":"/g,'</span>":"<span class="json-string">')
-        html = html.replace(/","/g,'</span>":"<span class="json-key">')
-        html = html.replace(/"}/g,'</span>"}')
+        html = html.replace(/("|{"|,")([\d\w]+)(":)/gm,`$1<span class='json-key'>$2</span>$3`);
+        html = html.replace(/(:"|\[")([\d\w]+)(")/gm,`$1<span class='json-string'>$2</span>$3`);
+        html = html.replace(/(\[")([\d\w]+)(",|"\]|",")/gm,`$1<span class='json-string'>$2</span>$3`);
+        html = html.replace(/(,")([\d\w]+)(",|"])/gm,`$1<span class='json-string'>$2</span>$3`);
+        html = html.replace(/(,|:\[|:{|:)(\d+)/gm,`$1<span class='json-value'>$2</span>`);
+
         // html = html.replace(/\,/g,', ')
         return html;
     }
@@ -52,7 +54,7 @@ class Background extends React.Component {
         // console.log(window.location.pathname);
         return (
             <div>
-                <JSONPretty ref={this.json} id='mongo_results' style={{fontSize:`${this.state.fontSize}px`}}json={this.props.storeResults} className={`${resultClass} ${this.state.displayPretty}`}></JSONPretty>
+                <JSONPretty ref={this.json} id='mongo_results' space={2} style={{fontSize:`${this.state.fontSize}px`}}json={this.props.storeResults} className={`${resultClass} ${this.state.displayPretty}`}></JSONPretty>
                 <div id='minifiedContainer' className={this.state.displayMinified}><p style={{fontSize:`${this.state.fontSize}px`}} dangerouslySetInnerHTML={{ __html: this.formatUglyJSON(this.props.storeResults)}}/></div>
                 < div className='headerTitle'>
                     <img src={require('../../images/baboon_white_monkey.png')} alt='logo' className='baboonLogo' />
