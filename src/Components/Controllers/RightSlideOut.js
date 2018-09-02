@@ -132,19 +132,19 @@ class RightSlideOut extends Component {
                             <ul id='quickToolsList'>
                                 <li id='saveResults' data-tip data-for='tooltip_CSV'>
                                     <FontAwesome name='file-export' size='2x' className={`iconButton ${activeToolsClass.activeQuerySave}`} onClick={this.saveResults.bind(this)} />
-                                    <ReactTooltip id='tooltip_CSV' type='error'>
+                                    <ReactTooltip id='tooltip_CSV' type='warning'>
                                         <span>export results to CSV</span>
                                     </ReactTooltip>
                                 </li>
                                 <li id='saveQuery' data-tip data-for='tooltip_saveQuery'>
                                     <FontAwesome name='save' size='2x' className={`iconButton ${activeToolsClass.activeExport}`} onClick={this.saveQuery.bind(this)} />
-                                    <ReactTooltip id='tooltip_saveQuery' type='error'>
+                                    <ReactTooltip id='tooltip_saveQuery' type='warning'>
                                         <span>save query to file</span>
                                     </ReactTooltip>
                                 </li>
                                 <li id='shareWorkspace' data-tip data-for='tooltip_shareWorkspace'>
                                     <FontAwesome name='share-alt' size='2x' className={`iconButton ${activeToolsClass.activeShare}`} />
-                                    <ReactTooltip id='tooltip_shareWorkspace' type='error'>
+                                    <ReactTooltip id='tooltip_shareWorkspace' type='warning'>
                                         <span>share workspace</span>
                                     </ReactTooltip>
                                 </li>

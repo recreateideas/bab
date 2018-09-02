@@ -15,57 +15,73 @@
 @import 'components/RightSlideOut.scss';
 @import 'components/LoginIFrame.scss';
 
-$tooltip-color: rgba(244, 179, 151,0.9);
-$right-quicktools: 65px;
-.showTooltip {
-    opacity: 1;
-}
+// $tooltip-color: rgba(244, 179, 151,0.9);
+// $right-quicktools: 65px;
+// .showTooltip {
+//     opacity: 1;
+// }
 
-.tooltipContainerClass {
-    position: relative;
-    top: -35px;
-    .generalTooltip {
-        position: fixed; // display: inline;
-        background-color: $tooltip-color;
-        color: black;
-        border-radius: 5px;
-        font-size: 14px; // padding: 1px 5px;
-        // min-height: 40px;
-        opacity: 1 !important;
-        padding: 10px !important;
-        height: auto !important;
-        text-align: center;
-        &.rightTooltip {
-            &.quicktools {
-                right: $right-quicktools;
-                &::after {
-                    border-left: 8px solid $tooltip-color;
-                    border-top: 8px solid transparent;
-                    border-bottom: 8px solid transparent;
-                    border-right: 0px solid transparent;
-                    left: calc( 100% + 20px) !important;
-                    right: 0px;
-                    position: absolute;
-                    top: 10px;
-                    left: 25%;
-                    margin-left: -21px; // width: 0;
-                    // height: 0;
-                }
-            }
-            width: fit-content;
-        }
-        &::after {
-            border-top: 10px solid $tooltip-color;
-            border-left: 10px solid transparent;
-            border-right: 10px solid transparent;
-            bottom: 0px;
-            content: "";
-            position: absolute;
-            top: 40px;
-            left: 25%;
-            margin-left: -21px;
-            width: 0;
-            height: 0;
-        }
+// .tooltipContainerClass {
+//     position: relative;
+//     top: -35px;
+//     .generalTooltip {
+//         position: fixed; // display: inline;
+//         background-color: $tooltip-color;
+//         color: black;
+//         border-radius: 5px;
+//         font-size: 14px; // padding: 1px 5px;
+//         // min-height: 40px;
+//         opacity: 1 !important;
+//         padding: 10px !important;
+//         height: auto !important;
+//         text-align: center;
+//         &.rightTooltip {
+//             &.quicktools {
+//                 right: $right-quicktools;
+//                 &::after {
+//                     border-left: 8px solid $tooltip-color;
+//                     border-top: 8px solid transparent;
+//                     border-bottom: 8px solid transparent;
+//                     border-right: 0px solid transparent;
+//                     left: calc( 100% + 20px) !important;
+//                     right: 0px;
+//                     position: absolute;
+//                     top: 10px;
+//                     left: 25%;
+//                     margin-left: -21px; // width: 0;
+//                     // height: 0;
+//                 }
+//             }
+//             width: fit-content;
+//         }
+//         &::after {
+//             border-top: 10px solid $tooltip-color;
+//             border-left: 10px solid transparent;
+//             border-right: 10px solid transparent;
+//             bottom: 0px;
+//             content: "";
+//             position: absolute;
+//             top: 40px;
+//             left: 25%;
+//             margin-left: -21px;
+//             width: 0;
+//             height: 0;
+//         }
+//     }
+// }
+
+.__react_component_tooltip.type-success{
+    background-color: #089e83 !important;
+    &.place-right:after {
+        border-right-color: #089e83 !important;
+    }
+    &.place-left:after {
+        border-left-color: #089e83 !important;
+    }
+    &.place-top:after {
+        border-top-color: #089e83 !important;
+    }
+    &.place-bottom:after {
+        border-bottom-color: #089e83 !important;
     }
 }

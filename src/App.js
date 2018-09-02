@@ -56,28 +56,28 @@ class SlidePage extends React.Component {
                                 <label id='connectorTab' htmlFor="toggle-tab1" data-tip data-for='tooltip_connectorTab'>
                                     <FontAwesome name='plug' size='2x' /*spin*/ className='connectPlug' style={{ textShadow: '0 1px 0 rgba(255, 255, 255, 0.7)' }} />
                                 </label>
-                                <ReactTooltip id='tooltip_connectorTab' type='error'>
+                                <ReactTooltip id='tooltip_connectorTab' type='success'>
                                         <span>Connection Centre</span>
                                 </ReactTooltip>
                                 <input type="radio" name="tabs" id="toggle-tab2" />
                                 <label htmlFor="toggle-tab2" data-tip data-for='tooltip_queryTab'>
                                     <FontAwesome name='feather' size='2x' /*spin*/ style={{ textShadow: '0 1px 0 rgba(255, 255, 255, 0.7)' }} />
                                 </label>
-                                <ReactTooltip id='tooltip_queryTab' type='error'>
+                                <ReactTooltip id='tooltip_queryTab' type='success'>
                                         <span>Query Jungle</span>
                                 </ReactTooltip>
                                 <input type="radio" name="tabs" id="toggle-tab3" />
                                 <label htmlFor="toggle-tab3" data-tip data-for='tooltip_toolsTab'>
                                     <FontAwesome name='flask' size='2x' /*spin*/ style={{ textShadow: '0 1px 0 rgba(255, 255, 255, 0.7)' }} />
                                 </label>
-                                <ReactTooltip id='tooltip_toolsTab' type='error'>
+                                <ReactTooltip id='tooltip_toolsTab' type='success'>
                                         <span>Potions</span>
                                 </ReactTooltip>
                                 <input type="radio" name="tabs" id="toggle-tab4" />
                                 <label htmlFor="toggle-tab4" data-tip data-for='tooltip_settingsTab'>
                                     <FontAwesome name='cogs' size='2x' /*spin*/ style={{ textShadow: '0 1px 0 rgba(255, 255, 255, 0.7)' }} />
                                 </label>
-                                <ReactTooltip id='tooltip_settingsTab' type='error'>
+                                <ReactTooltip id='tooltip_settingsTab' type='success'>
                                         <span>Settings</span>
                                 </ReactTooltip>
                                 <ConnectTab />
