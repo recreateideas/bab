@@ -11,7 +11,6 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => {
-    // console.log('@@ STAGE -> mapDispatchToProps');
     return {
         setQueryCollectionStateToStore: (collectionState) => {
             const action = {

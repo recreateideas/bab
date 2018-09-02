@@ -33,15 +33,16 @@ class Background extends React.Component {
     }
 
     formatUglyJSON(json){
-        let html = JSON.stringify(json);
-        html = html.replace(/("|{"|,")([\d\w]+)(":)/gm,`$1<span class='json-key'>$2</span>$3`);
-        html = html.replace(/(:"|\[")([\d\w]+)(")/gm,`$1<span class='json-string'>$2</span>$3`);
-        html = html.replace(/(\[")([\d\w]+)(",|"\]|",")/gm,`$1<span class='json-string'>$2</span>$3`);
-        html = html.replace(/(,")([\d\w]+)(",|"])/gm,`$1<span class='json-string'>$2</span>$3`);
-        html = html.replace(/(,|:\[|:{|:)(\d+)/gm,`$1<span class='json-value'>$2</span>`);
-
-        // html = html.replace(/\,/g,', ')
-        return html;
+        if(json){
+            let html = JSON.stringify(json);
+            html = html.replace(/("|{"|,")([\d\w]+)(":)/gm,`$1<span class='json-key'>$2</span>$3`);
+            html = html.replace(/(:"|\[")([\d\w]+)(")/gm,`$1<span class='json-string'>$2</span>$3`);
+            html = html.replace(/(\[")([\d\w]+)(",|"\]|",")/gm,`$1<span class='json-string'>$2</span>$3`);
+            html = html.replace(/(,")([\d\w]+)(",|"])/gm,`$1<span class='json-string'>$2</span>$3`);
+            html = html.replace(/(,|:\[|:{|:)(\d+)/gm,`$1<span class='json-value'>$2</span>`);
+            return html;
+        }
+        else return '';
     }
 
     render() {

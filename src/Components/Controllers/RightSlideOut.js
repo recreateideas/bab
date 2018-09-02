@@ -45,7 +45,8 @@ class RightSlideOut extends Component {
         // console.log(fileContent);
     }
 
-    prepareStateForExport(fullState) {
+    prepareStateForExport(object) {
+        let fullState = Object.assign({},object);
         if (fullState) {
             // delete fullState.config;
             delete fullState.greeting;

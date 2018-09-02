@@ -88,8 +88,9 @@ class ToolsTab extends React.Component {
         // console.log(fileContent);
     }
 
-    prepareStateForExport(fullState){
-        if(fullState){
+     prepareStateForExport(object) {
+        let fullState = Object.assign({},object);
+        if (fullState) {
             // delete fullState.config;
             delete fullState.greeting;
             delete fullState.isDBConnected;
@@ -99,7 +100,7 @@ class ToolsTab extends React.Component {
             delete fullState.mongo_results;
             delete fullState.user;
             return JSON.stringify(fullState);
-        } else return null;
+        }
     };
 
     saveResults(){

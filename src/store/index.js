@@ -35,6 +35,7 @@ const reducer = (state = initialState, action) => {  // 1 is the initial state i
             newState = Object.assign({}, state, { queryCollectionState: action.collectionState });
             Query = QUERY(newState);
             return Object.assign({}, newState, { mongo_query: Query.string, mongo_object: Query.paramsObj });
+
         case constants.FORMLINE_SET_QUERY_COLLECTION_STATE:
             newState = Object.assign({}, state, { queryCollectionState: action.collectionState });
             Query = QUERY(newState);
