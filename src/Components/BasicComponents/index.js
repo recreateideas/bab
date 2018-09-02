@@ -8,3 +8,4 @@ export { default as SelectInput } from './SelectInput';
 export { default as TextInput } from './TextInput';
 export { default as DateTimePickerButton } from './DateTimePickerButton';
 export { default as FileLoader } from './FileLoader';
+export { default as Tooltip } from './Tooltip';

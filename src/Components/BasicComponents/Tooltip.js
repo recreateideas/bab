@@ -5,13 +5,15 @@ import PropTypes from 'prop-types';
 
 const Tooltip = props => {
     return (
-        <div className={`tooltip ${props.displayTooltip}`}>
-        {props.content}
-       </div>
+        <div className={`${props.tooltipContainerClass || ''}`}>
+            <div className={`tooltip ${props.displayTooltip} ${props.addClass}`}>
+                {props.content}
+            </div>
+        </div>
     )
 }
 
-Tooltip.PropTypes = {
+Tooltip.propTypes = {
     displayTooltip: PropTypes.string,
     content: PropTypes.string
 }

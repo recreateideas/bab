@@ -5,6 +5,8 @@ import PropTypes from 'prop-types';
 import LoginIFrame from './LoginIFrame';
 import { mapStateToProps } from '../../store/mapToProps/mapToProps_SlideRightOut';
 import { downloadFile, saveResultsToCSV } from '../../tools/fileManagers';
+import { Tooltip } from '../BasicComponents';
+import {showTooltip, hideTooltip } from '../../tools/tooltipUtils';
 
 const FontAwesome = require('react-fontawesome');
 
@@ -57,37 +59,42 @@ class RightSlideOut extends Component {
     };
 
     checkResultsLength() {
-        // const mongo_results = this.props.storeQueryResults;
-        // if (mongo_results && mongo_results.length > 0) {
-        //     return {
-        //         activeFont: '',
-        //         activeExport: '',
-        //         activeQuerySave: '',
-        //         activeShare: '',
-        //     }
-        // } else {
-        //     return {
-        //         activeFont: 'inactiveButtonIcon',
-        //         activeExport: 'inactiveButtonIcon',
-        //         activeQuerySave: 'inactiveButtonIcon',
-        //         activeShare: 'inactiveButtonIcon',
-        //     }
-        // }
-        return {
-            activeFont: '',
-            activeExport: '',
-            activeQuerySave: '',
-            activeShare: '',
+        const mongo_results = this.props.storeQueryResults;
+        if (mongo_results && mongo_results.length > 0) {
+            return {
+                activeFont: '',
+                activeExport: '',
+                activeQuerySave: '',
+                activeShare: '',
+            }
+        } else {
+            return {
+                activeFont: 'inactiveButtonIcon',
+                activeExport: 'inactiveButtonIcon',
+                activeQuerySave: 'inactiveButtonIcon',
+                activeShare: 'inactiveButtonIcon',
+            }
         }
+        /******** TEST *********/
+        // return {
+        //     activeFont: '',
+        //     activeExport: '',
+        //     activeQuerySave: '',
+        //     activeShare: '',
+        // }
+        /***********************/
     }
 
     saveResults() {
-        // if (this.state.activeExport) {
-        console.log(this.checkResultsLength());
         saveResultsToCSV(this.props.storeQueryResults);
-        // } else {
-        //     console.log('not click ');
-        // }
+    }
+
+    showTooltip(e){
+        showTooltip(e.target.id,this);
+    }
+
+    hideTooltip(e){
+        hideTooltip(e.target.id,this);
     }
 
     render() {
@@ -95,7 +102,7 @@ class RightSlideOut extends Component {
         let hideLoggedIn = this.props.storeUser.loggedIn ? '' : 'display_none';
         let loggedInBorder = this.props.storeUser.loggedIn ? 'loggedInBorder' : '';
         const activeToolsClass = this.checkResultsLength();
-        console.log(this.checkResultsLength());
+        // console.log(this.checkResultsLength());
         return (
             <div>
                 <div id="rightSlideOut">
@@ -132,14 +139,32 @@ class RightSlideOut extends Component {
                         <div id='quickTools' className='toolContainer'>
                             <div className='slideOutDescriptionContainer'><p className='slideOutDescription'>tools</p></div>
                             <ul id='quickToolsList'>
-                                <li>
+                                <li id='saveResults' onMouseEnter={this.showTooltip.bind(this)} onMouseLeave={this.hideTooltip.bind(this)}>
                                     <FontAwesome name='file-export' size='2x' className={`iconButton ${activeToolsClass.activeQuerySave}`} onClick={this.saveResults.bind(this)} />
+                                    <Tooltip
+                                        tooltipContainerClass='tooltipContainerClass'
+                                        addClass='generalTooltip rightTooltip quicktools'
+                                        displayTooltip={this.state.display_saveResults_tooltip|| 'hidden'}
+                                        content={`export results to CSV`}
+                                    />
                                 </li>
-                                <li>
+                                <li id='saveQuery' onMouseEnter={this.showTooltip.bind(this)} onMouseLeave={this.hideTooltip.bind(this)}>
                                     <FontAwesome name='save' size='2x' className={`iconButton ${activeToolsClass.activeExport}`} onClick={this.saveQuery.bind(this)} />
+                                    <Tooltip
+                                        tooltipContainerClass='tooltipContainerClass'
+                                        addClass='generalTooltip rightTooltip quicktools ${}'
+                                        displayTooltip={this.state.display_saveQuery_tooltip|| 'hidden'}
+                                        content={`save query to file`}
+                                    />
                                 </li>
-                                <li>
+                                <li id='shareWorkspace' onMouseEnter={this.showTooltip.bind(this)} onMouseLeave={this.hideTooltip.bind(this)}>
                                     <FontAwesome name='share-alt' size='2x' className={`iconButton ${activeToolsClass.activeShare}`} />
+                                    <Tooltip
+                                        tooltipContainerClass='tooltipContainerClass'
+                                        addClass='generalTooltip rightTooltip quicktools'
+                                        displayTooltip={this.state.display_shareWorkspace_tooltip|| 'hidden'}
+                                        content={`share workspace`}
+                                    />
                                 </li>
                             </ul>
                         </div>
