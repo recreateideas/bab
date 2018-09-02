@@ -8,6 +8,8 @@ import { downloadFile, saveResultsToCSV } from '../../tools/fileManagers';
 import ReactTooltip from 'react-tooltip';
 
 const FontAwesome = require('react-fontawesome');
+const uglify_inactive = require('../../images/uglify.png');
+const uglify_active = require('../../images/uglify_active.png');
 
 class RightSlideOut extends Component {
     constructor(props) {
@@ -65,6 +67,7 @@ class RightSlideOut extends Component {
                 activeExport: '',
                 activeQuerySave: '',
                 activeShare: '',
+                activeUglify: '',
             }
         } else {
             return {
@@ -72,6 +75,7 @@ class RightSlideOut extends Component {
                 activeExport: 'inactiveButtonIcon',
                 activeQuerySave: 'inactiveButtonIcon',
                 activeShare: 'inactiveButtonIcon',
+                activeUglify: 'inactiveButtonIcon',
             }
         }
         /******** TEST *********/
@@ -93,6 +97,8 @@ class RightSlideOut extends Component {
         let hideLoggedIn = this.props.storeUser.loggedIn ? '' : 'display_none';
         let loggedInBorder = this.props.storeUser.loggedIn ? 'loggedInBorder' : '';
         const activeToolsClass = this.checkResultsLength();
+        let uglify,uglifyClass='';
+        activeToolsClass.activeUglify === '' ? (uglify = uglify_active, uglifyClass='activeImg') : (uglify = uglify_inactive, uglifyClass='inactiveImg');
         // console.log(this.checkResultsLength());
         return (
             <div>
@@ -126,18 +132,29 @@ class RightSlideOut extends Component {
                                 <h4 className={`fontButton ${activeToolsClass.activeFont}`}>&#8722;</h4>
                             </div>
                         </div>
-                        {/* <hr className="slideSeparator" /> */}
+            {/* <hr className="slideSeparator" /> */}
+                        <div id='formatResults' className='toolContainer'>
+                            <div className='slideOutDescriptionContainer'><p className='slideOutDescription'>format</p></div>
+                            <div>
+                                {/* <FontAwesome name='file-export' size='2x' className={`iconButton ${activeToolsClass.activeQuerySave}`} onClick={this.saveResults.bind(this)} /> */}
+                                <img src={uglify} className={`imageButton ${uglifyClass}`} data-tip data-for='tooltip_uglify' onClick={activeToolsClass.activeUglify === '' ? this.props.toggleMinified : null}/>
+                                <ReactTooltip id='tooltip_uglify' type='warning'>
+                                    <span>uglify/pretty results</span>
+                                </ReactTooltip>
+                            </div>
+                        </div>
+            {/* <hr className="slideSeparator" /> */}
                         <div id='quickTools' className='toolContainer'>
                             <div className='slideOutDescriptionContainer'><p className='slideOutDescription'>tools</p></div>
                             <ul id='quickToolsList'>
                                 <li id='saveResults' data-tip data-for='tooltip_CSV'>
-                                    <FontAwesome name='file-export' size='2x' className={`iconButton ${activeToolsClass.activeQuerySave}`} onClick={this.saveResults.bind(this)} />
+                                    <FontAwesome name='file-export' size='2x' className={`iconButton ${activeToolsClass.activeQuerySave}`} onClick={activeToolsClass.activeQuerySave === '' ? this.saveResults.bind(this) : null} />
                                     <ReactTooltip id='tooltip_CSV' type='warning'>
                                         <span>export results to CSV</span>
                                     </ReactTooltip>
                                 </li>
                                 <li id='saveQuery' data-tip data-for='tooltip_saveQuery'>
-                                    <FontAwesome name='save' size='2x' className={`iconButton ${activeToolsClass.activeExport}`} onClick={this.saveQuery.bind(this)} />
+                                    <FontAwesome name='save' size='2x' className={`iconButton ${activeToolsClass.activeExport}`} onClick={activeToolsClass.activeExport === '' ? this.saveQuery.bind(this): null} />
                                     <ReactTooltip id='tooltip_saveQuery' type='warning'>
                                         <span>save query to file</span>
                                     </ReactTooltip>
