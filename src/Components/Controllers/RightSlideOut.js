@@ -5,8 +5,7 @@ import PropTypes from 'prop-types';
 import LoginIFrame from './LoginIFrame';
 import { mapStateToProps } from '../../store/mapToProps/mapToProps_SlideRightOut';
 import { downloadFile, saveResultsToCSV } from '../../tools/fileManagers';
-import { Tooltip } from '../BasicComponents';
-import {showTooltip, hideTooltip } from '../../tools/tooltipUtils';
+import ReactTooltip from 'react-tooltip';
 
 const FontAwesome = require('react-fontawesome');
 
@@ -89,14 +88,6 @@ class RightSlideOut extends Component {
         saveResultsToCSV(this.props.storeQueryResults);
     }
 
-    showTooltip(e){
-        showTooltip(e.target.id,this);
-    }
-
-    hideTooltip(e){
-        hideTooltip(e.target.id,this);
-    }
-
     render() {
         let hideLoggedOut = this.props.storeUser.loggedIn ? 'display_none' : '';
         let hideLoggedIn = this.props.storeUser.loggedIn ? '' : 'display_none';
@@ -139,32 +130,23 @@ class RightSlideOut extends Component {
                         <div id='quickTools' className='toolContainer'>
                             <div className='slideOutDescriptionContainer'><p className='slideOutDescription'>tools</p></div>
                             <ul id='quickToolsList'>
-                                <li id='saveResults' onMouseEnter={this.showTooltip.bind(this)} onMouseLeave={this.hideTooltip.bind(this)}>
+                                <li id='saveResults' data-tip data-for='tooltip_CSV'>
                                     <FontAwesome name='file-export' size='2x' className={`iconButton ${activeToolsClass.activeQuerySave}`} onClick={this.saveResults.bind(this)} />
-                                    <Tooltip
-                                        tooltipContainerClass='tooltipContainerClass'
-                                        addClass='generalTooltip rightTooltip quicktools'
-                                        displayTooltip={this.state.display_saveResults_tooltip|| 'hidden'}
-                                        content={`export results to CSV`}
-                                    />
+                                    <ReactTooltip id='tooltip_CSV' type='error'>
+                                        <span>export results to CSV</span>
+                                    </ReactTooltip>
                                 </li>
-                                <li id='saveQuery' onMouseEnter={this.showTooltip.bind(this)} onMouseLeave={this.hideTooltip.bind(this)}>
+                                <li id='saveQuery' data-tip data-for='tooltip_saveQuery'>
                                     <FontAwesome name='save' size='2x' className={`iconButton ${activeToolsClass.activeExport}`} onClick={this.saveQuery.bind(this)} />
-                                    <Tooltip
-                                        tooltipContainerClass='tooltipContainerClass'
-                                        addClass='generalTooltip rightTooltip quicktools ${}'
-                                        displayTooltip={this.state.display_saveQuery_tooltip|| 'hidden'}
-                                        content={`save query to file`}
-                                    />
+                                    <ReactTooltip id='tooltip_saveQuery' type='error'>
+                                        <span>save query to file</span>
+                                    </ReactTooltip>
                                 </li>
-                                <li id='shareWorkspace' onMouseEnter={this.showTooltip.bind(this)} onMouseLeave={this.hideTooltip.bind(this)}>
+                                <li id='shareWorkspace' data-tip data-for='tooltip_shareWorkspace'>
                                     <FontAwesome name='share-alt' size='2x' className={`iconButton ${activeToolsClass.activeShare}`} />
-                                    <Tooltip
-                                        tooltipContainerClass='tooltipContainerClass'
-                                        addClass='generalTooltip rightTooltip quicktools'
-                                        displayTooltip={this.state.display_shareWorkspace_tooltip|| 'hidden'}
-                                        content={`share workspace`}
-                                    />
+                                    <ReactTooltip id='tooltip_shareWorkspace' type='error'>
+                                        <span>share workspace</span>
+                                    </ReactTooltip>
                                 </li>
                             </ul>
                         </div>
