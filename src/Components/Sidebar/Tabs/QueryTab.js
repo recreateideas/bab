@@ -162,7 +162,7 @@ class QueryTab extends React.Component {
                                 </div>
                             </Col>
                         </Row>
-                        <Row>
+                        <Row> //dispaly: flex and calc bottom and right
                             <Col xs={11} className='queryBoxCol'>
                                 <Querybox />
                             </Col>

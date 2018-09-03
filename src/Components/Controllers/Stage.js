@@ -88,7 +88,8 @@ class Stage extends React.Component {
                                 activeClass={activePipe}
                                 inputWidth={250}
                             />
-                        </Col></Row>
+                        </Col>
+                    </Row>
                 );
             case 'select':
                 return (
@@ -176,30 +177,30 @@ class Stage extends React.Component {
                         <Row className='formLineHeader'>
                             <Col xs={5} className='1sfHalf'>
                                 <Row className='webkit-box'>
-                                    <Col className={'activeCol'} xs={2}>
+                                    <Col className={'activeCol header'} xs={2}>
                                         <p className='h7'>Use</p>
                                     </Col>
-                                    <Col xs={8} className='keyCol'>
+                                    <Col xs={8} className='keyCol header'>
                                         <p className='h7'>Key</p>
                                     </Col>
-                                    <Col xs={2} className={'operatorCol'}>
+                                    <Col xs={2} className={'operatorCol header'}>
                                         <p className='h7'>Operator</p>
                                     </Col>
                                 </Row>
                             </Col>
                             <Col xs={7} className='2ndHalf'>
                                 <Row className='webkit-box'>
-                                    <Col xs={1} xsHidden={true} className={'vTypeSynLeftCol'}>
+                                    <Col xs={1} xsHidden={true} className={'vTypeSynLeftCol header'}>
                                     </Col>
-                                    <Col xs={5} className='valueCol'>
+                                    <Col xs={5} className='valueCol header'>
                                         <p className='h7'>Value</p>
                                     </Col>
-                                    <Col xs={1} xsHidden={true} className={'vTypeSynRightCol'}>
+                                    <Col xs={1} xsHidden={true} className={'vTypeSynRightCol header'}>
                                     </Col>
-                                    <Col xs={2} md={3} className={'typeCol'}>
+                                    <Col xs={2} md={3} className={'typeCol header'}>
                                         <p className='h7'>Type</p>
                                     </Col>
-                                    <Col xs={3} md={2} className={'addLineCol'}>
+                                    <Col xs={3} md={2} className={'addLineCol header'}>
                                     </Col>
                                 </Row>
                             </Col>

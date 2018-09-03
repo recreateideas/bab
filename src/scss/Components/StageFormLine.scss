@@ -6,7 +6,7 @@
     /* max-width: 80%; */
     width: fit-content;
     min-width: auto;
-    margin-top:5%;
+    margin-top: 50px;
 }
 
 .formLineRow_col {
@@ -31,7 +31,7 @@
     position: relative;
     width: fit-content;
     max-width: fit-content;
-    top: 30px;
+    // top: 30px;
 }
 
 .stageBadgeWrapper {
@@ -57,7 +57,7 @@ position: absolute;
     display: inline-block;
     position: relative;
     top: -30px;
-    left: 4%;
+    left: 40px;
     z-index: 10000000;
     margin-left:5px;
 }
@@ -77,6 +77,21 @@ position: absolute;
     margin-left: 0px;
     background-color: rgba(82,84,91,0.7) !important;
 }
+
+// .header {
+//     &.valueCol {
+//         p {
+//             position: fixed;
+//             left: 550px;
+//         }
+//     }
+//     &.typeCol {
+//         p {
+//             position: fixed;
+//             left: 785px;
+//         }
+//     }
+// } 
 
 .pipelineStage p {
     position: relative;

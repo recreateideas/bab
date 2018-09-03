@@ -15,8 +15,6 @@
 @import 'components/RightSlideOut.scss';
 @import 'components/LoginIFrame.scss';
 @import 'components/Tooltip.scss';
-
-
 .imageButton {
     height: 25px;
     &.activeImg {
@@ -32,7 +30,7 @@
     margin-left: 50px;
     margin-right: 50px;
     p {
-        font-family: Menlo,Monaco,Consolas,"Courier New",monospace;
+        font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
         color: #ccd;
         line-height: 1.5em;
         line-break: auto;
