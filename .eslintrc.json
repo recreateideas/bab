@@ -14,7 +14,6 @@
     "extends": [
         "airbnb",
         "eslint:recommended",
-        "./index.js"
     ],
     "env": {
         "commonjs":true,
