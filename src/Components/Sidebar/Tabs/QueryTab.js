@@ -162,14 +162,10 @@ class QueryTab extends React.Component {
                                 </div>
                             </Col>
                         </Row>
-                        <Row> //dispaly: flex and calc bottom and right
-                            <Col xs={11} className='queryBoxCol'>
-                                <Querybox />
-                            </Col>
-                            <Col xs={1} className='interrogatorCol'>
-                                <Interrogator id='interrogator' />
-                            </Col>
-                        </Row>
+                        <div id='queryTabBottomWrapper'>
+                            <Querybox />
+                            <Interrogator id='interrogator' />
+                        </div>
                     </Grid>
                 </div>
             </div>

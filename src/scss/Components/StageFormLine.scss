@@ -58,7 +58,7 @@ position: absolute;
     position: relative;
     top: -30px;
     left: 40px;
-    z-index: 10000000;
+    z-index: 1;
     margin-left:5px;
 }
 @media (max-width: 668px) {
@@ -347,11 +347,11 @@ tr.formLineRow:first-child td:last-child {
     max-width: 130px;
 }
 
-@media (max-width: 1400px) {
+// @media (max-width: 1400px) {
 .formLineRow .inputText{
     width: 100%;
   }
-}
+// }
 
 
 .webkit-box {

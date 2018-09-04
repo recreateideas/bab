@@ -135,6 +135,16 @@ $fontSizeColor: grey;
     }
 }
 
+.imageButton {
+    height: 25px;
+    &.activeImg {
+        cursor: pointer;
+    }
+    &.inactiveImg {
+        cursor: normal;
+    }
+}
+
 .fontButton {
     border-radius: 100%;
     width: 30px !important;
