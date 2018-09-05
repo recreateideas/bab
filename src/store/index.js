@@ -45,6 +45,11 @@ const reducer = (state = initialState, action) => {  // 1 is the initial state i
             newState = Object.assign({}, state, { query: { ...state.query, cursors: Object.assign({},action.cursors )}});
             Query = QUERY(newState);
             return Object.assign({}, newState, { mongo_query: Query.string, mongo_object: Query.paramsObj });
+
+        case constants.BACKGROUND_INSERT_CURSOR:
+            newState = Object.assign({}, state, { query: { ...state.query, cursors: Object.assign({},action.cursors )}});
+            Query = QUERY(newState);
+            return Object.assign({}, newState, { mongo_query: Query.string, mongo_object: Query.paramsObj });
     
         case constants.CONNECTOR_SET_DBCOLLECTIONS:
             return Object.assign({},state, {DBcollections: action.DBcollections});

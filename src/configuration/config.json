@@ -95,27 +95,35 @@
     },
     "cursors":{
         "pretty":{
+            "label":"pretty",
             "cursorLeft":".pretty(",
             "cursorRight":")",
-            "value": false
+            "value": false,
+            "default": true
         },
         "count": {
+            "label":"count",
             "cursorLeft": ".count(",
             "cursorRight": ")",
-            "value": false
+            "value": false,
+            "default": false
         },
         "limit": {
+            "label":"limit",
             "value": true,
             "cursorLeft": ".limit(",
             "cursorRight": ")",
             "valueType": "select",
-            "selectValues":"limit"
+            "selectValues":"limit",
+            "default": false
         },
         "sort": {
+            "label":"sort",
             "value": true,
             "cursorLeft": ".sort(",
             "cursorRight": ")",
-            "valueType": "keyValuePair"
+            "valueType": "keyValuePair",
+            "default": false
         }
     },
     "selectValues": {

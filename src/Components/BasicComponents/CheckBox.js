@@ -16,7 +16,7 @@ const IsActive = (props) => {
                 value={props.inputId}
                 onChange={props.change}
                 checked={checked}
-                // defaultChecked={defaultChecked}
+                // defaultChecked={props.defaultChecked}
             />
             <span className={`${props.spanClass || ''} checkmark`}></span>
         </label>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { mapStateToProps } from '../../store/mapToProps/mapToProps_Background';
+import { mapStateToProps, mapDispatchToProps } from '../../store/mapToProps/mapToProps_Background';
 import RightSlideOut from './RightSlideOut';
 import JSONPretty from 'react-json-pretty';
 import PropTypes from 'prop-types';
@@ -17,6 +17,12 @@ class Background extends React.Component {
         }
     }
 
+    componentWillReceiveProps(nextProps){
+        console.log(nextProps.storeisPretty);
+        !nextProps.storeisPretty ? this.setState({displayPretty: 'hidden',displayMinified: 'show'}) : this.setState({displayPretty: 'show',displayMinified: 'hidden'})
+
+    }
+
     increaseFont() {
         let fontSize = this.state.fontSize;
         if(fontSize<40)fontSize++;
@@ -28,12 +34,24 @@ class Background extends React.Component {
         if(fontSize>8)fontSize--;
         this.setState({fontSize});
     }
+    
     toggleMinified(){
         this.state.displayPretty === 'show' ? this.setState({displayPretty: 'hidden',displayMinified: 'show'}) : this.setState({displayPretty: 'show',displayMinified: 'hidden'})
+        this.togglePrettyCursorToStore();
+    }
+
+    togglePrettyCursorToStore(){
+        let activeCursors = this.props.storeQuery.cursors;
+        const prettyCursor = this.props.storeConfig.cursors.pretty;
+        //const position = cursors.indexOf(cursor);
+        // const isPretty = this.prop.storeisPretty.query.cursors.hasOwnProperty('pretty')
+        !this.props.storeisPretty ? activeCursors['pretty'] = prettyCursor : delete activeCursors.pretty;
+        console.log(activeCursors);
+        this.props.insertCursorInQueryToStore(activeCursors);
     }
 
     formatUglyJSON(json){
-        if(json){
+        if(json && json !== []){
             let html = JSON.stringify(json);
             html = html.replace(/("|{"|,")([^"]+)(":)/gm,`$1<span class='json-key'>$2</span>$3`);
             html = html.replace(/(:|\[)(")([^"]+)(")/gm,`$1<span class='json-string'>$2$3$4</span>`);
@@ -41,13 +59,6 @@ class Background extends React.Component {
             html = html.replace(/(,)(")([^"]+)(")(,|\])/gm,`$1<span class='json-string'>$2$3$4</span>$5`);
             html = html.replace(/(,|:\[|:{|:)(\d+)(,|\]|})/gm,`$1<span class='json-value'>$2</span>$3`);//
             html = html.replace(/(,|:\[|:{|:)(\d+)(])/gm,`$1<span class='json-value'>$2</span>$3`);
-            ///
-            // html = html.replace(/("|{"|,")([^"]+)(":)/gm,`$1<span class='json-key'>$2</span>$3`);
-            // html = html.replace(/(:"|\[")([^"]+)(")/gm,`$1<span class='json-string'>$2</span>$3`);
-            // html = html.replace(/(\[")([^"]+)(",|"\]|",")/gm,`$1<span class='json-string'>$2</span>$3`);
-            // html = html.replace(/(,")([^"]+)(",|"])/gm,`$1<span class='json-string'>$2</span>$3`);
-            // html = html.replace(/(,|:\[|:{|:)(\d+)(,|\]|})/gm,`$1<span class='json-value'>$2</span>$3`);//
-            // html = html.replace(/(,|:\[|:{|:)(\d+)(])/gm,`$1<span class='json-value'>$2</span>$3`);
             return html;
         }
         else return '';
@@ -63,7 +74,7 @@ class Background extends React.Component {
         // console.log(window.location.pathname);
         return (
             <div>
-                <JSONPretty ref={this.json} id='mongo_results' space={2} style={{fontSize:`${this.state.fontSize}px`}}json={this.props.storeResults} className={`${resultClass} ${this.state.displayPretty}`}></JSONPretty>
+                <JSONPretty ref={this.json} id='mongo_results' space={2} style={{fontSize:`${this.state.fontSize}px`}} json={this.props.storeResults} className={`${resultClass} ${this.state.displayPretty}`}></JSONPretty>
                 <div id='minifiedContainer' className={this.state.displayMinified}><p style={{fontSize:`${this.state.fontSize}px`}} dangerouslySetInnerHTML={{ __html: this.formatUglyJSON(this.props.storeResults)}}/></div>
                 < div className='headerTitle'>
                     <img src={require('../../images/baboon_white_monkey.png')} alt='logo' className='baboonLogo' />
@@ -85,4 +96,4 @@ Background.propTypes = {
 };
 
 
-export default connect(mapStateToProps)(Background);
+export default connect(mapStateToProps,mapDispatchToProps)(Background);

@@ -12,23 +12,36 @@ const FontAwesome = require('react-fontawesome');
 
 class Cursor extends React.Component {
 
+    
+    componentWillMount() {
+        this.loadCursorsFromConfig();
+    }
+    
+
+    loadCursorsFromConfig(){
+        let activeCursors = {};
+        const defaultCursors = this.props.storeConfig.cursors;
+        Object.keys(defaultCursors)
+            .filter(cursor => defaultCursors[cursor].default)
+            .forEach(cursor => activeCursors[cursor] = Object.assign({},defaultCursors[cursor]))
+        this.props.insertCursorInQueryToStore(activeCursors);
+    }
+
     appendCursors(e) {
+        console.log(e.target.checked);
         let cursor = e.target.id.split('_')[1];
         let activeCursors = this.props.storeQuery.cursors;
         const cursorsConfig = this.props.storeConfig.cursors;
         //const position = cursors.indexOf(cursor);
         e.target.checked ? activeCursors[cursor] = cursorsConfig[cursor] : delete activeCursors[cursor];
-        // console.log(activeCursors);
+        console.log(activeCursors[cursor]);
         this.props.insertCursorInQueryToStore(activeCursors);
     }
 
     handleCursorFields(label) {
-        // console.log(label);
         let activeCursors = this.props.storeQuery.cursors;
         if (activeCursors.hasOwnProperty(label) && activeCursors[label].value)
             return this.displayCursorFields(activeCursors, label);
-        // console.log(activeCursors);
-        //this.appendCursors(e.target);
     }
 
     recordCursorValue(e) {
@@ -67,6 +80,16 @@ class Cursor extends React.Component {
 
     renderCursors(cursor, label, index) {
         // console.log(cursor);
+        let checked = false;
+        let activeCursors = this.props.storeQuery.cursors;
+        // console.log(activeCursors);
+        Object.keys(activeCursors).forEach(activeCursor => {
+            if(activeCursor === cursor.label){
+            //    console.log(activeCursors[c].label);
+            //    console.log(cursor.label);
+               checked = true;
+            }
+        })
         return (
             <div className='flexItem' key={index}>
                 <CheckBox
@@ -74,8 +97,8 @@ class Cursor extends React.Component {
                     label={'cursor_' + label}
                     inputId={'cursor_' + label}
                     change={this.appendCursors.bind(this)}
-                    defaultChecked={false}
                     className={'querycheck'}
+                    checked={checked}
                 />
                 <div className='cursorText flexContainer'>
                     <p className='h7'>{cursor.cursorLeft}</p>

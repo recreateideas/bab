@@ -43,7 +43,7 @@
   },
   "scripts": {
     "watch-css": "node-sass-chokidar src/scss -o dist/css --watch --recursive",
-    "start-js": "concurrently  \"nodemon src/server/service.js\" \"mongod\" \"babel src --out-dir babel_compiled --watch\" \"electron .\"",
+    "start-js": "concurrently  \"nodemon src/server/service.js\" \"mongod\" \"babel src --out-dir babel_compiled --watch\" \"electron .\" \"webpack --watch\"",
     "start": "npm-run-all -p watch-css start-js",
     "build-js": "react-scripts build",
     "build": "npm-run-all build-css build-js webpack",
