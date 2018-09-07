@@ -18,14 +18,14 @@ const mapDispatchToProps = (dispatch) => {
     return {
         setResultsToStore: (results) => {
             const action = {
-                type: constants.INTERROGATOR_SET_RESULTS,
+                type: constants.SET_RESULTS,
                 queryResults: results
             }
             dispatch(action);
         },
         setQueryMessageToStore: (messageType,message) => {
             const action = {
-                type: constants.INTERROGATOR_SET_QUERYMESSAGE,
+                type: constants.SET_QUERYMESSAGE,
                 messageType: messageType,
                 queryMessage: message
             }

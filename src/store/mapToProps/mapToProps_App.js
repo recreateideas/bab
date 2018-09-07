@@ -22,42 +22,42 @@ const mapDispatchToProps = (dispatch) => {
     return {
         setCollectionToStore: (collection) => {
             const action = {
-                type: constants.APP_SET_COLLECTION,
+                type: constants.SET_COLLECTION,
                 collection: collection
             }
             dispatch(action);
         },
         setConfigQueriesToStore: (queries) => {
             const action = {
-                type: constants.APP_SET_CONFIG_QUERIES,
+                type: constants.SET_CONFIG_QUERIES,
                 queries: queries
             }
             dispatch(action);
         },
         setQueryValuesToStore: (query) => {
             const action = {
-                type: constants.APP_SET_QUERY_VALUES,
+                type: constants.SET_QUERY_VALUES,
                 query: query
             }
             dispatch(action);
         },
         setQueryTypeToStore: (type) => {
             const action = {
-                type: constants.APP_SET_QUERY_TYPE,
+                type: constants.SET_QUERY_TYPE,
                 queryType: type
             }
             dispatch(action);
         },
         setQueryCollectionStateToStore: (collectionState) => {
             const action = {
-                type: constants.APP_SET_QUERY_COLLECTION_STATE,
+                type: constants.SET_QUERY_COLLECTION_STATE,
                 collectionState: collectionState
             }
             dispatch(action);
         },
         recordUserObjectToStore: (user) => {
             const action = {
-                type: constants.LOGINIFRAME_RECORD_USER_OBJECT,
+                type: constants.RECORD_USER_OBJECT,
                 user,
             }
             dispatch(action)

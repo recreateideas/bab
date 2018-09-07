@@ -15,7 +15,7 @@ const mapDispatchToProps = (dispatch) => {
     return {
         setQueryCollectionStateToStore: (collectionState) => {
             const action = {
-                type: constants.FORMLINE_SET_QUERY_COLLECTION_STATE,
+                type: constants.SET_QUERY_COLLECTION_STATE,
                 collectionState: collectionState
             }
             dispatch(action);

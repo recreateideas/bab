@@ -13,7 +13,7 @@ const mapDispatchToProps = (dispatch) => {
     return {
         applyLoadedStateQueryToStore: (loadedContent) => {
             const action = {
-                type: constants.TOOLS_APPLY_LOADED_STATE,
+                type: constants.APPLY_LOADED_STATE,
                 loadedContent: loadedContent
             }
             dispatch(action)

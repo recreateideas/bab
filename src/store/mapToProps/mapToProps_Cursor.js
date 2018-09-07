@@ -14,7 +14,7 @@ const mapDispatchToProps = (dispatch) => {
     return {
         insertCursorInQueryToStore: (cursors) => {
             const action = {
-                type: constants.CURSOR_INSERT_CURSOR,
+                type: constants.INSERT_CURSOR,
                 cursors: cursors
             }
             dispatch(action)

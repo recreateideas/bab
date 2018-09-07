@@ -42,7 +42,7 @@ const mapDispatchToProps = (dispatch) => {
         },
         setCollectionConfigToStore: (collections) => {
             const action = {
-                type: constants.LOGINIFRAME_SET_DBCOLLECTIONS,
+                type: constants.SET_DBCOLLECTIONS,
                 DBcollections: collections
             }
             dispatch(action);
@@ -50,21 +50,21 @@ const mapDispatchToProps = (dispatch) => {
         setConnectionStateToStore: (isConnected) => {
             // console.log(isConnected);
             const action = {
-                type: constants.LOGINIFRAME_SET_ISCONNECTED,
+                type: constants.SET_ISCONNECTED,
                 isDBConnected: isConnected
             }
             dispatch(action);
         },
         setCollectionToStore: (collection) => {
             const action = {
-                type: constants.LOGINIFRAME_SET_COLLECTION,
+                type: constants.SET_COLLECTION,
                 collection: collection
             }
             dispatch(action);
         },
         setResultsToStore: (results) => {
             const action = {
-                type: constants.LOGINIFRAME_SET_RESULTS,
+                type: constants.SET_RESULTS,
                 queryResults: results
             }
             dispatch(action);

@@ -15,7 +15,7 @@ const mapDispatchToProps = (dispatch) => {
     return {
         setConnectionParametersToStore: (param, value) => {
             const action = {
-                type: constants.CONNECTOR_SET_CONNECTION_PARAMS,
+                type: constants.SET_CONNECTION_PARAMS,
                 param: param,
                 value: value
             }
@@ -23,7 +23,7 @@ const mapDispatchToProps = (dispatch) => {
         },
         setCollectionConfigToStore: (collections) => {
             const action = {
-                type: constants.CONNECTOR_SET_DBCOLLECTIONS,
+                type: constants.SET_DBCOLLECTIONS,
                 DBcollections: collections
             }
             dispatch(action);
@@ -31,14 +31,14 @@ const mapDispatchToProps = (dispatch) => {
         setConnectionStateToStore: (isConnected) => {
             // console.log(isConnected);
             const action = {
-                type: constants.CONNECTOR_SET_ISCONNECTED,
+                type: constants.SET_ISCONNECTED,
                 isDBConnected: isConnected
             }
             dispatch(action);
         },
         setCollectionToStore: (collection) => {
             const action = {
-                type: constants.CONNECTOR_SET_COLLECTION,
+                type: constants.SET_COLLECTION,
                 collection: collection
             }
             dispatch(action);

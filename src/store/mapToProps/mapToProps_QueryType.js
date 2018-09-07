@@ -10,7 +10,7 @@ const mapDispatchToProps = (dispatch) => {
     return {
         onChangeQueryType: (e) => {
             const action = {
-                type: constants.CHANGE_QUERY_TYPE,
+                type: constants.QUERY_TYPE,
                 value: e.target.value
             }
             dispatch(action);
