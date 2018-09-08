@@ -1,12 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { TextInput, Button2, CheckBox } from '../BasicComponents';
+import { TextInput, Button2 } from '../BasicComponents';
 import { Grid, Row, Col } from 'react-bootstrap';
-import axios from 'axios';
 import { mapStateToProps, mapDispatchToProps } from '../../store/mapToProps/mapToProps_LoginIFrame';
-// import { mapStateToTemplatesProps } from '../../store/mapToProps/mapToProps_DataTemplates';
-// import { emptyUser } from '../../dataTemplates/collectionState';
 import { dbDisconnect } from '../../tools/DBClientUtils/DBClientUtils';
+import { sendLoginRequest,sendRegisterRequest } from '../../tools/DBClientUtils/userAuthUtils';
+
 import PropTypes from 'prop-types';
 
 const FontAwesome = require('react-fontawesome');
@@ -39,78 +38,21 @@ class LoginIFrame extends React.Component {
         }
     }
 
-    async sendLoginRequest(e) {
-        const userDetails = this.props.storeUser;
-        // console.log(userDetails);
-        if(e) e.stopPropagation();
-        if (this.validateLoginForSubmission() === true) {
-            const loginDetails = {
-                email: userDetails.loginEmail,
-                password: userDetails.loginPassword
-            }
-            try {
-                const res = await axios.post(`${process.env.REMOTE_HOST}:${process.env.REMOTE_PORT}/users/login`,
-                    {
-                        details: loginDetails
-                    })
-                console.log(res);
-                // console.log(res.data.userFound);
-                const userFound = res.data.userFound;
-                if (userFound) this.loginUser(res.data.userDetails[0]._id,res.data.userDetails[0].email,res.data.userDetails[0].nickname);
-                else this.handleLoginRejection();
-            }
-            catch (err) {
-                console.log(err);
-            }
-        } else {
-            console.log('form not valid');
-        }
+    async Login(e) {
+        const validated = this.validateLoginForSubmission();
+       await sendLoginRequest(e, this,validated);
     }
 
     validateLoginForSubmission() {
         return this.state.validation.login.loginEmail.EmailValidate;
     }
 
-    async sendRegisterRequest(e) {
-        const userDetails = this.props.storeUser;
-        e.stopPropagation();
-        if (this.validateRegistrForSubmission()) {
-            console.log(userDetails);
-            const registerDetails = {
-                nickname: userDetails.nickName,
-                email: userDetails.registerEmail,
-                password: userDetails.passWord,
-            }
-            try {
-                const res = await axios.post(`${process.env.REMOTE_HOST}:${process.env.REMOTE_PORT}/users/register`,
-                    {
-                        details: registerDetails
-                    })
-                console.log(res.data);
-                const userInserted = res.data.userInserted;
-                if (userInserted) this.loginUser(res.data._id,res.data.email,res.data.nickname);
-            }
-            catch (err) {
-                console.log(err);
-            }
-        } else {
-            console.log('form not valid');
-        }
+    async Register(e) {
+        const validated = this.validateRegisterForSubmission();
+        await sendRegisterRequest(e, this, validated);
     }
 
-    handleLoginRejection() {
-        console.log('rejected');
-    }
-
-    loginUser(id,email,nickname) {
-        console.log('log me in');
-        this.props.loginUserToStore(true);
-        this.props.recordUserDetailsToStore('ID', id);
-        this.props.recordUserDetailsToStore('loginEmail', email);
-        this.props.recordUserDetailsToStore('nickName', nickname);
-    }
-
-    validateRegistrForSubmission() {
+    validateRegisterForSubmission() {
         return this.state.validation.register.registerEmail.EmailValidate
             && this.state.validation.register.passWord.matchingPasswords;
     }
@@ -308,7 +250,7 @@ class LoginIFrame extends React.Component {
                                     </li>
                                     <li className='loginList loginButtonSpacer'>
                                         <Button2
-                                            click={this.sendLoginRequest.bind(this)}
+                                            click={this.Login.bind(this)}
                                             buttonId='LoginButton'
                                             value='Login'
                                         />
@@ -402,7 +344,7 @@ class LoginIFrame extends React.Component {
                                     </li>
                                     <li className='registerList registerButtonSpacer'>
                                         <Button2
-                                            click={this.sendRegisterRequest.bind(this)}
+                                            click={this.Register.bind(this)}
                                             buttonId='registerButton'
                                             value='Register'
                                         />
