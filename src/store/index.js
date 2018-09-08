@@ -1,4 +1,5 @@
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
 import constants from './constants';
 import initialState from './initialState';
 import QUERY from './stringifyHelpers/stringifyStages';
@@ -68,8 +69,8 @@ const reducer = (state = initialState, action) => {  // 1 is the initial state i
 
 /** STORE */
 
-const store = createStore(reducer, /* preloadedState, remove those when going to production-->*/ window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
-
+const store = createStore(reducer,  /*applyMiddleware(thunk), /*preloadedState, remove those when going to production-->*/ window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+console.log(store.getState());
 /**    add this to index.html when going to production <script>
       window.__REACT_DEVTOOLS_GLOBAL_HOOK__.inject = function () { }
     </script> */

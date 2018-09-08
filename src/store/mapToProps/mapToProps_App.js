@@ -13,7 +13,31 @@ const mapStateToProps = (state) => { // use this also to select what propsApp sh
         storeQueryType: state.queryType,
         storeMongoQuery: state.mongo_query,
         storeQuery: state.query,
-        storeQueryCollectionState: state.queryCollectionState
+        storeQueryCollectionState: state.queryCollectionState,
+        _collectionStateTemplate: {
+            isActive : true,
+            preStage : '',
+            params: {
+                actives: [true],
+                keys: [''],
+                operators: [Object.keys(state.config.operators)[0]],
+                types: [Object.keys(state.config.stringTypes)[0]],
+                values: ['']
+            }
+        },
+        _stageTemplate: {
+            valueTypeLeft : '"',
+            valueTypeRight :'"',
+            isActive: true,
+            preStage: '',
+            params: {
+                actives: [true],
+                keys: [''],
+                operators: [Object.keys(state.config.operators)[0]],
+                types: [Object.keys(state.config.stringTypes)[0]],
+                values: ['']
+            }
+        },
     }
 }
 

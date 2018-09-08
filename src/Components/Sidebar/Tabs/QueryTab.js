@@ -2,7 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux'
 import { Querybox, Cursor, QueryType, Stage, SelectCollection, Interrogator } from '../../../Components';
 import { Grid, Row, Col } from 'react-bootstrap';
-import { _collectionStateTemplate, _stageTemplate } from '../../../dataTemplates/collectionState';
+// import { _collectionStateTemplate, _stageTemplate } from '../../../dataTemplates/collectionState';
+// import { mapStateToTemplatesProps } from '../../../store/mapToProps/mapToProps_DataTemplates';
 import { mapStateToProps, mapDispatchToProps } from '../../../store/mapToProps/mapToProps_App';
 import { getElementsFromConfig, findStageValuesFromConfig, parsePreParamsSyntax } from '../../../configuration/configHelpers/queryHelpers';
 import PropTypes from 'prop-types';
@@ -27,7 +28,7 @@ class QueryTab extends React.Component {
     }
 
     insertCollectionStateInObject(object, stage) {
-        object[stage] = Object.assign({}, _collectionStateTemplate);
+        object[stage] = Object.assign({}, this.props._collectionStateTemplate);
         return object;
     }
 
@@ -44,7 +45,7 @@ class QueryTab extends React.Component {
             if (!stateStage) { //need to create a collection field and a query field
                 stateStage = formatStages[stage];
                 if (!collection[stage]) {
-                    collection[stage] = JSON.parse(JSON.stringify(_stageTemplate));
+                    collection[stage] = JSON.parse(JSON.stringify(this.props._stageTemplate));
                 }
             }
             else Object.keys(formatStages[stage]) //maps to the config stage
@@ -100,7 +101,7 @@ class QueryTab extends React.Component {
         let newStateQuery = this.props.storeQuery;
         let newStateCollection = this.props.storeQueryCollectionState;
         newStateQuery.stages[nextStage] = this.props.storeConfig.queries[queryType].stages.stage_1;
-        newStateCollection[nextStage] = JSON.parse(JSON.stringify(_stageTemplate));
+        newStateCollection[nextStage] = JSON.parse(JSON.stringify(this.props._stageTemplate));
         // console.log(newStateCollection[nextStage]);
         this.props.setQueryValuesToStore(newStateQuery);
         this.props.setQueryCollectionStateToStore(newStateCollection);

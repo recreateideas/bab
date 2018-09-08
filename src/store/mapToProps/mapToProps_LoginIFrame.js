@@ -5,6 +5,16 @@ const mapStateToProps = (state) => {
     return {
         storeConnection: state.connection,
         storeUser: state.user,
+        _emptyUser: {
+            loggedIn: false,
+            ID:'',
+            loginEmail:'',
+            loginPassword:'',
+            nickName: '',
+            registerEmail:'',
+            passWord:'',
+            confirmPassWord:'',
+        }
     }
 }
 

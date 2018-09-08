@@ -3,8 +3,10 @@ import FormLine from './FormLine';
 import { Grid, Row, Col } from 'react-bootstrap';
 import { AddRemove, SelectInput, CheckBox, TextInput } from '../BasicComponents';
 import { connect } from 'react-redux';
-import { _paramsLine } from '../../dataTemplates/collectionState'
+// import { _paramsLine } from '../../dataTemplates/collectionState'
 import { mapStateToProps, mapDispatchToProps } from '../../store/mapToProps/mapToProps_Stage';
+// import { mapStateToTemplatesProps } from '../../store/mapToProps/mapToProps_DataTemplates';
+
 import PropTypes from 'prop-types';
 
 const FontAwesome = require('react-fontawesome');
@@ -16,7 +18,7 @@ class Stage extends React.Component {
         const stage = this.props.stage;
         let collection = this.props.storeQueryCollectionState;
         let params = collection[stage].params;
-        const _template = JSON.parse(JSON.stringify(_paramsLine));
+        const _template = JSON.parse(JSON.stringify(this.props._paramsLine));
         Object.keys(params)
             .map(key => params[key].push(_template[key][0]))
         this.props.setQueryCollectionStateToStore(collection);

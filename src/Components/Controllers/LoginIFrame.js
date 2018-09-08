@@ -4,7 +4,8 @@ import { TextInput, Button2, CheckBox } from '../BasicComponents';
 import { Grid, Row, Col } from 'react-bootstrap';
 import axios from 'axios';
 import { mapStateToProps, mapDispatchToProps } from '../../store/mapToProps/mapToProps_LoginIFrame';
-import { emptyUser } from '../../dataTemplates/collectionState';
+// import { mapStateToTemplatesProps } from '../../store/mapToProps/mapToProps_DataTemplates';
+// import { emptyUser } from '../../dataTemplates/collectionState';
 import { dbDisconnect } from '../DBClientUtils/DBClientUtils';
 import PropTypes from 'prop-types';
 
@@ -186,7 +187,7 @@ class LoginIFrame extends React.Component {
         // console.log('logout');
         dbDisconnect(e, this);
         this.forgetUser();
-        this.props.recordUserObjectToStore(emptyUser);
+        this.props.recordUserObjectToStore(this.props._emptyUser);
         this.props.setResultsToStore([]);
         this.setValidationState('register', 'passWord', { matchingPasswords: null, message: ' ', });
         this.setValidationState('register', 'registerEmail', { EmailValidate: null, message: ' ', });

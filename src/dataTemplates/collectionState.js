@@ -1,5 +1,7 @@
-import store from '../store';
+import store,{ getState } from '../store';
 
+
+console.log(store.getState());
 
 const _paramsLine = {
     actives: [true],
