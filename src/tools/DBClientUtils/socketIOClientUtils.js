@@ -5,19 +5,18 @@ let socket;
 
 module.exports = {
 
-    connectToSocket:  async ()=>{
+    connectToSocket: customId => {
         socket = io('http://localhost:8011');
-        // console.log(socket);
-        socket.on('connect',()=>{
+        socket.on('connect', () => {
             console.log(socket);
+            socket.emit('updateClientInfo', { customId });
         });
     },
-    
-    subscribeToTimer: callback => {
-        console.log('subscribed');
-        socket.on('timer', timestamp => callback(null, timestamp));
-        socket.emit('subscribeToTimer',1000);
-    }
+
+    storeClientInfo: customId => {
+        socket.emit('updateClientInfo', { customId });
+    },
+
 }
 
 // export {connectToSocket, subscribeToTimer };

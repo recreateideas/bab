@@ -8,7 +8,7 @@ import SettingsTab from './Components/Sidebar/Tabs/SettingsTab';
 import ReactTooltip from 'react-tooltip';
 import PropTypes from 'prop-types';
 
-import {connectToSocket,subscribeToTimer,storeClientInfo} from './tools/DBClientUtils/socketIOClientUtils';
+import {connectToSocket,storeClientInfo} from './tools/DBClientUtils/socketIOClientUtils';
 
 const FontAwesome = require('react-fontawesome');
 
@@ -26,7 +26,8 @@ class App extends React.Component {
     }
 
     componentDidMount() {
-        connectToSocket();
+        connectToSocket('claudio');
+        // storeClientInfo('claudio');
         // subscribeToTimer((err, timestamp) => console.log(timestamp));
     }
     
