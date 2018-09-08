@@ -57,6 +57,7 @@ const config = {
       }
     ]
   },
+  externals: ['ws'],
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     // HtmlWebPackPlugin

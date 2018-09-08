@@ -112,6 +112,7 @@
 
   #tabs #toggle-tab1:checked~label[for="toggle-tab1"],
   #toggle-tab2:checked~label[for="toggle-tab2"],
+  #toggle-shareTab:checked~label[for="toggle-shareTab"],
   #toggle-tab3:checked~label[for="toggle-tab3"],
   #toggle-tab4:checked~label[for="toggle-tab4"] {
       background: #e9e9e9;
@@ -125,6 +126,7 @@
 
   #tabs #toggle-tab1:checked~#tab1,
   #toggle-tab2:checked~#queryTab,
+  #toggle-shareTab:checked~#shareTab,
   #toggle-tab3:checked~#tab3,
   #toggle-tab4:checked~#tab4 {
       display: block;

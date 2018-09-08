@@ -2,7 +2,7 @@ import React from 'react';
 // import '../../css/App.css';
 // import SelectInput from './BasicComponents/SelectInput';
 // import TextInput from './BasicComponents/TextInput';
-import { CheckBox, SelectInput } from '../BasicComponents';
+import { CheckBox, SelectInput } from '../index';
 import { connect } from 'react-redux';
 import { Grid, Row, Col } from 'react-bootstrap';
 import { mapStateToProps, mapDispatchToProps } from '../../store/mapToProps/mapToProps_Cursor';
