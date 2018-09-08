@@ -1,8 +1,8 @@
 import constants from '../constants';
+import store from '../../store';
 
 const mapStateToProps = (state) => {
     const isPretty = state.query.cursors.hasOwnProperty('pretty')
-    // console.log(isPretty);
     return {
         storeQuery: state.query,
         storeConfig: state.config,
@@ -19,6 +19,11 @@ const mapDispatchToProps = (dispatch) => {
                 cursors: cursors
             }
             dispatch(action)
+            const update_query = {
+                type: constants.UPDATE_MONGO_QUERY,
+                state: store.getState(),
+            }
+            dispatch(update_query)
         }
     }
 }

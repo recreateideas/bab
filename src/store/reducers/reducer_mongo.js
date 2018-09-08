@@ -2,23 +2,23 @@ import constants from '../constants';
 import initialState from '../initialState';
 import QUERY from '../stringifyHelpers/stringifyStages';
 
-const mongo = (state = initialState.mongo, action) => {
-    const obj = Object.assign({}, state);
+const mongo = (mongo = initialState.mongo, action) => {
+    const obj = Object.assign({}, mongo);
     switch (action.type) {
         case constants.SET_DBCOLLECTIONS:
-            return Object.assign({}, state, { ...state, DBcollections: action.DBcollections } );
+            return Object.assign({}, mongo, { ...mongo, DBcollections: action.DBcollections } );
         case constants.SET_RESULTS:
-            return Object.assign({}, state, { ...state, mongo_results: action.queryResults } );
+            return Object.assign({}, mongo, { ...mongo, mongo_results: action.queryResults } );
         case constants.SET_QUERYMESSAGE:
-            return Object.assign({}, state, { ...state, [action.messageType]: action.queryMessage } );
+            return Object.assign({}, mongo, { ...mongo, [action.messageType]: action.queryMessage } );
         case constants.UPDATE_MONGO_QUERY:
-            let Query = QUERY(state,action.query);
-            return Object.assign({}, state, { ...state, mongo_query: Query.string, mongo_object: Query.paramsObj } );
+            let Query = QUERY(action.state);
+            return Object.assign({}, mongo, { ...mongo, mongo_query: Query.string, mongo_object: Query.paramsObj } );
         case constants.SET_MONGO_OBJECT:
-            return Object.assign({}, state, action.mongo );
+            return Object.assign({}, mongo, action.mongo );
 
         default:
-            return Object.assign({}, state, obj);
+            return Object.assign({}, mongo, obj);
     }
 }
 

@@ -1,4 +1,5 @@
 import constants from '../constants';
+import store from '../../store';
 
 const mapStateToProps = (state) => {
     return {
@@ -36,6 +37,7 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => {
+    
     return {
         setConfigQueriesToStore: (queries) => {
             const action = {
@@ -49,16 +51,57 @@ const mapDispatchToProps = (dispatch) => {
                 type: constants.SET_QUERY_VALUES,
                 query: query
             }
-            dispatch(action);
+            dispatch(action)
+            const update_query = {
+                type: constants.UPDATE_MONGO_QUERY,
+                state: store.getState(),
+            }
+            dispatch(update_query)
         },
         setQueryCollectionStateToStore: (collectionState) => {
             const action = {
                 type: constants.SET_QUERY_COLLECTION_STATE,
                 collectionState: collectionState
             }
-            dispatch(action);
+            dispatch(action)
+            const update_query = {
+                type: constants.UPDATE_MONGO_QUERY,
+                state: store.getState(),
+            }
+            dispatch(update_query)
         },
     }
 }
 
 export { mapStateToProps, mapDispatchToProps};
+// const mapDispatchToProps = (dispatch) => {
+//     return {
+//         setQueryValuesToStore: (v) => {
+//             const action = {
+//                 type: constants.SET_QUERY_VALUES,
+//                 value: e.target.value
+//             }
+//             dispatch(action);
+//             console.log(store);
+//         }
+//     }
+// }
+
+// const mapDispatchToProps = (dispatch,props) => {
+//     // console.log(props);
+//     return {
+//         onChangeQueryType: (e) => asyncActionCreator(e)
+//     }
+// }
+
+// const asyncActionCreator = (e) => {
+//     return (dispatch, getState) => {
+//         const action = {
+//             type: constants.QUERY_TYPE,
+//             value: e.target.value
+//         }
+//         dispatch(action).then(() => {
+//             console.log(store);
+//         });
+//     }
+//   }

@@ -38,7 +38,11 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(apply_mongo)
             dispatch(apply_query)
             dispatch(apply_queryCollectionState)
-
+            const update_query = {
+                type: constants.UPDATE_MONGO_QUERY,
+                state: store.getState(),
+            }
+            dispatch(update_query)
         }
     }
 }

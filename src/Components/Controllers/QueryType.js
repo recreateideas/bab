@@ -2,7 +2,7 @@ import React from 'react';
 import { SelectInput } from '../BasicComponents';
 import { connect } from 'react-redux';
 import { Grid, Row, Col } from 'react-bootstrap';
-import { mapStateToProps, mapDispatchToProps } from '../../store/mapToProps/mapToProps_QueryType';
+import { mapStateToProps } from '../../store/mapToProps/mapToProps_QueryType';
 import PropTypes from 'prop-types';
 
 class QueryType extends React.Component {
@@ -17,7 +17,7 @@ class QueryType extends React.Component {
         return (
             <Grid className='keysTable'>
                 <Row>
-                    <Col xs={12}><div className='fieldTitle'><p className='h7'>Query Type: {this.props.queryType}</p></div></Col>
+                    <Col xs={12}><div className='fieldTitle'><p className='h7'>Query Type: {this.props.storeQueryType}</p></div></Col>
                 </Row>
                 <Row>
                     <Col xs={12}>
@@ -42,4 +42,4 @@ QueryType.propTypes = {
     queryType: PropTypes.string,
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(QueryType); 
+export default connect(mapStateToProps)(QueryType); 

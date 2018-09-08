@@ -18,7 +18,7 @@ class Background extends React.Component {
     }
 
     componentWillReceiveProps(nextProps){
-        console.log(nextProps.storeisPretty);
+        // console.log(nextProps.storeisPretty);
         !nextProps.storeisPretty ? this.setState({displayPretty: 'hidden',displayMinified: 'show'}) : this.setState({displayPretty: 'show',displayMinified: 'hidden'})
 
     }
@@ -46,7 +46,7 @@ class Background extends React.Component {
         //const position = cursors.indexOf(cursor);
         // const isPretty = this.prop.storeisPretty.query.cursors.hasOwnProperty('pretty')
         !this.props.storeisPretty ? activeCursors['pretty'] = prettyCursor : delete activeCursors.pretty;
-        console.log(activeCursors);
+        // console.log(activeCursors);
         this.props.insertCursorInQueryToStore(activeCursors);
     }
 

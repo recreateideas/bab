@@ -1,4 +1,5 @@
 import constants from '../constants';
+import store from '../../store';
 
 const mapStateToProps = (state) => {
     // console.log('@@ CURSOR -> mapStateToProps');
@@ -18,6 +19,11 @@ const mapDispatchToProps = (dispatch) => {
                 cursors: cursors
             }
             dispatch(action)
+            const update_query = {
+                type: constants.UPDATE_MONGO_QUERY,
+                state: store.getState(),
+            }
+            dispatch(update_query)
         }
     }
 }
