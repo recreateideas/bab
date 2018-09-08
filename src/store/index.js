@@ -22,32 +22,27 @@ const reducer = (state = initialState, action) => {  // 1 is the initial state i
         case constants.SET_COLLECTION:
             newState = Object.assign({}, state, { query : {...state.query, collection: action.collection  } });
             Query = QUERY(newState);
-            // return Object.assign({}, newState, { mongo_query: Query.string, mongo_object: Query.paramsObj });
             return Object.assign({}, newState, { mongo : {...state.mongo, mongo_query: Query.string, mongo_object: Query.paramsObj  } });
-
 
         case constants.SET_QUERY_TYPE:
             newState = Object.assign({}, state, { queryType: action.queryType });
             Query = QUERY(newState);
-            // return Object.assign({}, newState, { mongo_query: Query.string, mongo_object: Query.paramsObj });
             return Object.assign({}, newState, { mongo : {...state.mongo, mongo_query: Query.string, mongo_object: Query.paramsObj  } });
         case constants.SET_QUERY_VALUES:
-            return Object.assign({}, state, { query: action.query });
+            newState = Object.assign({}, state, { query: action.query });
+            Query = QUERY(newState);
+            return Object.assign({}, newState, { mongo : {...state.mongo, mongo_query: Query.string, mongo_object: Query.paramsObj  } });
         case constants.SET_QUERY_COLLECTION_STATE:
             newState = Object.assign({}, state, { queryCollectionState: action.collectionState });
             Query = QUERY(newState);
-            // return Object.assign({}, newState, { mongo_query: Query.string, mongo_object: Query.paramsObj });
             return Object.assign({}, newState, { mongo : {...state.mongo, mongo_query: Query.string, mongo_object: Query.paramsObj  } });
 
         case constants.INSERT_CURSOR:
             newState = Object.assign({}, state, { query: { ...state.query, cursors: Object.assign({}, action.cursors) } });
-            Query = QUERY(newState);
-            // return Object.assign({}, newState, { mongo_query: Query.string, mongo_object: Query.paramsObj });  
+            Query = QUERY(newState); 
             return Object.assign({}, newState, { mongo : {...state.mongo, mongo_query: Query.string, mongo_object: Query.paramsObj  } });
       
-
         case constants.SET_DBCOLLECTIONS:
-            // return Object.assign({}, state, { DBcollections: action.DBcollections });
             return Object.assign({}, state, { mongo : {...state.mongo, DBcollections: action.DBcollections  } });
         case constants.SET_ISCONNECTED:
             return Object.assign({}, state, { connection: { ...state.connection, isDBConnected: action.isDBConnected } });
@@ -55,10 +50,8 @@ const reducer = (state = initialState, action) => {  // 1 is the initial state i
             return Object.assign({}, state, { connection: { ...state.connection, [action.param]: action.value } });
 
         case constants.SET_RESULTS:
-            // return Object.assign({}, state, { mongo_results: action.queryResults });
             return Object.assign({}, state, { mongo : {...state.mongo, mongo_results: action.queryResults  } });
         case constants.SET_QUERYMESSAGE:
-            // return Object.assign({}, state, { [action.messageType]: action.queryMessage });
             return Object.assign({}, state, { mongo : {...state.mongo, [action.messageType]: action.queryMessage  } });
 
         case constants.RECORD_USER_DETAILS:
@@ -84,7 +77,7 @@ const allReducers = combineReducers({
 // const store = createStore(allReducers,  /*applyMiddleware(thunk), /*preloadedState, remove those when going to production-->*/ window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
 const store = createStore(reducer,  /*applyMiddleware(thunk), /*preloadedState, remove those when going to production-->*/ window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
-console.log(store.getState());
+// console.log(store.getState());
 /**    add this to index.html when going to production <script>
       window.__REACT_DEVTOOLS_GLOBAL_HOOK__.inject = function () { }
     </script> */

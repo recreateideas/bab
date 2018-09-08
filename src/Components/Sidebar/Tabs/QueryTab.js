@@ -2,9 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux'
 import { Querybox, Cursor, QueryType, Stage, SelectCollection, Interrogator } from '../../../Components';
 import { Grid, Row, Col } from 'react-bootstrap';
-// import { _collectionStateTemplate, _stageTemplate } from '../../../dataTemplates/collectionState';
-// import { mapStateToTemplatesProps } from '../../../store/mapToProps/mapToProps_DataTemplates';
-import { mapStateToProps, mapDispatchToProps } from '../../../store/mapToProps/mapToProps_App';
+import { mapStateToProps, mapDispatchToProps } from '../../../store/mapToProps/mapToProps_QueryTab';
 import { getElementsFromConfig, findStageValuesFromConfig, parsePreParamsSyntax } from '../../../configuration/configHelpers/queryHelpers';
 import PropTypes from 'prop-types';
 
@@ -14,7 +12,6 @@ const configJSON = require('../../../configuration/config.json');
 class QueryTab extends React.Component {
 
     componentWillMount() {
-        // console.log('QUERYTAB -> componentWillMount');
         this.config = configJSON;
         this.config.queries = parsePreParamsSyntax(this.config);
         this.props.setConfigQueriesToStore(this.config.queries);
@@ -34,7 +31,6 @@ class QueryTab extends React.Component {
 
     updateQueryType(e) {
         const type = e.target.value;
-        // console.log('APP -> updateQueryType:' + type);
         const stateQuery = this.props.storeQuery;
         const format = this.props.storeConfig.queries[type];
         const formatStages = format.stages;
@@ -56,7 +52,6 @@ class QueryTab extends React.Component {
         stateQuery.openQuery = format.openQuery; //  sets the openQuery according to config 
         stateQuery.closeQuery = format.closeQuery; //sets the closeQuery according to config
         stateQuery.queryType = type;
-        // this.props.setQueryTypeToStore(type);
         this.props.setQueryValuesToStore(stateQuery);
         this.updateQueryCollectionPreStages(collection);
     }
@@ -73,8 +68,11 @@ class QueryTab extends React.Component {
     }
 
     updateCollection(e) {
-        const collection = e.target.value;
-        this.props.setCollectionToStore(collection);
+        // const collection = e.target.value;
+        let query = Object.assign({}, this.props.storeQuery);
+        query.collection = e.target.value;
+        // this.props.setCollectionToStore(collection);
+        this.props.setQueryValuesToStore(query);
     }
 
     removeStage(name) {
@@ -184,8 +182,9 @@ QueryTab.propTypes = {
     setConfigQueriesToStore: PropTypes.func,
     setQueryCollectionStateToStore: PropTypes.func,
     setQueryValuesToStore: PropTypes.func,
-    setQueryTypeToStore: PropTypes.func,
-    setCollectionToStore: PropTypes.func,
+    // setCollectionToStore: PropTypes.func,
+    _collectionStateTemplate: PropTypes.object,
+    _stageTemplate: PropTypes.object
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(QueryTab);

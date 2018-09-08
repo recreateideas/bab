@@ -1,13 +1,12 @@
 import React from 'react';
-//import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
 import { Background, ConnectTab, QueryTab } from './Components';
 import printConsoleLogo from './graphicHelpers/PrintConsoleLogo';
-// import QueryTab from './Components';
 import { mapStateToProps, mapDispatchToProps } from './store/mapToProps/mapToProps_App';
 import ToolsTab from './Components/Sidebar/Tabs/ToolsTab';
 import SettingsTab from './Components/Sidebar/Tabs/SettingsTab';
 import ReactTooltip from 'react-tooltip';
+import PropTypes from 'prop-types';
 
 const FontAwesome = require('react-fontawesome');
 
@@ -22,7 +21,6 @@ class SlidePage extends React.Component {
             this.props.recordUserObjectToStore(user);
         }
     }
-    
 
     displayConnectedBadge() {
         let classProp;
@@ -32,12 +30,10 @@ class SlidePage extends React.Component {
     }
 
     render() {
-
         const connectOpacity = this.displayConnectedBadge();
-        // console.log('APP -> render ');
         return (
             <div>
-                <Background greeting={this.props.greeting} />
+                <Background/>
                 
                 <div id='toggleContainer' className='toggleContainer'>
                     <input type="checkbox" id="slide" name="" value="" defaultChecked={false} />
@@ -48,7 +44,6 @@ class SlidePage extends React.Component {
                             <FontAwesome name='bars' /*spin*/ />{/*☰*/}
                         </label>
                             <div id="tabs" className=''>
-                                {/* replace this part with a fragment? */}
                                 <input type="radio" name="tabs" id="toggle-tab1" defaultChecked={true} />
                                 <div className='connectIndicatorWrapper'>
                                     <FontAwesome name='check-circle' size='2x' /*spin*/ className={`connectIndicator ${connectOpacity}`} />
@@ -96,6 +91,11 @@ class SlidePage extends React.Component {
         )
     }
 }
+
+SlidePage.propType = {
+    storeDBConnected: PropTypes.bool,
+    recordUserObjectToStore: PropTypes.func
+};
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(SlidePage);
