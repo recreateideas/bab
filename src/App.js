@@ -22,15 +22,10 @@ class App extends React.Component {
         if(user){
             console.log('welcome back chimp!');
             this.props.recordUserObjectToStore(user);
+            connectToSocket('claudio');
+            // storeClientInfo('claudio');
         }
     }
-
-    componentDidMount() {
-        connectToSocket('claudio');
-        // storeClientInfo('claudio');
-        // subscribeToTimer((err, timestamp) => console.log(timestamp));
-    }
-    
 
     displayConnectedBadge() {
         let classProp;

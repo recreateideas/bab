@@ -1,7 +1,11 @@
 import axios from 'axios';
 import 'regenerator-runtime';
+import {connectToSocket,storeClientInfo} from '../../tools/DBClientUtils/socketIOClientUtils';
 // import 'babel-polyfill';
 
+
+// storeClientInfo('claudio');
+// subscribeToTimer((err, timestamp) => console.log(timestamp));
 
 const loginUser = (component, id, email, nickname) => {
     console.log('log me in');
@@ -31,7 +35,10 @@ const sendLoginRequest = async (e, component, validated) => {
             console.log(res);
             // console.log(res.data.userFound);
             const userFound = res.data.userFound;
-            if (userFound) loginUser(component, res.data.userDetails[0]._id, res.data.userDetails[0].email, res.data.userDetails[0].nickname);
+            if (userFound) {
+                loginUser(component, res.data.userDetails[0]._id, res.data.userDetails[0].email, res.data.userDetails[0].nickname);
+                connectToSocket('claudio');
+            }
             else handleLoginRejection();
         }
         catch (err) {
@@ -41,7 +48,6 @@ const sendLoginRequest = async (e, component, validated) => {
         console.log('form not valid');
     }
 }
-
 
 const sendRegisterRequest = async (e,component, validated) => {
     const userDetails = component.props.storeUser;
