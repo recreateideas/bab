@@ -7,6 +7,9 @@ const config = (state = initialState.config, action) => {
         case constants.SET_CONFIG_QUERIES:
             obj.queries = Object.assign({}, action.queries);
             return Object.assign({}, state, obj);
+        case constants.SET_CONFIG_OBJECT:
+            return Object.assign({}, state, action.config);
+
         default:
             return Object.assign({}, state, obj);
     }

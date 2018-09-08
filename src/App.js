@@ -10,9 +10,8 @@ import PropTypes from 'prop-types';
 
 const FontAwesome = require('react-fontawesome');
 
-class SlidePage extends React.Component {
+class App extends React.Component {
 
-    
     componentWillMount() {
         printConsoleLogo();
         const user = JSON.parse(localStorage.getItem('user'));
@@ -32,45 +31,44 @@ class SlidePage extends React.Component {
     render() {
         const connectOpacity = this.displayConnectedBadge();
         return (
-            <div>
+            <div id ="App">
                 <Background/>
-                
                 <div id='toggleContainer' className='toggleContainer'>
                     <input type="checkbox" id="slide" name="" value="" defaultChecked={false} />
                     <div className="container mainContainer">
                
                         <div className="sidebar">
                         <label htmlFor="slide" className="toggle">
-                            <FontAwesome name='bars' /*spin*/ />{/*☰*/}
+                            <FontAwesome name='bars' />{/*☰*/}
                         </label>
                             <div id="tabs" className=''>
                                 <input type="radio" name="tabs" id="toggle-tab1" defaultChecked={true} />
                                 <div className='connectIndicatorWrapper'>
-                                    <FontAwesome name='check-circle' size='2x' /*spin*/ className={`connectIndicator ${connectOpacity}`} />
+                                    <FontAwesome name='check-circle' size='2x' className={`connectIndicator ${connectOpacity}`} />
                                 </div>
                                 <label id='connectorTab' htmlFor="toggle-tab1" data-tip data-for='tooltip_connectorTab'>
-                                    <FontAwesome name='plug' size='2x' /*spin*/ className='connectPlug' style={{ textShadow: '0 1px 0 rgba(255, 255, 255, 0.7)' }} />
+                                    <FontAwesome name='plug' size='2x' className='connectPlug' style={{ textShadow: '0 1px 0 rgba(255, 255, 255, 0.7)' }} />
                                 </label>
                                 <ReactTooltip id='tooltip_connectorTab' type='success'>
                                         <span>Connection Centre</span>
                                 </ReactTooltip>
                                 <input type="radio" name="tabs" id="toggle-tab2" />
                                 <label htmlFor="toggle-tab2" data-tip data-for='tooltip_queryTab'>
-                                    <FontAwesome name='feather' size='2x' /*spin*/ style={{ textShadow: '0 1px 0 rgba(255, 255, 255, 0.7)' }} />
+                                    <FontAwesome name='feather' size='2x' style={{ textShadow: '0 1px 0 rgba(255, 255, 255, 0.7)' }} />
                                 </label>
                                 <ReactTooltip id='tooltip_queryTab' type='success'>
                                         <span>Query Jungle</span>
                                 </ReactTooltip>
                                 <input type="radio" name="tabs" id="toggle-tab3" />
                                 <label htmlFor="toggle-tab3" data-tip data-for='tooltip_toolsTab'>
-                                    <FontAwesome name='flask' size='2x' /*spin*/ style={{ textShadow: '0 1px 0 rgba(255, 255, 255, 0.7)' }} />
+                                    <FontAwesome name='flask' size='2x' style={{ textShadow: '0 1px 0 rgba(255, 255, 255, 0.7)' }} />
                                 </label>
                                 <ReactTooltip id='tooltip_toolsTab' type='success'>
                                         <span>Potions</span>
                                 </ReactTooltip>
                                 <input type="radio" name="tabs" id="toggle-tab4" />
                                 <label htmlFor="toggle-tab4" data-tip data-for='tooltip_settingsTab'>
-                                    <FontAwesome name='cogs' size='2x' /*spin*/ style={{ textShadow: '0 1px 0 rgba(255, 255, 255, 0.7)' }} />
+                                    <FontAwesome name='cogs' size='2x' style={{ textShadow: '0 1px 0 rgba(255, 255, 255, 0.7)' }} />
                                 </label>
                                 <ReactTooltip id='tooltip_settingsTab' type='success'>
                                         <span>Settings</span>
@@ -92,10 +90,10 @@ class SlidePage extends React.Component {
     }
 }
 
-SlidePage.propType = {
+App.propType = {
     storeDBConnected: PropTypes.bool,
     recordUserObjectToStore: PropTypes.func
 };
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(SlidePage);
+export default connect(mapStateToProps, mapDispatchToProps)(App);

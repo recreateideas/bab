@@ -13,8 +13,10 @@ const mongo = (state = initialState.mongo, action) => {
             return Object.assign({}, state, { ...state, [action.messageType]: action.queryMessage } );
         case constants.UPDATE_MONGO_QUERY:
             let Query = QUERY(state,action.query);
-            console.log('aaa',action.query);
             return Object.assign({}, state, { ...state, mongo_query: Query.string, mongo_object: Query.paramsObj } );
+        case constants.SET_MONGO_OBJECT:
+            return Object.assign({}, state, action.mongo );
+
         default:
             return Object.assign({}, state, obj);
     }
