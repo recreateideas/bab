@@ -1,12 +1,10 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { TextInput, Button2 } from '../BasicComponents';
 import { Grid, Row, Col } from 'react-bootstrap';
 import { mapStateToProps, mapDispatchToProps } from '../../store/mapToProps/mapToProps_LoginIFrame';
-import { dbDisconnect } from '../../tools/DBClientUtils/DBClientUtils';
-import { sendLoginRequest,sendRegisterRequest } from '../../tools/DBClientUtils/userAuthUtils';
-
-import PropTypes from 'prop-types';
+import { sendLoginRequest,sendRegisterRequest,sendLogout } from '../../tools/DBClientUtils/userAuthUtils';
 
 const FontAwesome = require('react-fontawesome');
 const monkeyLogin = require('../../images/monkey_login.png');
@@ -126,9 +124,8 @@ class LoginIFrame extends React.Component {
         })
     };
 
-    async logOut(e) {
-        // console.log('logout');
-        dbDisconnect(e, this);
+    async Logout(e) {
+        sendLogout(e,this,);
         this.forgetUser();
         this.props.recordUserObjectToStore(this.props._emptyUser);
         this.props.setResultsToStore([]);
@@ -386,7 +383,7 @@ class LoginIFrame extends React.Component {
                                                     addClass={displayForget}
                                                 />
                                                 <Button2
-                                                    click={this.logOut.bind(this)}
+                                                    click={this.Logout.bind(this)}
                                                     buttonId='logoutButton'
                                                     value='Logout'
                                                 />

@@ -1,6 +1,6 @@
 // Modules to control application life and create native browser window
 const { app, BrowserWindow, Menu, MenuItem, remote } = require('electron'),
-  template = require('./electronUtils/contextMenu'),
+  template = require('./tools/electronUtils/contextMenu'),
   path = require('path'),
   { default: installExtension, REDUX_DEVTOOLS, REACT_DEVELOPER_TOOLS } = require('electron-devtools-installer');
 

@@ -1,6 +1,7 @@
 import axios from 'axios';
 import 'regenerator-runtime';
-import {connectToSocket,storeClientInfo} from '../../tools/DBClientUtils/socketIOClientUtils';
+import {connectToSocket, storeClientInfo, disconnectSocket} from '../../tools/DBClientUtils/socketIOClientUtils';
+import { dbDisconnect } from './DBClientUtils';
 // import 'babel-polyfill';
 
 
@@ -13,10 +14,11 @@ const loginUser = (component, id, email, nickname) => {
     component.props.recordUserDetailsToStore('ID', id);
     component.props.recordUserDetailsToStore('loginEmail', email);
     component.props.recordUserDetailsToStore('nickName', nickname);
-}
+};
+
 const handleLoginRejection = () => {
     console.log('rejected');
-}
+};
 
 const sendLoginRequest = async (e, component, validated) => {
     const userDetails = component.props.storeUser;
@@ -37,7 +39,7 @@ const sendLoginRequest = async (e, component, validated) => {
             const userFound = res.data.userFound;
             if (userFound) {
                 loginUser(component, res.data.userDetails[0]._id, res.data.userDetails[0].email, res.data.userDetails[0].nickname);
-                connectToSocket('claudio');
+                connectToSocket(res.data.userDetails[0]._id);
             }
             else handleLoginRejection();
         }
@@ -47,7 +49,7 @@ const sendLoginRequest = async (e, component, validated) => {
     } else {
         console.log('form not valid');
     }
-}
+};
 
 const sendRegisterRequest = async (e,component, validated) => {
     const userDetails = component.props.storeUser;
@@ -74,6 +76,10 @@ const sendRegisterRequest = async (e,component, validated) => {
     } else {
         console.log('form not valid');
     }
-}
+};
 
-export { sendLoginRequest,sendRegisterRequest }
+const sendLogout = (e,component) => {
+    dbDisconnect(e, component);
+};
+
+export { sendLoginRequest,sendRegisterRequest,sendLogout }

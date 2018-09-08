@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Background, ConnectTab, QueryTab } from './Components';
-import printConsoleLogo from './graphicHelpers/PrintConsoleLogo';
+import printConsoleLogo from './tools/graphicHelpers/PrintConsoleLogo';
 import { mapStateToProps, mapDispatchToProps } from './store/mapToProps/mapToProps_App';
 import ToolsTab from './Components/Sidebar/Tabs/ToolsTab';
 import SettingsTab from './Components/Sidebar/Tabs/SettingsTab';
@@ -14,7 +14,6 @@ const FontAwesome = require('react-fontawesome');
 
 class App extends React.Component {
 
-    
 
     componentWillMount() {
         printConsoleLogo();
@@ -22,7 +21,7 @@ class App extends React.Component {
         if(user){
             console.log('welcome back chimp!');
             this.props.recordUserObjectToStore(user);
-            connectToSocket('claudio');
+            connectToSocket(user.ID);
             // storeClientInfo('claudio');
         }
     }
