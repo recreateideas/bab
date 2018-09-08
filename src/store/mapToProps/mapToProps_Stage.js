@@ -1,14 +1,12 @@
 import constants from '../constants';
-import store from '../../store';
 
 const mapStateToProps = (state) => {
-    // console.log('@@ STAGE -> mapStateToProps');
     return {
         storeQuery: state.query,
         storeConfig: state.config,
         storeQueryType: state.query.queryType,
         storeQueryCollectionState: state.queryCollectionState,
-        _paramsLine : {
+        _paramsLine: {
             actives: [true],
             keys: [''],
             operators: [Object.keys(state.config.operators)[0]],
@@ -26,13 +24,18 @@ const mapDispatchToProps = (dispatch) => {
                 collectionState: collectionState
             }
             dispatch(action)
-            const update_query = {
-                type: constants.UPDATE_MONGO_QUERY,
-                state: store.getState(),
+            dispatch(updateQuery())
+            function updateQuery() {
+                return (dispatch, getState) => {
+                    const state = getState();
+                    dispatch({
+                        type: constants.UPDATE_MONGO_QUERY,
+                        state,
+                    })
+                }
             }
-            dispatch(update_query)
         }
     }
-} 
+}
 
 export { mapStateToProps, mapDispatchToProps };

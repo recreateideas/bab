@@ -33,10 +33,10 @@ const QUERY = (store) => {
                     })
                     subString += handlePostParamsType(stageName, queryName, store) + '}';
                     query.stages[stageName].params = subString;
-                    string += (stageCount > 0 ? ', ' : ''); //separates the stages
+                    string += stageCount > 0 ? ', ' : ''; //separates the stages
                     string += subString;
                     subString = '';
-                    return stageCount++;
+                    stageCount++;
                 }
             })
         console.log(`Query string: ${string}`);

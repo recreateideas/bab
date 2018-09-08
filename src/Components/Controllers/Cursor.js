@@ -28,13 +28,13 @@ class Cursor extends React.Component {
     }
 
     appendCursors(e) {
-        console.log(e.target.checked);
+        // console.log(e.target.checked);
         let cursor = e.target.id.split('_')[1];
         let activeCursors = this.props.storeQuery.cursors;
         const cursorsConfig = this.props.storeConfig.cursors;
         //const position = cursors.indexOf(cursor);
         e.target.checked ? activeCursors[cursor] = cursorsConfig[cursor] : delete activeCursors[cursor];
-        console.log(activeCursors[cursor]);
+        // console.log(activeCursors[cursor]);
         this.props.insertCursorInQueryToStore(activeCursors);
     }
 
