@@ -41,6 +41,7 @@ class LoginIFrame extends React.Component {
 
     async sendLoginRequest(e) {
         const userDetails = this.props.storeUser;
+        // console.log(userDetails);
         if(e) e.stopPropagation();
         if (this.validateLoginForSubmission() === true) {
             const loginDetails = {
@@ -53,7 +54,7 @@ class LoginIFrame extends React.Component {
                         details: loginDetails
                     })
                 console.log(res);
-                console.log(res.data.userFound);
+                // console.log(res.data.userFound);
                 const userFound = res.data.userFound;
                 if (userFound) this.loginUser(res.data.userDetails[0]._id,res.data.userDetails[0].email,res.data.userDetails[0].nickname);
                 else this.handleLoginRejection();

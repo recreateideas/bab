@@ -7,7 +7,7 @@ const mapStateToProps = (state) => {
         storeQuery: state.query,
         storeConfig: state.config,
         storeisPretty: isPretty,
-        storeResults: state.mongo_results,
+        storeResults: state.mongo.mongo_results,
     }
 }
 

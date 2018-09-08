@@ -5,7 +5,7 @@ const mapStateToProps = (state) => {
     return {
         storeQuery: state.query,
         storeConfig: state.config,
-        storeQueryType: state.queryType,
+        storeQueryType: state.query.queryType,
         storeQueryCollectionState: state.queryCollectionState
     }
 }

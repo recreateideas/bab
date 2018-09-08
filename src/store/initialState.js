@@ -2,7 +2,6 @@
 
 const initialState = {
     config: require('../configuration/config.json'),
-    greeting: 'baboon',
     connection: {
         isDBConnected: false,
         connectionStatus: 'Disconnected',
@@ -14,9 +13,6 @@ const initialState = {
         sshPath: '',
         sshMode: 'file'
     },
-    DBcollections: [],
-    collection: '',
-    queryType: 'find',
     queryCollectionState: {
         stage_1: {
             isActive: true,
@@ -31,6 +27,8 @@ const initialState = {
         }
     },
     query: {
+        collection: '',
+        queryType: 'find',
         openQuery: '.find(',
         stages: {
             stage_1: {
@@ -52,11 +50,12 @@ const initialState = {
         passWord:'',
         confirmPassWord:'',
     },
-    mongo_query: '',
-    mongo_object: '',
-    mongo_results: [],
-    queryMessage: '',
-    queryError: '',
+    mongo:{
+        DBcollections: [],
+        mongo_query: '',
+        mongo_object: '',
+        mongo_results: [],
+    },
 }
 
 export default initialState;

@@ -22,7 +22,7 @@ const mapDispatchToProps = (dispatch) => {
     return {
         recordUserDetailsToStore: (field, data) => {
             const action = {
-                type: constants.LOGINIFRAME_RECORD_USER_DETAILS,
+                type: constants.RECORD_USER_DETAILS,
                 field,
                 data
             }
@@ -30,21 +30,21 @@ const mapDispatchToProps = (dispatch) => {
         },
         recordUserObjectToStore: (user) => {
             const action = {
-                type: constants.LOGINIFRAME_RECORD_USER_OBJECT,
+                type: constants.RECORD_USER_OBJECT,
                 user,
             }
             dispatch(action)
         },
         loginUserToStore: (loggedIn) => {
             const action = {
-                type: constants.LOGINIFRAME_LOGIN_USER,
+                type: constants.LOGIN_USER,
                 loggedIn
             }
             dispatch(action)
         },
         setConnectionParametersToStore: (param, value) => {
             const action = {
-                type: constants.LOGINIFRAME_SET_CONNECTION_PARAMS,
+                type: constants.SET_CONNECTION_PARAMS,
                 param: param,
                 value: value
             }

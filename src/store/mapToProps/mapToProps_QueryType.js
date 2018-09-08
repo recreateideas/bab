@@ -2,7 +2,7 @@ import constants from '../../store/constants';
 
 const mapStateToProps = (state) => {
     return {
-        storeQueryType: state.queryType
+        storeQueryType: state.query.queryType
     }
 }
 

@@ -3,15 +3,13 @@ import constants from '../constants';
 const mapStateToProps = (state) => { // use this also to select what propsApp should listen to to rerender
     // console.log('@@ APP -> mapStateToProps');
     return {
-        storeQueryMessage: state.queryMessage,
-        storeQueryError: state.queryError,
+        storeQueryMessage: state.mongo.queryMessage,
+        storeQueryError: state.mongo.queryError,
         storeAllState: state,
-        storeQueryParams: state.query,
         storeDBConnected: state.connection.isDBConnected,
-        storeGreeting: state.greeting,
         storeConfig: state.config,
-        storeQueryType: state.queryType,
-        storeMongoQuery: state.mongo_query,
+        storeQueryType: state.query.queryType,
+        storeMongoQuery: state.mongo.mongo_query,
         storeQuery: state.query,
         storeQueryCollectionState: state.queryCollectionState,
         _collectionStateTemplate: {

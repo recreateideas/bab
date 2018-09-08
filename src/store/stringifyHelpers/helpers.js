@@ -79,6 +79,6 @@ sanitizeQueryString = (string) => {
 },
 
 dbAndCollection = (collection,store) => {
-    const string = (collection ? "db." + collection : "db." + store.collection);
+    const string = (collection ? "db." + collection : "db." + store.query.collection);
     return (string);
 }

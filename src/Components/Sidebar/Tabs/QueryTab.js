@@ -55,7 +55,8 @@ class QueryTab extends React.Component {
         })
         stateQuery.openQuery = format.openQuery; //  sets the openQuery according to config 
         stateQuery.closeQuery = format.closeQuery; //sets the closeQuery according to config
-        this.props.setQueryTypeToStore(type);
+        stateQuery.queryType = type;
+        // this.props.setQueryTypeToStore(type);
         this.props.setQueryValuesToStore(stateQuery);
         this.updateQueryCollectionPreStages(collection);
     }
@@ -146,7 +147,7 @@ class QueryTab extends React.Component {
                                 <QueryType
                                     id='querytype'
                                     change={this.updateQueryType.bind(this)}
-                                    queryType={this.props.queryType}
+                                    queryType={this.props.storeQueryType}
                                     valueArray={array} />
                             </Col>
                         </Row>

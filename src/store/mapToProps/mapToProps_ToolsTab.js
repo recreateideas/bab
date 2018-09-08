@@ -4,7 +4,7 @@ const mapStateToProps = (state) => { // use this also to select what propsApp sh
     // console.log('@@ APP -> mapStateToProps');
     return {
         storeAllState: state,
-        storeQueryResults: state.mongo_results,
+        storeQueryResults: state.mongo.mongo_results,
     }
 }
 

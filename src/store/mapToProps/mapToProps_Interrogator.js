@@ -6,9 +6,9 @@ const mapStateToProps = (state) => { // use this also to select what propsApp sh
         // storeResults: state.Resultsmongo_results,
         storeQueryParams: state.query,
         storeDBConnected: state.connection.isDBConnected,
-        storeMongoObject: state.mongo_object,
-        storeCollection: state.collection,
-        storeQueryType: state.queryType,
+        storeMongoObject: state.mongo.mongo_object,
+        storeCollection: state.query.collection,
+        storeQueryType: state.query.queryType,
         storeDB: state.connection.db
     }
 }
