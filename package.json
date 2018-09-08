@@ -37,14 +37,14 @@
     "react-fontawesome": "1.6.1",
     "react-json-pretty": "1.7.6",
     "react-redux": "5.0.7",
-    "react-tooltip": "^3.6.1",
+    "react-tooltip": "3.6.1",
     "redux": "4.0.0",
-    "redux-thunk": "^2.3.0",
-    "styled-components": "^3.4.5"
+    "redux-thunk": "2.3.0",
+    "socket.io-client": "2.1.1"
   },
   "scripts": {
     "watch-css": "node-sass-chokidar src/scss -o dist/css --watch --recursive",
-    "start-js": "concurrently  \"nodemon src/server/service.js\" \"mongod\" \"babel src --out-dir babel_compiled --watch\" \"electron .\" \"webpack --watch\"",
+    "start-js": "concurrently \"mongod\" \"babel src --out-dir babel_compiled --watch\" \"electron .\" \"webpack --watch\"",
     "start": "npm-run-all -p watch-css start-js",
     "build-js": "react-scripts build",
     "build": "npm-run-all build-css build-js webpack",

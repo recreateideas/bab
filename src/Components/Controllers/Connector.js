@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { Grid, Row, Col } from 'react-bootstrap';
 import axios from 'axios';
 import { validateFile, validateContent } from '../../tools/fileManagers';
-import { dbDisconnect, dbConnect, updateUserField } from '../DBClientUtils/DBClientUtils';
+import { dbDisconnect, dbConnect, updateUserField } from '../../tools/DBClientUtils/DBClientUtils';
 import PropTypes from 'prop-types';
 import 'regenerator-runtime';
 import 'babel-polyfill';

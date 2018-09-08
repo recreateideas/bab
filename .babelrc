@@ -26,8 +26,11 @@
             "import-static-files",
             {
                 "extensions": [
+                    ".gif",
+                    ".jpeg",
                     ".jpg",
-                    ".png"
+                    ".png",
+                    ".svg"
                 ],
                 "baseDir":"/users/claudio/baboon/"
             }

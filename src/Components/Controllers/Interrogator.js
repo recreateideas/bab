@@ -4,7 +4,7 @@ import { mapStateToProps, mapDispatchToProps } from '../../store/mapToProps/mapT
 import { Button } from '../BasicComponents';
 import axios from 'axios';
 import PropTypes from 'prop-types';
-import { fetchResults } from '../DBClientUtils/DBClientUtils';
+import { fetchResults } from '../../tools/DBClientUtils/DBClientUtils';
 const FontAwesome = require('react-fontawesome');
 
 

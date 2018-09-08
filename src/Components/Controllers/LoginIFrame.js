@@ -6,7 +6,7 @@ import axios from 'axios';
 import { mapStateToProps, mapDispatchToProps } from '../../store/mapToProps/mapToProps_LoginIFrame';
 // import { mapStateToTemplatesProps } from '../../store/mapToProps/mapToProps_DataTemplates';
 // import { emptyUser } from '../../dataTemplates/collectionState';
-import { dbDisconnect } from '../DBClientUtils/DBClientUtils';
+import { dbDisconnect } from '../../tools/DBClientUtils/DBClientUtils';
 import PropTypes from 'prop-types';
 
 const FontAwesome = require('react-fontawesome');
