@@ -15,7 +15,9 @@ class UsersBox extends React.Component {
     }
 
     renderUser(user,index){
-        let rowClass = index === 0 ? 'firstUser' : (index % 2) === 1 ? 'oddUser' : '';
+        let rowClass = index === 0 ? 'firstUser' : '';
+        rowClass = (index % 2) === 1 ? (rowClass+' oddUser') : (rowClass+' evenUser');
+        // rowClass = (index % 2) === 0 ? (rowClass+' evenUser') : '';
         // console.log((index % 2));
         return (
             <li key={index} className={rowClass}>
