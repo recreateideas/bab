@@ -11,7 +11,7 @@ class UserContainer extends React.Component {
         return (
             <div id={this.props.containerId} className={`${this.props.addClass} userContainer`} onClick={this.props.click}>
                 <div className='connectedBadge'>
-                    <div className='connectedCircle'></div>
+                    <div className={`connectedCircle ${this.props.activeUser}`}></div>
                 </div>
                 <div className='userTextWrap'>
                     <p className='nicknameText h7'>{this.props.nickname}</p><br />

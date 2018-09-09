@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { TextInput, Button2 } from '../BasicComponents';
 import { Grid, Row, Col } from 'react-bootstrap';
 import { mapStateToProps, mapDispatchToProps } from '../../store/mapToProps/mapToProps_LoginIFrame';
+
 import { sendLoginRequest,sendRegisterRequest,sendLogout } from '../../tools/DBClientUtils/userAuthUtils';
 
 const FontAwesome = require('react-fontawesome');
@@ -38,7 +39,7 @@ class LoginIFrame extends React.Component {
 
     async Login(e) {
         const validated = this.validateLoginForSubmission();
-       await sendLoginRequest(e, this,validated);
+       await sendLoginRequest(e, this, validated);
     }
 
     validateLoginForSubmission() {

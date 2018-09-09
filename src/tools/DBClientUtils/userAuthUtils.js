@@ -80,6 +80,7 @@ const sendRegisterRequest = async (e,component, validated) => {
 
 const sendLogout = (e,component) => {
     dbDisconnect(e, component);
+    disconnectSocket();
 };
 
 export { sendLoginRequest,sendRegisterRequest,sendLogout }

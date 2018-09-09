@@ -14,11 +14,17 @@ class UsersBox extends React.Component {
         console.log('click');
     }
 
+    isUserActive(id){
+        const activeUsers = this.props.storeActiveUsers;
+        let found = null;
+        activeUsers.filter(user => user.customId === id).forEach(user => {found = true});
+        return found;
+    }
+
     renderUser(user,index){
         let rowClass = index === 0 ? 'firstUser' : '';
         rowClass = (index % 2) === 1 ? (rowClass+' oddUser') : (rowClass+' evenUser');
-        // rowClass = (index % 2) === 0 ? (rowClass+' evenUser') : '';
-        // console.log((index % 2));
+        const activeUser = this.isUserActive(user.customId) ? 'activeUser' : 'inactiveUser';
         return (
             <li key={index} className={rowClass}>
                 <UserContainer
@@ -27,13 +33,14 @@ class UsersBox extends React.Component {
                     click={this.userOnClick.bind(this)}
                     nickname={user.nickname}
                     lastActive={``}
+                    activeUser={activeUser}
                 />
             </li>
         )
     }
 
     render() {
-        console.log(this.props.storeAllUsers);
+        // console.log(this.props.storeActiveUsers);
         const users = this.props.storeAllUsers;
         return (
             <div id="usersBox" className="usersBox">

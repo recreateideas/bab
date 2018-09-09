@@ -2,7 +2,7 @@ import axios from 'axios';
 import 'regenerator-runtime';
 import 'babel-polyfill';
 
-const dbDisconnect = async (e,component) => {
+const dbDisconnect = async (e, component) => {
     e.stopPropagation();
     console.log('disconnect');
     try {
@@ -21,7 +21,7 @@ const dbDisconnect = async (e,component) => {
     }
 };
 
-const dbConnect = async (e,component)=> {
+const dbConnect = async (e, component) => {
     e.stopPropagation();
     const dbConnectParams = {
         connection: component.props.storeConnection
@@ -54,6 +54,16 @@ const dbConnect = async (e,component)=> {
     }
 };
 
+const findAllUsers = async component => {
+    try {
+        const res = await axios.get(`${process.env.REMOTE_HOST}:${process.env.REMOTE_PORT}/users/find/all`);
+        // console.log(res.data.users);
+        component.props.saveUsersToStore('allUsers', res.data.users);
+    }
+    catch (err) {
+        console.log(err);
+    }
+};
 
 const fetchResults = async component => {
     const db = component.props.storeDB;
@@ -70,27 +80,27 @@ const fetchResults = async component => {
         })
         console.log(res.data)
         if (res.data.Error)
-            component.props.setQueryMessageToStore('queryError',res.data.Error);
-            component.props.setQueryMessageToStore('queryMessage','');
+            component.props.setQueryMessageToStore('queryError', res.data.Error);
+        component.props.setQueryMessageToStore('queryMessage', '');
         if (res.data.results) {
             component.props.setResultsToStore(res.data.results);
-            component.props.setQueryMessageToStore('queryError','');
-            component.props.setQueryMessageToStore('queryMessage',`The query has returned ${res.data.results.length} results.`);
+            component.props.setQueryMessageToStore('queryError', '');
+            component.props.setQueryMessageToStore('queryMessage', `The query has returned ${res.data.results.length} results.`);
         }
         else {
-            component.props.setQueryMessageToStore('queryError','Something went wrong');
-            component.props.setQueryMessageToStore('queryMessage','');
+            component.props.setQueryMessageToStore('queryError', 'Something went wrong');
+            component.props.setQueryMessageToStore('queryMessage', '');
         }
 
     }
 };
 
-const updateUserField = async ( payload, component ) => {
+const updateUserField = async (payload, component) => {
     console.log(payload.data);
     console.log(payload.user);
-    const res = await axios.post(`${process.env.REMOTE_HOST}:${process.env.REMOTE_PORT}/users/update`,payload);
+    const res = await axios.post(`${process.env.REMOTE_HOST}:${process.env.REMOTE_PORT}/users/update`, payload);
     console.log(res);
 }
 
 
-export { dbDisconnect, dbConnect, fetchResults, updateUserField};
+export { dbDisconnect, dbConnect, fetchResults, updateUserField, findAllUsers };

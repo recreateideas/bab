@@ -90,6 +90,14 @@ const mapDispatchToProps = (dispatch) => {
             }
             dispatch(action);
         },
+        saveUsersToStore: (usersType, data) => {
+            const action = {
+                type: constants.SET_USERS,
+                usersType,
+                data,
+            }
+            dispatch(action);
+        }
     }
 }
 

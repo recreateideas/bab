@@ -43,10 +43,10 @@ class TypeBox extends React.Component {
 
     sendMessage(){
         const message = this.state.message.content;
-        alert(`${message} ${this.state.message.date}`);
-
+        if(message && message !== ''){
+            alert(`${message} ${this.state.message.date}`);
+        }
         this.setState({message:''});
-
     }
 
     render(){
