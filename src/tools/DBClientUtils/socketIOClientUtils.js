@@ -16,9 +16,23 @@ const connectToSocket = async (component,customId, nickname) => {
     socket.on('receiveActiveUsers', (users) => {
         component.props.saveUsersToStore('activeUsers', users);
     });
+
+    socket.on('otherUserIsTyping', ({customId,nickname}) => {
+        console.log(`${nickname} is typing...`);
+    });
+
     socket.on('error', function(){
         socket.reconnect();
-      });
+    });
+};
+
+const emitUserTyping = async (customId,nickname) => {
+    socket.emit('thisUserIsTyping',{customId,nickname});
+};
+
+const emitMessage = async (component,{content,date}) => {
+    console.log(`${content} : ${date}`);
+    alert(`${content} : ${date}`);
 };
 
 const storeClientInfo = (customId, nickname) => {
@@ -26,7 +40,9 @@ const storeClientInfo = (customId, nickname) => {
 };
 
 const disconnectSocket = (component) => {
-    socket.disconnect();
+    /*** comment to text multi sockets ***/
+    socket.disconnect();/*****************/
+    /*************************************/
     console.log(socket);
     component.props.saveUsersToStore('activeUsers', []);
     component.props.saveUsersToStore('allUsers', []);
@@ -38,4 +54,4 @@ const getSocket = () => {
 };
 
 
-export { connectToSocket, storeClientInfo, disconnectSocket, getSocket };
+export { connectToSocket, storeClientInfo, emitUserTyping, emitMessage, disconnectSocket, getSocket };

@@ -1,6 +1,9 @@
 import React from 'react';
 import { Button2, TextBox } from '../BasicComponents';
+import { connect } from 'react-redux';
 const FontAwesome = require('react-fontawesome');
+import { emitMessage, emitUserTyping } from '../../tools/DBClientUtils/socketIOClientUtils';
+import { mapStateToProps, mapDispatchToProps } from '../../store/mapToProps/mapToProps_TypeBox';
 
 class TypeBox extends React.Component {
 
@@ -39,14 +42,15 @@ class TypeBox extends React.Component {
             e.preventDefault();
             this.sendMessage();
         }
+        emitUserTyping(this.props.storeUser.ID, this.props.storeUser.nickName);
     }
 
     sendMessage(){
         const message = this.state.message.content;
         if(message && message !== ''){
-            alert(`${message} ${this.state.message.date}`);
+            emitMessage(this, this.state.message);
         }
-        this.setState({message:''});
+        this.setState({message:{content:'',date:''}});
     }
 
     render(){
@@ -72,4 +76,4 @@ class TypeBox extends React.Component {
 };
 
 
-export default TypeBox;
+export default connect(mapStateToProps, mapDispatchToProps)(TypeBox);
