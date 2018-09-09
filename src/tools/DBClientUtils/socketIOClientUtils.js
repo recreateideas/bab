@@ -25,9 +25,12 @@ const storeClientInfo = (customId, nickname) => {
     socket.emit('updateClientInfo', { customId, nickname });
 };
 
-const disconnectSocket = () => {
-    console.log('disconnect');
-    socket.emit('disconnect');
+const disconnectSocket = (component) => {
+    socket.disconnect();
+    console.log(socket);
+    component.props.saveUsersToStore('activeUsers', []);
+    component.props.saveUsersToStore('allUsers', []);
+    // socket.emit('disconnect');
 };
 
 const getSocket = () => {
