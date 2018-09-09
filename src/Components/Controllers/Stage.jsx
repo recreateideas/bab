@@ -1,7 +1,7 @@
 import React from 'react';
 import FormLine from './FormLine';
 import { Grid, Row, Col } from 'react-bootstrap';
-import { AddRemove, SelectInput, CheckBox, TextInput } from '../BasicComponents';
+import { AddRemove, SelectInput, CheckBox, TextInput } from '../index';
 import { connect } from 'react-redux';
 // import { _paramsLine } from '../../dataTemplates/collectionState'
 import { mapStateToProps, mapDispatchToProps } from '../../store/mapToProps/mapToProps_Stage';

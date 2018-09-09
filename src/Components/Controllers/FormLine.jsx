@@ -3,7 +3,7 @@ import DatePicker from 'react-datepicker';
 import moment from 'moment';
 import 'moment-timezone';
 import {  Row, Col } from 'react-bootstrap';
-import { AddRemove, SelectInput, CheckBox, TextInput, DateTimePickerButton } from '../BasicComponents';
+import { AddRemove, SelectInput, CheckBox, TextInput, DateTimePickerButton } from '../index';
 import { getElementsFromConfig } from '../../configuration/configHelpers/queryHelpers';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';

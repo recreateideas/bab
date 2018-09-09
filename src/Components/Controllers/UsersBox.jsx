@@ -1,13 +1,13 @@
 import React from 'react';
 
 // const FontAwesome = require('react-fontawesome');
-const MessageBox = () => {
+const UsersBox = () => {
     return (
-        <div id="messageBox" className="messageBox">
+        <div id="usersBox" className="usersBox">
          
         </div>
     )
 };
 
 
-export default MessageBox;
+export default UsersBox;
