@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { TextInput, FileLoader } from '../BasicComponents';
 import { mapStateToProps, mapDispatchToProps } from '../../store/mapToProps/mapToProps_Connector';
 import { connect } from 'react-redux';
@@ -6,7 +7,6 @@ import { Grid, Row, Col } from 'react-bootstrap';
 import axios from 'axios';
 import { validateFile, validateContent } from '../../tools/fileManagers';
 import { dbDisconnect, dbConnect, updateUserField } from '../../tools/DBClientUtils/DBClientUtils';
-import PropTypes from 'prop-types';
 import 'regenerator-runtime';
 import 'babel-polyfill';
 

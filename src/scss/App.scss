@@ -16,39 +16,84 @@
 @import 'components/LoginIFrame.scss';
 @import 'components/Tooltip.scss';
 @import 'components/Querybox.scss';
-
-$messages-width: 725px;
+$messages-width: 630px;
 $typebox-width: 207px;
 $userbox-left: 27px;
-
-#chatContainer{
+$border-radius-messages: 5px;
+$send-button-width: 70px;
+$spacing: 8px;
+#chatContainer {
     display: flex;
     flex-direction: row;
-    #messagesAndUsers{
+    #messagesAndUsers {
         display: flex;
         flex-direction: column;
         #messageBox {
             position: absolute;
-            width: $messages-width;
-            height: 650px;
-            background-color: rgba(250,250,250,0.2);
-            border-radius: 8px;
+            width: calc( #{$messages-width} + 1px);
+            height: calc(100% - (#{$send-button-width} + #{$spacing} * 7));
+            background-color: rgba(240, 240, 240, 1);
+            border-radius: $border-radius-messages;
         }
         #typeBox {
             position: absolute;
             bottom: 15px;
-            width: calc( #{$typebox-width} + #{$messages-width} + #{$userbox-left} - 11px);
-            height: 105px;
-            background-color: rgba(250, 250, 250, 0.2);
-            border-radius: 8px;
+            width: calc( #{$messages-width} + #{$userbox-left} - 26px);
+            height: calc(#{$send-button-width} + #{$spacing} * 2);
+            background-color: rgba(240, 240, 240, 1);
+            border-radius: $border-radius-messages;
+            .button2 {
+                width: $send-button-width !important;
+                max-width: $send-button-width !important;
+                min-width: $send-button-width !important;
+                height: $send-button-width;
+                left: calc( 100% - #{$send-button-width} - #{$spacing});
+                top: $spacing;
+                position: absolute;
+            }
         }
     }
     #usersBox {
         position: absolute;
-        left: calc( #{$messages-width} + #{$userbox-left} );
-        width: 207px;
-        height: 650px;
-        background-color: rgba(250,250,250,0.2);
-        border-radius: 8px;
+        left: calc( #{$messages-width} + #{$userbox-left});
+        width: 307px;
+        height: calc(100% - 27px);
+        background-color: rgba(240, 240, 240, 1);
+        border-radius: $border-radius-messages;
+        ul {
+            padding-left: 15px;
+            position: relative;
+            top: 10px;
+            padding-right: 10px;
+            li{
+                &.firstUser{
+                    border-top: solid 1px #444;
+                }
+                &.oddUser{
+                    background-color: rgba(150,150,150,0.2);
+                }
+                cursor: pointer;
+                .userContainer {
+                    display: flex;
+                    flex-direction: row;
+                    border-bottom: solid 1px #444;
+                    margin-top: 5px;
+                    // padding-top: 15px;
+                    height: 40px;
+                    .connectedCircle {
+                        width: 10px;
+                        height: 10px;
+                        background-color: green;
+                        border-radius: 10px;
+                    }
+                    .userTextWrap {
+                        margin-left: 5px;
+                        .nicknameText {
+                            color: #444;
+                        }
+                    }
+                }
+            }
+        }
     }
 }

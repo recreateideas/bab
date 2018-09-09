@@ -39,7 +39,7 @@ const sendLoginRequest = async (e, component, validated) => {
             const userFound = res.data.userFound;
             if (userFound) {
                 loginUser(component, res.data.userDetails[0]._id, res.data.userDetails[0].email, res.data.userDetails[0].nickname);
-                connectToSocket(res.data.userDetails[0]._id);
+                connectToSocket(component, res.data.userDetails[0]._id,res.data.userDetails[0].nickname);
             }
             else handleLoginRejection();
         }

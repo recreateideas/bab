@@ -4,7 +4,7 @@ import React from 'react';
 const MessageBox = () => {
     return (
         <div id="messageBox" className="messageBox">
-         
+
         </div>
     )
 };

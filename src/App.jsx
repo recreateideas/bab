@@ -22,7 +22,7 @@ class App extends React.Component {
         if (user) {
             console.log('welcome back chimp!');
             this.props.recordUserObjectToStore(user);
-            connectToSocket(user.ID);
+            connectToSocket(this, user.ID,user.nickName);
             // storeClientInfo('claudio');
         }
     }

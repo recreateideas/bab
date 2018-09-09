@@ -1,6 +1,6 @@
 import { createStore, applyMiddleware, combineReducers, compose } from 'redux';
 import thunk from 'redux-thunk';
-import { config, connection, queryCollectionState, query, user, mongo } from './reducers';
+import { config, connection, queryCollectionState, query, user, mongo, share } from './reducers';
 
 
 
@@ -11,7 +11,8 @@ const allReducers = combineReducers({
     queryCollectionState,
     query,
     user,
-    mongo
+    mongo,
+    share
 });
 
 const store = createStore(allReducers, compose(applyMiddleware(thunk),

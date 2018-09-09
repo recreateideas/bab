@@ -14,7 +14,15 @@ const mapDispatchToProps = (dispatch) => {
                 type: constants.RECORD_USER_OBJECT,
                 user,
             }
-            dispatch(action)
+            dispatch(action);
+        },
+        saveUsersToStore: (usersType, data) => {
+            const action = {
+                type: constants.SET_USERS,
+                usersType,
+                data,
+            }
+            dispatch(action);
         }
     }
 }

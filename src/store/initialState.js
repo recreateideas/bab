@@ -56,6 +56,11 @@ const initialState = {
         mongo_object: '',
         mongo_results: [],
     },
+    share:{
+        allUsers:[],
+        activeUsers:[],
+        messages:[],
+    }
 }
 
 export default initialState;
