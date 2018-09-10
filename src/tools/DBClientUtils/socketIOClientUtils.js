@@ -5,8 +5,8 @@ import { findAllUsers } from './DBClientUtils';
 
 let socket;
 
-const connectToSocket = async (component,customId, nickname) => {
-    socket = io(`${process.env.REMOTE_HOST}:${process.env.REMOTE_SOCKET_PORT}`,{reconnection: true});
+const connectToSocket = async (component, customId, nickname) => {
+    socket = connect();
     await findAllUsers(component);
     socket.on('connect', () => {
         socket.emit('updateClientInfo', { customId, nickname });
@@ -17,22 +17,33 @@ const connectToSocket = async (component,customId, nickname) => {
         component.props.saveUsersToStore('activeUsers', users);
     });
 
-    socket.on('otherUserIsTyping', ({customId,nickname}) => {
+    socket.on('otherUserIsTyping', ({ customId, nickname }) => {
         console.log(`${nickname} is typing...`);
     });
 
-    socket.on('error', function(){
-        socket.reconnect();
+    socket.on('incomingMessage', message => {
+        console.log('MESSAGE:', message);
+    });
+
+    socket.on('error', function () {
+        socket.connect();
     });
 };
 
-const emitUserTyping = async (customId,nickname) => {
-    socket.emit('thisUserIsTyping',{customId,nickname});
+const connect = () =>{
+    socket = io(`${process.env.REMOTE_HOST}:${process.env.REMOTE_SOCKET_PORT}`, { reconnection: true });
+    return socket;
 };
 
-const emitMessage = async (component,{content,date}) => {
+const emitUserTyping = async (customId, nickname) => {
+    socket.emit('thisUserIsTyping', { customId, nickname });
+};
+
+const emitMessage = async (component, { userTo, content, date }) => {
+    console.log(userTo);
     console.log(`${content} : ${date}`);
-    alert(`${content} : ${date}`);
+    socket.emit('sendMessageToClient',{ userTo, content, date });
+    // alert(`${content} : ${date}`);
 };
 
 const storeClientInfo = (customId, nickname) => {
