@@ -11,7 +11,9 @@ class UsersBox extends React.Component {
     }
 
     userOnClick(e){
-        console.log('click');
+        e.stopPropagation();
+        console.log(e.currentTarget.dataset.customid);
+        console.log(e.currentTarget.dataset.nickname);
     }
 
     isUserActive(id){
@@ -34,6 +36,7 @@ class UsersBox extends React.Component {
                     nickname={user.nickname}
                     lastActive={``}
                     activeUser={activeUser}
+                    customID={user.customId}
                 />
             </li>
         )
