@@ -14,6 +14,7 @@ class UsersBox extends React.Component {
         e.stopPropagation();
         console.log(e.currentTarget.dataset.customid);
         console.log(e.currentTarget.dataset.nickname);
+        //add CSS
     }
 
     isUserActive(id){

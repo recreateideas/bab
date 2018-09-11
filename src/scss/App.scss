@@ -30,10 +30,13 @@ $spacing: 8px;
         flex-direction: column;
         #messageBox {
             position: absolute;
-            width: calc( #{$messages-width} + 1px);
+            width: calc( #{$messages-width} + 15px);
             height: calc(100% - (#{$send-button-width} + #{$spacing} * 7));
             background-color: rgba(234, 245, 247, 0.79);
             border-radius: $border-radius-messages;
+            border-top-right-radius: 0px;
+            border-bottom-right-radius: 0px;
+            border-bottom-left-radius: 0px;
         }
         #typeBox {
             position: absolute;

@@ -30,7 +30,7 @@ const connectToSocket = async (component, customId, nickname) => {
     });
 };
 
-const connect = () =>{
+const connect = () => {
     socket = io(`${process.env.REMOTE_HOST}:${process.env.REMOTE_SOCKET_PORT}`, { reconnection: true });
     return socket;
 };
@@ -39,11 +39,12 @@ const emitUserTyping = async (customId, nickname) => {
     socket.emit('thisUserIsTyping', { customId, nickname });
 };
 
-const emitMessage = async (component, { userTo, content, date }) => {
-    console.log(userTo);
-    console.log(`${content} : ${date}`);
-    socket.emit('sendMessageToClient',{ userTo, content, date });
-    // alert(`${content} : ${date}`);
+const emitMessage = async (senderId, senderNickname,message) => {
+    // console.log(userTo);
+    // console.log(`${content} : ${date}`);
+
+    socket.emit('sendMessageToClient', {senderId, senderNickname, message});
+
 };
 
 const storeClientInfo = (customId, nickname) => {
