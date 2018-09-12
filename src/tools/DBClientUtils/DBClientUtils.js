@@ -54,17 +54,6 @@ const dbConnect = async (e, component) => {
     }
 };
 
-const findAllUsers = async component => {
-    try {
-        const res = await axios.get(`${process.env.REMOTE_HOST}:${process.env.REMOTE_PORT}/users/find/all`);
-        // console.log(res.data.users);
-        component.props.saveUsersToStore('allUsers', res.data.users);
-    }
-    catch (err) {
-        console.log(err);
-    }
-};
-
 const fetchResults = async component => {
     const db = component.props.storeDB;
     const collection = component.props.storeCollection;
@@ -102,5 +91,19 @@ const updateUserField = async (payload, component) => {
     console.log(res);
 }
 
+const findAllUsers = async component => {
+    try {
+        const res = await axios.get(`${process.env.REMOTE_HOST}:${process.env.REMOTE_PORT}/users/find/all`);
+        component.props.saveUsersToStore('allUsers', res.data.users);
+    }
+    catch (err) {
+        console.log(err);
+    }
+};
 
-export { dbDisconnect, dbConnect, fetchResults, updateUserField, findAllUsers };
+const getMessageHistory = async (component) => {
+    console.log(component);
+}
+
+
+export { dbDisconnect, dbConnect, fetchResults, updateUserField, findAllUsers, getMessageHistory };

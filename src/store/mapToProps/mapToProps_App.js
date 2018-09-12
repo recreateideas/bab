@@ -23,6 +23,14 @@ const mapDispatchToProps = (dispatch) => {
                 data,
             }
             dispatch(action);
+        },
+        pushMessageToHistory: message => {
+            console.log('MESSAGE:', message);
+            const action = {
+                type: constants.PUSH_MESSAGE,
+                message,
+            }
+            dispatch(action);
         }
     }
 }

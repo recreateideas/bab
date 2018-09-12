@@ -50,7 +50,7 @@ class TypeBox extends React.Component {
     sendMessage() {
         const content = this.state.message.content;
         if (content && content !== '') {
-            console.log(this.state.message);
+            // console.log(this.state.message);
             emitMessage(this.props.storeUser.ID,this.props.storeUser.nickName,this.state.message);
         }
         this.setState({ message: { ...this.state.message, content: '', date: '' } });

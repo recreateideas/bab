@@ -21,7 +21,6 @@ class Connector extends React.Component {
         this.state = {
             sf: []
         };
-        // let message = '';
     }
 
     throwErrors(err) {

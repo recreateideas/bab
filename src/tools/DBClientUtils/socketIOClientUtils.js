@@ -1,18 +1,20 @@
 import io from 'socket.io-client';
 import 'regenerator-runtime';
 import 'babel-polyfill';
-import { findAllUsers } from './DBClientUtils';
+import { findAllUsers, getMessageHistory } from './DBClientUtils';
 
 let socket;
 
-const connectToSocket = async (component, customId, nickname) => {
+const connectToSocket = (component, customId, nickname) => {
     socket = connect();
-    await findAllUsers(component);
-    socket.on('connect', () => {
-        socket.emit('updateClientInfo', { customId, nickname });
-        // socket.emit('updateClientInfo', { customId:'123456789', nickname: 'second_test_user2' });
+
+    socket.on('connect', async () => {
+        await findAllUsers(component);
+        await getMessageHistory(component);
+        socket.emit('updateClientInfo', { customId, nickname });        /* TEST --> socket.emit('updateClientInfo', { customId:'123456789', nickname: 'second_test_user2' }); */
         socket.emit('getActiveUsers');
     });
+
     socket.on('receiveActiveUsers', (users) => {
         component.props.saveUsersToStore('activeUsers', users);
     });
@@ -22,7 +24,7 @@ const connectToSocket = async (component, customId, nickname) => {
     });
 
     socket.on('incomingMessage', message => {
-        console.log('MESSAGE:', message);
+        component.props.pushMessageToHistory(message);
     });
 
     socket.on('error', function () {
@@ -39,11 +41,11 @@ const emitUserTyping = async (customId, nickname) => {
     socket.emit('thisUserIsTyping', { customId, nickname });
 };
 
-const emitMessage = async (senderId, senderNickname,message) => {
+const emitMessage = async (senderId, senderNickname, message) => {
     // console.log(userTo);
     // console.log(`${content} : ${date}`);
 
-    socket.emit('sendMessageToClient', {senderId, senderNickname, message});
+    socket.emit('sendMessageToClient', { senderId, senderNickname, message });
 
 };
 
