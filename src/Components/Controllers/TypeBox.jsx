@@ -21,6 +21,14 @@ class TypeBox extends React.Component {
         }
     }
 
+    componentWillReceiveProps(nextProps){
+        if(nextProps.storeUserTo){
+            this.setState({
+                message: {...this.state.message, userTo : Object.assign({}, nextProps.storeUserTo)}
+            });
+        }
+    }
+
     typeMessage(e) {
         const content = e.target.value;
         const date = new Date();
@@ -43,7 +51,11 @@ class TypeBox extends React.Component {
             e.preventDefault();
             this.sendMessage();
         } else {
-            emitUserTyping(this.props.storeUser.ID, this.props.storeUser.nickName);
+            const sender = {
+                customId: this.props.storeUser.ID,
+                nickname: this.props.storeUser.nickName,
+            }
+            emitUserTyping(sender,this.props.storeUserTo);
         }
     }
 
@@ -52,6 +64,7 @@ class TypeBox extends React.Component {
         if (content && content !== '') {
             // console.log(this.state.message);
             emitMessage(this.props.storeUser.ID,this.props.storeUser.nickName,this.state.message);
+            // this.props.pushMessageToHistory(this.state.message);
         }
         this.setState({ message: { ...this.state.message, content: '', date: '' } });
     }

@@ -1,8 +1,9 @@
 import constants from '../constants';
-import axios from 'axios';
 
 const mapStateToProps = (state) => {
     return {
+        storeUser: state.user,
+        storeUserTo: state.share.userTo,
         storeAllUsers: state.share.allUsers,
         storeActiveUsers: state.share.activeUsers,
     }
@@ -11,13 +12,6 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     
     return {
-        setUserToToStore: (userTo) => {
-            const action = {
-                type: constants.SET_USER_TO,
-                userTo
-            }
-            dispatch(action) 
-        }
     }
 }
 

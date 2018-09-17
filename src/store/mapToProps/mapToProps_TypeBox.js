@@ -3,6 +3,7 @@ import constants from '../constants';
 const mapStateToProps = (state) => {
     return {
         storeUser: state.user,
+        storeUserTo: state.share.userTo,
         // storeAllUsers: state.share.allUsers,
         // storeActiveUsers: state.share.activeUsers,
     }
@@ -11,6 +12,14 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     
     return {
+        pushMessageToHistory: message => {
+            console.log('MESSAGE:', message);
+            const action = {
+                type: constants.PUSH_MESSAGE,
+                message,
+            }
+            dispatch(action);
+        }
     }
 }
 

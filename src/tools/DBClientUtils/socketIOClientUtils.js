@@ -19,12 +19,21 @@ const connectToSocket = (component, customId, nickname) => {
         component.props.saveUsersToStore('activeUsers', users);
     });
 
-    socket.on('otherUserIsTyping', ({ customId, nickname }) => {
-        console.log(`${nickname} is typing...`);
+    socket.on('otherUserIsTyping', (data) => {
+        // console.log(data.sender.nickname);
+        console.log(`${data.sender.nickname} is typing...`);
     });
 
     socket.on('incomingMessage', message => {
+        console.log('MESSAGE', message);
         component.props.pushMessageToHistory(message);
+        // console.log(component);
+    });
+
+    socket.on('messageSent', message => {
+        console.log('SENT MESSAGE: ',message);
+        component.props.pushMessageToHistory(message);
+        // console.log(component);
     });
 
     socket.on('error', function () {
@@ -37,16 +46,14 @@ const connect = () => {
     return socket;
 };
 
-const emitUserTyping = async (customId, nickname) => {
-    socket.emit('thisUserIsTyping', { customId, nickname });
+const emitUserTyping = (sender,receiver) => {
+    socket.emit('thisUserIsTyping', {sender,receiver});
 };
 
-const emitMessage = async (senderId, senderNickname, message) => {
+const emitMessage = (senderId, senderNickname, message) => {
     // console.log(userTo);
     // console.log(`${content} : ${date}`);
-
     socket.emit('sendMessageToClient', { senderId, senderNickname, message });
-
 };
 
 const storeClientInfo = (customId, nickname) => {
@@ -57,7 +64,7 @@ const disconnectSocket = (component) => {
     /*** comment to text multi sockets ***/
     socket.disconnect();/*****************/
     /*************************************/
-    console.log(socket);
+    // console.log(socket);
     component.props.saveUsersToStore('activeUsers', []);
     component.props.saveUsersToStore('allUsers', []);
     // socket.emit('disconnect');

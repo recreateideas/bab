@@ -12,7 +12,7 @@ const query = (state = initialState.query, action) => {
             return Object.assign({}, state, { ...state, cursors: Object.assign({}, action.cursors) } );       
         default:
             return Object.assign({}, state, obj);
-    }
+    } 
 }
 
 export default query;

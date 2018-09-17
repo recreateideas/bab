@@ -59,7 +59,13 @@ const initialState = {
     share:{
         allUsers:[],
         activeUsers:[],
-        messages:[],
+        chats:[],
+        activeChatId:'',
+        chatRooms:[],
+        userTo:{
+            customId: '',
+            nickname: '',
+        }
     }
 }
 

@@ -23,7 +23,8 @@ class App extends React.Component {
             console.log('welcome back chimp!');
             this.props.recordUserObjectToStore(user);
             connectToSocket(this, user.ID,user.nickName);
-            // storeClientInfo('claudio');
+            this.props.loadLocalStorageMessagesToStore();
+            // update messages with waitingRoom
         }
     }
 

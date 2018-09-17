@@ -12,9 +12,13 @@ class UsersBox extends React.Component {
 
     userOnClick(e){
         e.stopPropagation();
-        console.log(e.currentTarget.dataset.customid);
-        console.log(e.currentTarget.dataset.nickname);
-        //add CSS
+        const userTo = {
+            customId: e.currentTarget.dataset.customid,
+            nickname: e.currentTarget.dataset.nickname,
+        }
+        this.props.setUserToToStore(userTo);
+        // set active chatId
+        // add CSS
     }
 
     isUserActive(id){
@@ -32,6 +36,7 @@ class UsersBox extends React.Component {
             <li key={index} className={rowClass}>
                 <UserContainer
                     containerId={`user_${index}`}
+                    chatId={this.props.storeChatId}
                     addClass=''
                     click={this.userOnClick.bind(this)}
                     nickname={user.nickname}

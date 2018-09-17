@@ -25,12 +25,20 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(action);
         },
         pushMessageToHistory: message => {
-            console.log('MESSAGE:', message);
+            // console.log('MESSAGE:', message);
             const action = {
                 type: constants.PUSH_MESSAGE,
                 message,
             }
             dispatch(action);
+        },
+        loadLocalStorageMessagesToStore: () => {
+            const chats = localStorage.getItem('chats')? localStorage.getItem('chats') : [];
+            const action = {
+                type: constants.LOAD_LOCALSTORAGE_MESSASGES,
+                chats
+            }   
+            dispatch(action)
         }
     }
 }
