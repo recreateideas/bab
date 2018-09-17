@@ -31,27 +31,38 @@ $spacing: 8px;
                     right: 0px;
                     left: calc(100% - #{$message-bubble-width});
                     .message_bubble{
-                        background-color: rgb(0, 158, 97);
+                        background-color: #006a9e;
+                    }
+                    .messageDate{
+                        color: #557;
                     }
                 }
                 &.received{
                     text-align: left;
                     .message_bubble{
-                        background-color: rgb(170, 66, 255);
+                        background-color: #aa9db5;
+                        .messageText{
+                            color: #444;
+                            font-style: normal;
+                        }
+                    }
+                    .messageDate{
+                        color: #667;
                     }
                 }
                 .message_bubble{
                     background-color: #667;
-                    border-radius: 7px;
+                    border-radius: 3px;
                     width: $message-bubble-width !important;
                     padding: 4px;
+                    box-shadow: 4px 4px 15px rgba(0,0,0,.3);
                     .messageText{
+                        font-size: 14px;
                         line-height: 1.1em;
                         padding-top: 5px;
                     }
                 }
                 .messageDate{
-                    color: #777;
                     font-size: 11px;
                     font-weight: bold;
                     font-style: normal;
