@@ -46,7 +46,8 @@ $spacing: 8px;
                     width: $message-bubble-width !important;
                     padding: 4px;
                     .messageText{
-                        line-height: 1.2em;
+                        line-height: 1.1em;
+                        padding-top: 5px;
                     }
                 }
                 .messageDate{

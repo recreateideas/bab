@@ -41,9 +41,9 @@ class LoginIFrame extends React.Component {
         const validated = this.validateLoginForSubmission();
         const messageHistory = await sendLoginRequest(e, this, validated);
         const formattedMessages = formatMessages(this.props.storeUser.ID, messageHistory);
+        console.log(formattedMessages);
         localStorage.setItem('chats', JSON.stringify(formattedMessages));
         this.props.loadLocalStorageMessagesToStore();
-        console.log(formattedMessages);
     }
 
     validateLoginForSubmission() {

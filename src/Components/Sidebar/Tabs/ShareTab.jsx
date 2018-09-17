@@ -9,9 +9,6 @@ class ShareTab extends React.Component {
 
     renderMessageBoxes(chat, receiver,index) {
         let isActiveBox = this.props.storeUserTo.customId === receiver ? 'show' : 'hidden';
-        // console.log(chat);
-        // console.log(this.props.storeUserTo.customId);
-        // console.log(receiver);
         return (
             <MessageBox
                 key={index}
