@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 import { TextInput, Button2 } from '../BasicComponents';
 import { Grid, Row, Col } from 'react-bootstrap';
 import { mapStateToProps, mapDispatchToProps } from '../../store/mapToProps/mapToProps_LoginIFrame';
-
-import { sendLoginRequest,sendRegisterRequest,sendLogout } from '../../tools/DBClientUtils/userAuthUtils';
+import { formatMessages } from '../../tools/messageUtils';
+import { sendLoginRequest, sendRegisterRequest, sendLogout } from '../../tools/DBClientUtils/userAuthUtils';
 
 const FontAwesome = require('react-fontawesome');
 const monkeyLogin = require('../../images/monkey_login.png');
@@ -39,7 +39,11 @@ class LoginIFrame extends React.Component {
 
     async Login(e) {
         const validated = this.validateLoginForSubmission();
-       await sendLoginRequest(e, this, validated);
+        const messageHistory = await sendLoginRequest(e, this, validated);
+        const formattedMessages = formatMessages(this.props.storeUser.ID, messageHistory);
+        localStorage.setItem('chats', JSON.stringify(formattedMessages));
+        this.props.loadLocalStorageMessagesToStore();
+        console.log(formattedMessages);
     }
 
     validateLoginForSubmission() {
@@ -126,7 +130,7 @@ class LoginIFrame extends React.Component {
     };
 
     async Logout(e) {
-        sendLogout(e,this,);
+        sendLogout(e, this, );
         this.forgetUser();
         this.props.recordUserObjectToStore(this.props._emptyUser);
         this.props.setResultsToStore([]);

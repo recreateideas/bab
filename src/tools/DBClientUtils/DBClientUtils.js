@@ -85,8 +85,8 @@ const fetchResults = async component => {
 };
 
 const updateUserField = async (payload, component) => {
-    console.log(payload.data);
-    console.log(payload.user);
+    // console.log(payload.data);
+    // console.log(payload.user);
     const res = await axios.post(`${process.env.REMOTE_HOST}:${process.env.REMOTE_PORT}/users/update`, payload);
     console.log(res);
 }
@@ -101,9 +101,23 @@ const findAllUsers = async component => {
     }
 };
 
-const getMessageHistory = async (component) => {
-    // console.log(component);
-}
+const getMessageHistory = async (component,userId) => {
+    try {
+        if(userId){
+            console.log({userId});
+            console.log(component);
+            const res = await axios.post(`${process.env.REMOTE_HOST}:${process.env.REMOTE_PORT}/messages/find/`, {userId});
+            if(res.data.messagesFound){
+                // console.log(res.data);
+                return res.data.messages;
+            }
+            return; 
+        }
+    }
+    catch (err) {
+        console.log(err);
+    }
+};
 
 
 export { dbDisconnect, dbConnect, fetchResults, updateUserField, findAllUsers, getMessageHistory };

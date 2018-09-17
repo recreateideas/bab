@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 const FontAwesome = require('react-fontawesome');
 import { emitMessage, emitUserTyping } from '../../tools/DBClientUtils/socketIOClientUtils';
 import { mapStateToProps, mapDispatchToProps } from '../../store/mapToProps/mapToProps_TypeBox';
+import {formatDate} from '../../tools/messageUtils';
 
 class TypeBox extends React.Component {
 
@@ -34,18 +35,18 @@ class TypeBox extends React.Component {
         const content = e.target.value;
         const date = new Date();
         this.setState({
-            message: { ...this.state.message, content, date: this.formatDate(date), }
+            message: { ...this.state.message, content, date: formatDate(date), }
         });
     }
 
-    formatDate(date) {
-        return [date.getMonth() + 1,
-        date.getDate(),
-        date.getFullYear()].join('/') + ' ' +
-            [date.getHours(),
-            date.getMinutes(),
-            date.getSeconds()].join(':');
-    }
+    // formatDate(date) {
+    //     return [date.getMonth() + 1,
+    //     date.getDate(),
+    //     date.getFullYear()].join('/') + ' ' +
+    //         [date.getHours(),
+    //         date.getMinutes(),
+    //         date.getSeconds()].join(':');
+    // }
 
     validateKeyPressed(e) {
         if (e.key === 'Enter') {

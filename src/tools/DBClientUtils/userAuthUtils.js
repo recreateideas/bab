@@ -1,12 +1,9 @@
 import axios from 'axios';
 import 'regenerator-runtime';
 import {connectToSocket, storeClientInfo, disconnectSocket} from '../../tools/DBClientUtils/socketIOClientUtils';
-import { dbDisconnect } from './DBClientUtils';
+import { dbDisconnect,getMessageHistory } from './DBClientUtils';
+
 // import 'babel-polyfill';
-
-
-// storeClientInfo('claudio');
-// subscribeToTimer((err, timestamp) => console.log(timestamp));
 
 const loginUser = (component, id, email, nickname) => {
     console.log('log me in');
@@ -20,9 +17,15 @@ const handleLoginRejection = () => {
     console.log('rejected');
 };
 
+const loginProcess = async(component,res) =>{
+    loginUser(component, res.data.userDetails[0]._id, res.data.userDetails[0].email, res.data.userDetails[0].nickname);
+    await connectToSocket(component, res.data.userDetails[0]._id,res.data.userDetails[0].nickname);
+    const messageHistory = await getMessageHistory(component,res.data.userDetails[0]._id);
+    return messageHistory;
+};
+
 const sendLoginRequest = async (e, component, validated) => {
     const userDetails = component.props.storeUser;
-
     if (e) e.stopPropagation();
     if (validated) {
         const loginDetails = {
@@ -30,16 +33,9 @@ const sendLoginRequest = async (e, component, validated) => {
             password: userDetails.loginPassword
         }
         try {
-            const res = await axios.post(`${process.env.REMOTE_HOST}:${process.env.REMOTE_PORT}/users/login`,
-                {
-                    details: loginDetails
-                })
-            console.log(res);
-            // console.log(res.data.userFound);
-            const userFound = res.data.userFound;
-            if (userFound) {
-                loginUser(component, res.data.userDetails[0]._id, res.data.userDetails[0].email, res.data.userDetails[0].nickname);
-                connectToSocket(component, res.data.userDetails[0]._id,res.data.userDetails[0].nickname);
+            const res = await axios.post(`${process.env.REMOTE_HOST}:${process.env.REMOTE_PORT}/users/login`,{details: loginDetails})
+            if (res.data.userFound) {
+                return await loginProcess(component,res);
             }
             else handleLoginRejection();
         }

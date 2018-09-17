@@ -39,7 +39,7 @@ class ShareTab extends React.Component {
 };
 
 ShareTab.propTypes = {
-    storeChats: PropTypes.object,
+    storeChats: PropTypes.oneOfType([PropTypes.object,PropTypes.array]),
     storeUserTo: PropTypes.object,
 };
 

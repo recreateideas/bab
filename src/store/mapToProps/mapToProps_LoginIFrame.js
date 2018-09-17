@@ -107,6 +107,14 @@ const mapDispatchToProps = (dispatch) => {
             }
             dispatch(action);
         },
+        loadLocalStorageMessagesToStore: () => {
+            const chats = localStorage.getItem('chats')? JSON.parse(localStorage.getItem('chats')) : [];
+            const action = {
+                type: constants.LOAD_LOCALSTORAGE_MESSASGES,
+                chats
+            }   
+            dispatch(action)
+        }
     }
 }
 
