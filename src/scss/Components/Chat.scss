@@ -1,3 +1,5 @@
+
+$message-bubble-width: 310px;
 $messages-width: 630px;
 $typebox-width: 207px;
 $userbox-left: 27px;
@@ -19,6 +21,43 @@ $spacing: 8px;
             border-top-right-radius: 0px;
             border-bottom-right-radius: 0px;
             border-bottom-left-radius: 0px;
+            overflow-y: auto;
+            padding: 6px;
+            .messageContainer{
+                width: $message-bubble-width !important;
+                &.sent{
+                    text-align: right;
+                    position: relative;
+                    right: 0px;
+                    left: calc(100% - #{$message-bubble-width});
+                    .message_bubble{
+                        background-color: rgb(0, 158, 97);
+                    }
+                }
+                &.received{
+                    text-align: left;
+                    .message_bubble{
+                        background-color: rgb(170, 66, 255);
+                    }
+                }
+                .message_bubble{
+                    background-color: #667;
+                    border-radius: 7px;
+                    width: $message-bubble-width !important;
+                    padding: 4px;
+                    .messageText{
+                        line-height: 1.2em;
+                    }
+                }
+                .messageDate{
+                    color: #777;
+                    font-size: 11px;
+                    font-weight: bold;
+                    font-style: normal;
+                    top: 4px;
+                    position: relative;
+                }
+            }
         }
         #typeBox {
             position: absolute;
