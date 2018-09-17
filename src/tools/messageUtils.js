@@ -1,36 +1,31 @@
 
 
-const formatMessages = (userId, messageHistory)=> {
-    let formattedMessages = {};
-    // console.log(messageHistory);
+const formatMessages = (userId, messageHistory) => {
+    let formattedMessages = {}, direction = '', chatId = '';
+    console.log(messageHistory);
     // let newId='',newDirection='';
     messageHistory.forEach(message => {
-        if (!formattedMessages.hasOwnProperty(message.receiverId) || !formattedMessages.hasOwnProperty(message.senderId)) {
-            if (message.receiverId === userId) {
-                formattedMessages[message.senderId] = {
-                    messages: [
-                        {
-                            direction: 'received',
-                            content: message.content,
-                            date: message.dateSent,
-                        }
-                    ]
-                };
-            } else if (message.senderId === userId) {
-                {
-                    formattedMessages[message.receiverId] = {
-                        messages: [
-                            {
-                                direction: 'sent',
-                                content: message.content,
-                                date: message.dateSent,
-                            }
-                        ]
-                    };
-                }
-            }
-        } else if (formattedMessages.hasOwnProperty(message.receiverId)) {
-            // console.log('test1');
+        if (!formattedMessages.hasOwnProperty(message.receiverId) && message.receiverId !== userId) {
+            formattedMessages[message.receiverId] = {
+                messages: [
+                    {
+                        direction: 'sent',
+                        content: message.content,
+                        date: message.dateSent,
+                    }
+                ]
+            };
+        } else if (!formattedMessages.hasOwnProperty(message.senderId) && message.senderId !== userId) {
+            formattedMessages[message.senderId] = {
+                messages: [
+                    {
+                        direction: 'received',
+                        content: message.content,
+                        date: message.dateSent,
+                    }
+                ]
+            };
+        } else if (formattedMessages.hasOwnProperty(message.receiverId) && message.receiverId !== userId) {
             formattedMessages[message.receiverId].messages.push(
                 {
                     direction: 'sent',
@@ -38,10 +33,10 @@ const formatMessages = (userId, messageHistory)=> {
                     date: message.dateSent,
                 }
             )
-        } else if (formattedMessages.hasOwnProperty(message.senderId)) {
+        } else if (formattedMessages.hasOwnProperty(message.senderId) && message.senderId !== userId) {
             formattedMessages[message.senderId].messages.push(
                 {
-                    direction: 'received',
+                    direction:'received',
                     content: message.content,
                     date: message.dateSent,
                 }
@@ -60,4 +55,4 @@ const formatDate = (date) => {
         date.getSeconds()].join(':');
 }
 
-export {formatMessages, formatDate}
+export { formatMessages, formatDate }
