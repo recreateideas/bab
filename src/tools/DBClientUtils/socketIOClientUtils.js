@@ -26,13 +26,13 @@ const connectToSocket = (component, customId, nickname) => {
 
     socket.on('incomingMessage', message => {
         console.log('MESSAGE', message);
-        component.props.pushMessageToHistory(message);
+        component.props.pushMessageToHistory('received',message);
         // console.log(component);
     });
 
     socket.on('messageSent', message => {
         console.log('SENT MESSAGE: ',message);
-        component.props.pushMessageToHistory(message);
+        component.props.pushMessageToHistory('sent',message);
         // console.log(component);
     });
 

@@ -4,8 +4,6 @@ const mapStateToProps = (state) => {
     return {
         storeUser: state.user,
         storeUserTo: state.share.userTo,
-        // storeAllUsers: state.share.allUsers,
-        // storeActiveUsers: state.share.activeUsers,
     }
 }
 

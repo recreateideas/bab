@@ -102,7 +102,7 @@ const findAllUsers = async component => {
 };
 
 const getMessageHistory = async (component) => {
-    console.log(component);
+    // console.log(component);
 }
 
 

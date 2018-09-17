@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button2, TextBox } from '../BasicComponents';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 const FontAwesome = require('react-fontawesome');
 import { emitMessage, emitUserTyping } from '../../tools/DBClientUtils/socketIOClientUtils';
 import { mapStateToProps, mapDispatchToProps } from '../../store/mapToProps/mapToProps_TypeBox';
@@ -36,7 +37,7 @@ class TypeBox extends React.Component {
             message: { ...this.state.message, content, date: this.formatDate(date), }
         });
     }
-//"5b8b583e3b30be0bfc50f7ab
+
     formatDate(date) {
         return [date.getMonth() + 1,
         date.getDate(),
@@ -62,9 +63,7 @@ class TypeBox extends React.Component {
     sendMessage() {
         const content = this.state.message.content;
         if (content && content !== '') {
-            // console.log(this.state.message);
             emitMessage(this.props.storeUser.ID,this.props.storeUser.nickName,this.state.message);
-            // this.props.pushMessageToHistory(this.state.message);
         }
         this.setState({ message: { ...this.state.message, content: '', date: '' } });
     }
@@ -88,7 +87,12 @@ class TypeBox extends React.Component {
             </div>
         )
     }
+};
 
+TypeBox.propTypes = {
+    storeUserTo: PropTypes.object,
+    storeUser: PropTypes.object,
+    pushMessageToHistory: PropTypes.func,
 };
 
 

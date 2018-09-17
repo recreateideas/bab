@@ -11,6 +11,7 @@ const share = (share = initialState.share, action) => {
         case constants.PUSH_MESSAGE:
             const messageHistory = share.chats && share.chats[action.message.receiverId] ? share.chats[action.message.receiverId].messages : [];
             const newMessage = {
+                direction: action.direction,
                 content: action.message.content,
                 date: action.message.dateSent,
             }
