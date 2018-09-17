@@ -97,7 +97,16 @@ const mapDispatchToProps = (dispatch) => {
                 data,
             }
             dispatch(action);
-        }
+        },
+        pushMessageToHistory: (direction,message) => {
+            // console.log('MESSAGE:', message);
+            const action = {
+                type: constants.PUSH_MESSAGE,
+                direction,
+                message,
+            }
+            dispatch(action);
+        },
     }
 }
 
