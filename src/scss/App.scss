@@ -17,3 +17,56 @@
 @import 'components/Tooltip.scss';
 @import 'components/Querybox.scss';
 @import 'components/Chat.scss';
+
+::-webkit-scrollbar {
+    background-color: transparent;
+    width: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+    background:rgba(0,0,0,0.3) !important; // manage scrollbar thumb background color here
+    border-radius: 6px;
+    &:hover{
+        background:rgba(0,0,0,0.45) !important;
+        transition: 1s;
+    }
+  }
+
+#typeBox {
+    position: absolute;
+    bottom: 15px;
+    width: calc( #{$messages-width} + #{$userbox-left} - 26px);
+    height: calc(#{$send-button-width} + #{$spacing} * 2);
+    background-color: rgba(57, 111, 142, 0.445);
+    border-radius: $border-radius-messages;
+    .attachButton{
+        position: absolute;
+        top: $spacing;
+        left: $spacing;
+        height: $send-button-width !important;
+        width: calc(#{$send-button-width} / 2) !important;
+        min-width: calc(#{$send-button-width} / 2) !important;
+    }
+    .sendButton {
+        width: $send-button-width !important;
+        max-width: $send-button-width !important;
+        min-width: $send-button-width !important;
+        height: $send-button-width;
+        left: calc( 100% - #{$send-button-width} - #{$spacing});
+        top: $spacing;
+        position: absolute;
+    }
+    #typeBoxInput {
+        position: absolute;
+        left: calc((#{$send-button-width} / 2) + #{$spacing});
+        margin: 8px !important;
+        width: calc( 536px - (#{$send-button-width} / 2) - #{$spacing}) !important;
+        height: 70px !important;
+        color: #420b75;
+        padding: 5px;
+        border: transparent;
+        border-radius: 3px;
+        resize: none;
+        background-color: rgba(255, 255, 255, .7);
+    }
+}

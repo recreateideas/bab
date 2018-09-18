@@ -16,38 +16,41 @@ $spacing: 8px;
             position: absolute;
             width: calc( #{$messages-width} + 15px);
             height: calc(100% - (#{$send-button-width} + #{$spacing} * 7));
-            background-color: rgba(234, 245, 247, 0.79);
+            background-color: rgba(234, 245, 247, 0.89);
             border-radius: $border-radius-messages;
             border-top-right-radius: 0px;
             border-bottom-right-radius: 0px;
             border-bottom-left-radius: 0px;
-            overflow-y: auto;
+            overflow-y: scroll;
             padding: 6px;
             .messageContainer{
                 width: $message-bubble-width !important;
+                margin-top: 26px;
                 &.sent{
                     text-align: right;
                     position: relative;
                     right: 0px;
                     left: calc(100% - #{$message-bubble-width});
                     .message_bubble{
-                        background-color: #006a9e;
+                        background-color: #396f8e;
+                        box-shadow: -4px 4px 15px rgba(0,0,0,.3);
                     }
                     .messageDate{
-                        color: #557;
+                        color: rgba(85, 85, 119, .7);
                     }
                 }
                 &.received{
                     text-align: left;
                     .message_bubble{
-                        background-color: #aa9db5;
+                        background-color: #bdbdbd;
+                        box-shadow: 4px 4px 15px rgba(0,0,0,.3);
                         .messageText{
                             color: #444;
                             font-style: normal;
                         }
                     }
                     .messageDate{
-                        color: #667;
+                        color: rgba(102, 102, 119, .7);
                     }
                 }
                 .message_bubble{
@@ -55,7 +58,6 @@ $spacing: 8px;
                     border-radius: 3px;
                     width: $message-bubble-width !important;
                     padding: 4px;
-                    box-shadow: 4px 4px 15px rgba(0,0,0,.3);
                     .messageText{
                         font-size: 14px;
                         line-height: 1.1em;
@@ -66,39 +68,42 @@ $spacing: 8px;
                     font-size: 11px;
                     font-weight: bold;
                     font-style: normal;
-                    top: 4px;
+                    top: 10px;
                     position: relative;
                 }
             }
         }
-        #typeBox {
-            position: absolute;
-            bottom: 15px;
-            width: calc( #{$messages-width} + #{$userbox-left} - 26px);
-            height: calc(#{$send-button-width} + #{$spacing} * 2);
-            background-color: rgba(57, 111, 142, 0.445);
-            border-radius: $border-radius-messages;
-            .button2 {
-                width: $send-button-width !important;
-                max-width: $send-button-width !important;
-                min-width: $send-button-width !important;
-                height: $send-button-width;
-                left: calc( 100% - #{$send-button-width} - #{$spacing});
-                top: $spacing;
-                position: absolute;
-            }
-            #typeBoxInput {
-                margin: 8px !important;
-                width: 536px !important;
-                height: 70px !important;
-                color: #420b75;
-                padding: 5px;
-                border: transparent;
-                border-radius: 3px;
-                resize: none;
-                background-color: rgba(255, 255, 255, .7);
-            }
-        }
+        // #typeBox {
+        //     position: absolute;
+        //     bottom: 15px;
+        //     width: calc( #{$messages-width} + #{$userbox-left} - 26px);
+        //     height: calc(#{$send-button-width} + #{$spacing} * 2);
+        //     background-color: rgba(57, 111, 142, 0.445);
+        //     border-radius: $border-radius-messages;
+        //     .attachButton{
+
+        //     }
+        //     .sendButton {
+        //         width: $send-button-width !important;
+        //         max-width: $send-button-width !important;
+        //         min-width: $send-button-width !important;
+        //         height: $send-button-width;
+        //         left: calc( 100% - #{$send-button-width} - #{$spacing});
+        //         top: $spacing;
+        //         position: absolute;
+        //     }
+        //     #typeBoxInput {
+        //         margin: 8px !important;
+        //         width: 536px !important;
+        //         height: 70px !important;
+        //         color: #420b75;
+        //         padding: 5px;
+        //         border: transparent;
+        //         border-radius: 3px;
+        //         resize: none;
+        //         background-color: rgba(255, 255, 255, .7);
+        //     }
+        // }
     }
     #usersBox {
         position: absolute;

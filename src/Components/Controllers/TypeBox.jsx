@@ -63,6 +63,12 @@ class TypeBox extends React.Component {
     render() {
         return (
             <div id="typeBox" className="typeBox">
+                <Button2
+                    click={this.sendMessage.bind(this)}
+                    addClass='attachButton'
+                    buttonId='attachButton'
+                    value={'+'}
+                />
                 <TextBox
                     content='content'
                     change={this.typeMessage.bind(this)}
@@ -73,8 +79,7 @@ class TypeBox extends React.Component {
                     click={this.sendMessage.bind(this)}
                     addClass='sendButton'
                     buttonId='sendMessage'
-                    value={<FontAwesome name='paper-plane' size='2x' /*spin*/ className={`sendIcon`} />
-                    }
+                    value={<FontAwesome name='paper-plane' size='2x' /*spin*/ className={`sendIcon`} />}
                 />
             </div>
         )
