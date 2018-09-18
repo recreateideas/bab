@@ -4,9 +4,8 @@ import PropTypes from 'prop-types';
 class MessageBox extends React.Component {
 
     scrollToBottom() {
-        this.messagesEnd.scrollIntoView({ behavior: "smooth" ,block: 'center',
-        inline: 'center'});
-        // this.messagesEnd.scrollIntoView(!0);
+        // this.messagesEnd.scrollIntoView({ behavior: "smooth" ,block: 'center',inline: 'center'});
+        this.messagesEnd.parentNode.scrollTop = this.messagesEnd.offsetTop;
     }
 
     componentDidMount() {
