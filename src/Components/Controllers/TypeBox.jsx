@@ -1,11 +1,12 @@
 import React from 'react';
-import { Button2, TextBox } from '../BasicComponents';
+import { Button2, TextBox, FileLoader } from '../BasicComponents';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 const FontAwesome = require('react-fontawesome');
 import { emitMessage, emitUserTyping } from '../../tools/DBClientUtils/socketIOClientUtils';
 import { mapStateToProps, mapDispatchToProps } from '../../store/mapToProps/mapToProps_TypeBox';
 import {formatDate} from '../../tools/messageUtils';
+import { handleFilesSelect } from '../../tools/fileManagers';
 
 class TypeBox extends React.Component {
 
@@ -14,6 +15,7 @@ class TypeBox extends React.Component {
         this.state = {
             message: {
                 content: '',
+                attachment:'',
                 date: '',
                 userTo: {
                     customId: '5b8b583e3b30be0bfc50f7ab',
@@ -60,20 +62,33 @@ class TypeBox extends React.Component {
         this.setState({ message: { ...this.state.message, content: '', date: '' } });
     }
 
+    uploadFileToSend(e){
+        console.log(e.target);
+
+        handleFilesSelect(this,e, 'resultMessage', ()=>{
+            console.log('loading...');
+        });
+    }
+
     render() {
         return (
             <div id="typeBox" className="typeBox">
-                <Button2
-                    click={this.sendMessage.bind(this)}
-                    addClass='attachButton'
-                    buttonId='attachButton'
-                    value={'+'}
+
+                <FileLoader
+                    buttonIcon={'plus'}
+                    iconClass='attachIcon'
+                    addClass={'button2 attachButton'}
+                    inputID={'attachButton'}
+                    change={this.uploadFileToSend.bind(this)}
+                    fileAccepted='.bab, .json, .js'
+                    iconSize={'lg'}
                 />
                 <TextBox
                     content='content'
                     change={this.typeMessage.bind(this)}
                     keypress={this.validateKeyPressed.bind(this)}
                     content={this.state.message.content}
+                    uploadedFiles={this.state.uploadedFiles}
                 />
                 <Button2
                     click={this.sendMessage.bind(this)}

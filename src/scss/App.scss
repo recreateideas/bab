@@ -41,6 +41,7 @@
     border-radius: $border-radius-messages;
     .attachButton{
         position: absolute;
+        cursor: pointer;
         top: $spacing;
         left: $spacing;
         height: $send-button-width !important;
@@ -58,6 +59,7 @@
     }
     #typeBoxInput {
         position: absolute;
+        top:0px;
         left: calc((#{$send-button-width} / 2) + #{$spacing});
         margin: 8px !important;
         width: calc( 536px - (#{$send-button-width} / 2) - #{$spacing}) !important;
@@ -68,5 +70,10 @@
         border-radius: 3px;
         resize: none;
         background-color: rgba(255, 255, 255, .7);
+    }
+    .attachIcon{
+        position: relative;
+        top: 22px;
+        left: -2px;
     }
 }

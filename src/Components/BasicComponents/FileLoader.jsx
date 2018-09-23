@@ -8,14 +8,14 @@ const FileLoader = (props) => {
     return (
         <div className='inline buttonContainer'>
             <label htmlFor={props.inputID}>
-                <div className='buttonIcon'>
-                    <FontAwesome className={props.iconClass} name={props.buttonIcon} /*size='3x' spin*/ style={{ textShadow: '0 1px 0 rgba(255, 255, 255, 0.7)' }} />
+                <div className={`${props.addClass}`}>
+                    <FontAwesome className={props.iconClass} name={props.buttonIcon} size={props.iconSize} style={{ textShadow: '0 1px 0 rgba(255, 255, 255, 0.7)' }} />
                 </div>
             </label>
             <input
                 type="file"
                 id={props.inputID}
-                name={`${props.inputID}[]`}
+                name={`${props.inputID}`}
                 onChange={props.change}
                 className='display_none'
                 accept={props.fileAccepted}

@@ -33,15 +33,15 @@ const downloadFile = args => {
     validateFile = (file, { maxSize, excludeFormat }) => {
         let validationPassed = false;
         const excluded = new RegExp(excludeFormat);
-        const fileSize = file.size*0.001;
-        if (fileSize <= maxSize && !excluded.test(file.type)){
+        const fileSize = file.size * 0.001;
+        if (fileSize <= maxSize && !excluded.test(file.type)) {
             validationPassed = true;
         }
         return validationPassed;
     },
 
     validateContent = (content, format) => {
-        switch(format){
+        switch (format) {
             case 'sshKey':
                 var rsa = new r.RSAKey();
                 try {
@@ -51,7 +51,7 @@ const downloadFile = args => {
                     return false;
                 }
             default: break;
-        }  
+        }
     },
 
     saveResultsToCSV = QueryResults => {
@@ -70,6 +70,46 @@ const downloadFile = args => {
             return true;
         }
         return false;
+    },
+
+    handleFilesSelect = (component, e, resultText, callback) => {
+        const files = e.target.files; // FileList object
+        [...files].forEach(file => {
+            const reader = new FileReader();
+            reader.onload = () => {
+                if (testFileExtension(file.name)) {
+                    let text = reader.result;
+                    let newState = JSON.parse(text);
+                    console.log(newState);
+                    saveFileToState(component, resultText, file);
+                    callback(newState);
+                }
+                else {
+                    component.setState({
+                        [resultText]: '',
+                        error: 'File format error: the file has to be a baboon query file [*.bab]',
+                    });
+                }
+            };
+            reader.readAsText(file);
+        });
+        e.target.value = '';
+    },
+
+    saveFileToState = (component, resultText, file) => {
+        let output = [];
+        console.log(file);
+        output.push({
+            name: file.name,
+            size: Math.round(file.size * 0.001),
+            type: file.type === '' || /\.bab$/.test(file.name) ? 'baboon.query.file' : 'n/a', // or json
+            lastModified: file.lastModifiedDate ? file.lastModifiedDate.toLocaleDateString() : file.lastModified ? file.lastModified : 'n/a'
+        })
+        component.setState({
+            [resultText]: '',
+            error: '',
+            uploadedFiles: output
+        })
     };
 
-export { downloadFile, saveResultsToCSV, testFileExtension, validateFile, validateContent };
+export { downloadFile, saveResultsToCSV, testFileExtension, validateFile, validateContent, handleFilesSelect, saveFileToState };

@@ -56,6 +56,7 @@ class Tool extends React.Component {
                         inputID={this.props.inputID}
                         change={this.props.change}
                         fileAccepted='.bab'
+                        addClass={'buttonIcon'}
                     />
                 )
                 break;

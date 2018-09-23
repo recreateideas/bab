@@ -2,7 +2,7 @@ import React from 'react';
 import Tool from '../../Controllers/Tool';
 import { connect } from 'react-redux';
 import { mapStateToProps, mapDispatchToProps } from '../../../store/mapToProps/mapToProps_ToolsTab';
-import { downloadFile, saveResultsToCSV, testFileExtension } from '../../../tools/fileManagers';
+import { downloadFile, saveResultsToCSV, handleFilesSelect } from '../../../tools/fileManagers';
 import PropTypes from 'prop-types';
 
 class ToolsTab extends React.Component {
@@ -35,44 +35,8 @@ class ToolsTab extends React.Component {
         }
     }
 
-    handleFilesSelect(e) {
-        const files = e.target.files; // FileList object
-        [...files].forEach(file => {
-            const reader = new FileReader();
-            reader.onload = () =>{
-                if (testFileExtension(file.name)){
-                    let text = reader.result;
-                    let newState = JSON.parse(text);
-                    console.log(newState);
-                    this.saveFileToState(file);
-                    this.props.applyLoadedStateQueryToStore(newState);
-                }
-                else {
-                    this.setState({
-                        message: '',
-                        error: 'File format error: the file has to be a baboon query file [*.bab]',
-                    }); 
-                }
-            };
-            reader.readAsText(file);
-        });
-        e.target.value = '';
-    }
-
-    async saveFileToState(file){
-        let output = [];
-        console.log(file);
-        output.push({
-            name: file.name,
-            size: Math.round(file.size * 0.001),
-            type: file.type === '' || /\.bab$/.test(file.name) ? 'baboon.query.file' : 'n/a',
-            lastModified: file.lastModifiedDate ? file.lastModifiedDate.toLocaleDateString() : file.lastModified ? file.lastModified : 'n/a'
-        })
-        await this.setState({
-            message: '',
-            error: '',
-            uploadedFiles: output
-        })
+    handleFilesSelect(e){
+        handleFilesSelect(this,e, 'message',this.props.applyLoadedStateQueryToStore);
     }
 
     saveQuery() {
