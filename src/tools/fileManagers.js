@@ -72,23 +72,25 @@ const downloadFile = args => {
         return false;
     },
 
-    handleFilesSelect = (component, e, resultText, callback) => {
+    handleFilesSelect = (component, e, resultText, saveToState, callback, type) => {
         const files = e.target.files; // FileList object
         [...files].forEach(file => {
             const reader = new FileReader();
-            reader.onload = () => {
+            reader.onload = async () => {
                 if (testFileExtension(file.name)) {
                     let text = reader.result;
                     let newState = JSON.parse(text);
                     console.log(newState);
-                    saveFileToState(component, resultText, file);
+                    saveFileToState(component, resultText, file, type);
                     callback(newState);
                 }
                 else {
-                    component.setState({
-                        [resultText]: '',
-                        error: 'File format error: the file has to be a baboon query file [*.bab]',
-                    });
+                    if(saveToState!== 'false'){
+                        component.setState({
+                            [resultText]: '',
+                            error: 'File format error: the file has to be a baboon query file [*.bab]',
+                        });
+                    }
                 }
             };
             reader.readAsText(file);
@@ -96,7 +98,7 @@ const downloadFile = args => {
         e.target.value = '';
     },
 
-    saveFileToState = (component, resultText, file) => {
+    saveFileToState = (component, resultText, file, type) => {
         let output = [];
         console.log(file);
         output.push({
@@ -105,11 +107,15 @@ const downloadFile = args => {
             type: file.type === '' || /\.bab$/.test(file.name) ? 'baboon.query.file' : 'n/a', // or json
             lastModified: file.lastModifiedDate ? file.lastModifiedDate.toLocaleDateString() : file.lastModified ? file.lastModified : 'n/a'
         })
-        component.setState({
-            [resultText]: '',
-            error: '',
-            uploadedFiles: output
-        })
+        if(type && type === 'message'){
+            component.setState({ message: { ...component.state.message, attachment: output} });
+        } else {
+            component.setState({
+                [resultText]: '',
+                error: '',
+                uploadedFiles: output
+            })
+        }
     };
 
 export { downloadFile, saveResultsToCSV, testFileExtension, validateFile, validateContent, handleFilesSelect, saveFileToState };

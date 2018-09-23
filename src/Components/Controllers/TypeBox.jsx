@@ -62,12 +62,15 @@ class TypeBox extends React.Component {
         this.setState({ message: { ...this.state.message, content: '', date: '' } });
     }
 
-    uploadFileToSend(e){
-        console.log(e.target);
+    saveAttachment(files){
+        this.setState({ message: { ...this.state.message, attachment: files} });
+    }
 
-        handleFilesSelect(this,e, 'resultMessage', ()=>{
-            console.log('loading...');
-        });
+    uploadFileToSend(e){
+        // console.log(e.target.files[0]);
+        // const files =  e.target.files;
+        handleFilesSelect(this,e, 'resultMessage', 'false', ()=>{},'message');
+        // this.setState({ message: { ...this.state.message, attachment: files} });
     }
 
     render() {
@@ -80,7 +83,7 @@ class TypeBox extends React.Component {
                     addClass={'button2 attachButton'}
                     inputID={'attachButton'}
                     change={this.uploadFileToSend.bind(this)}
-                    fileAccepted='.bab, .json, .js'
+                    fileAccepted='.bab, .json, .csv, .js'
                     iconSize={'lg'}
                 />
                 <TextBox
