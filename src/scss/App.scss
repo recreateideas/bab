@@ -38,14 +38,19 @@ $message-bubble-tringle-size: 6px;
         #messageBox {
             position: absolute;
             width: $message-box-width;
-            height: calc(100% - (#{$send-button-width} - 5px + #{$spacing} * 7));
+            // height: calc(100% - (#{$send-button-width} - 5px + #{$spacing} * 7));
+            height: calc( 100% - 27px);
             background-color: rgba(234, 245, 247, 0.89);
             border-radius: $border-radius-messages;
             border-top-right-radius: 0px;
             border-bottom-right-radius: 0px;
             border-bottom-left-radius: 0px;
             overflow-y: scroll;
+            overflow-x: hidden;
             padding: 6px;
+            .messageBottomSpacer{
+                height: 95px;
+            }
             .messageContainer{
                 width: $message-bubble-width !important;
                 margin-top: 26px;
@@ -211,7 +216,7 @@ $message-bubble-tringle-size: 6px;
     bottom: 15px;
     width: $message-box-width;
     height: calc(#{$send-button-width} + #{$spacing} * 3);
-    background-color: rgba(234, 245, 247, 0.89);
+    // background-color: rgba(234, 245, 247, 0.89);
     .attachButton{
         position: absolute;
         cursor: pointer;
@@ -242,7 +247,7 @@ $message-bubble-tringle-size: 6px;
         border: transparent;
         border-radius: 3px;
         resize: none;
-        background-color: rgba(255, 255, 255, .7);
+        background-color: rgba(255, 255, 255, 0.86);
         border: solid 2px darkgray;
     }
     .attachIcon{

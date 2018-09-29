@@ -17,7 +17,7 @@ class MessageBox extends React.Component {
     }
 
     renderAttachment(attachment, key, direction){
-    console.log(direction); //direction -> sent received
+    // console.log(direction); //direction -> sent received
         return (
             <div key={key} id={`attachment_${key}`} className={`attachmentFiles`}>
                 <p className='attachmentText'><strong>{`${attachment.name}`}</strong></p>
@@ -28,8 +28,8 @@ class MessageBox extends React.Component {
 
     renderMessage(message, key) {
         const messageTypeClass = `message_bubble ${message.direction}`;
-        console.log(message);
-        console.log(message.attachment);
+        // console.log(message);
+        // console.log(message.attachment);
         return (
             <div key={key} className={`messageContainer ${messageTypeClass}`}>
                 <div className={`message ${messageTypeClass}`}>
@@ -47,7 +47,7 @@ class MessageBox extends React.Component {
         return (
             <div id="messageBox" className={`${this.props.addClass} messageBox`}>
                 {this.props.messages.map((message, key) => this.renderMessage(message, key))}
-                <div style={{ float: "left", clear: "both" }}
+                <div style={{ float: "left", clear: "both" }} className={`messageBottomSpacer`}
                     ref={(el) => { this.messagesEnd = el; }}>
                 </div>
             </div>
