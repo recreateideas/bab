@@ -36,7 +36,8 @@ class ToolsTab extends React.Component {
     }
 
     handleFilesSelect(e){
-        handleFilesSelect(this,e, 'message',this.props.applyLoadedStateQueryToStore,()=>{});
+        const acceptableFileFormats =['.bab'];
+        handleFilesSelect(this,e, 'message',true, this.props.applyLoadedStateQueryToStore,'queryLoad',acceptableFileFormats);
     }
 
     saveQuery() {

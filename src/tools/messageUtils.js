@@ -12,6 +12,7 @@ const formatMessages = (userId, messageHistory) => {
                         direction: 'sent',
                         content: message.content,
                         date: message.dateSent,
+                        attachment: message.attachment,
                     }
                 ]
             };
@@ -22,6 +23,7 @@ const formatMessages = (userId, messageHistory) => {
                         direction: 'received',
                         content: message.content,
                         date: message.dateSent,
+                        attachment: message.attachment,
                     }
                 ]
             };
@@ -31,6 +33,7 @@ const formatMessages = (userId, messageHistory) => {
                     direction: 'sent',
                     content: message.content,
                     date: message.dateSent,
+                    attachment: message.attachment,
                 }
             )
         } else if (formattedMessages.hasOwnProperty(message.senderId) && message.senderId !== userId) {
@@ -39,6 +42,7 @@ const formatMessages = (userId, messageHistory) => {
                     direction:'received',
                     content: message.content,
                     date: message.dateSent,
+                    attachment: message.attachment,
                 }
             )
         }

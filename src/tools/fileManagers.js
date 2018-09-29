@@ -66,31 +66,37 @@ const downloadFile = args => {
         });
     },
 
-    testFileExtension = fileName => {
-        var matches = fileName && fileName.match(/\.([^.]+)$/);
-        if (/\.bab|\.csv|\.js/.test(matches)) {
-            return true;
-        }
-        return false;
+    testFileExtension = (fileName,acceptableFileFormats) => {
+        var acceptable = false;
+        var extension = fileName.match(/\.([^.]+)$/);
+        acceptableFileFormats.forEach(format =>{
+            var acceptRegex = new RegExp(format);
+            if(acceptRegex.test(extension))
+                acceptable = true;
+        });
+        // if (/\.bab|\.csv|\.js|\.json/.test(matches)) {
+        //     return true;
+        // }
+        return acceptable;
     },
 
-    handleFilesSelect = async (component, e, resultText, saveToState, callback, type) => {
+    handleFilesSelect = async (component, e, resultText, saveToState, callback, type, acceptableFileFormats) => {
         const files = e.target.files; // FileList object
         [...files].forEach(file => {
             const reader = new FileReader();
             reader.onload = async () => {
-                if (testFileExtension(file.name)) {
+                if (testFileExtension(file.name,acceptableFileFormats)) {
                     let text = reader.result;
-                    let newState = JSON.parse(text);
+                    // let newState = JSON.parse(text);
                     // console.log(newState);
                     await saveFileToState(component, resultText, file, text, type);
-                    callback(newState);
+                    callback(text);
                 }
                 else {
-                    if(saveToState!== 'false'){
+                    if(saveToState!== false){
                         component.setState({
                             [resultText]: '',
-                            error: 'File format error: the file has to be a baboon query file [*.bab]',
+                            error: 'File format error: the file is not in a valid file format',
                         });
                     }
                 }
@@ -111,7 +117,7 @@ const downloadFile = args => {
             lastModified: file.lastModifiedDate ? file.lastModifiedDate.toLocaleDateString() : file.lastModified ? file.lastModified : 'n/a'
         })
         if(type && type === 'message'){
-            await component.setState({ message: { ...component.state.message, attachment: output} });
+            await component.setState({ message: { ...component.state.message, attachment: output}, error:'' });
         } else {
             await component.setState({
                 [resultText]: '',

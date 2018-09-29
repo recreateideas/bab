@@ -28,7 +28,8 @@ $spacing: 8px;
 $message-box-width: calc( #{$messages-width} + 15px);
 $message-bubble-side-spacing: 5px;
 $message-bubble-tringle-size: 6px;
-
+$message-txt-shadow: .2px;
+$message-txt-shadow-color: #555;
 #chatContainer {
     display: flex;
     flex-direction: row;
@@ -37,10 +38,10 @@ $message-bubble-tringle-size: 6px;
         flex-direction: column;
         #messageBox {
             position: absolute;
-            width: $message-box-width;
-            // height: calc(100% - (#{$send-button-width} - 5px + #{$spacing} * 7));
+            width: $message-box-width; // height: calc(100% - (#{$send-button-width} - 5px + #{$spacing} * 7));
             height: calc( 100% - 27px);
-            background-color: rgba(234, 245, 247, 0.89);
+            // background-color: rgba(234, 245, 247, 0.89);
+            background-color: rgba(255, 255, 255, 0.85);
             border-radius: $border-radius-messages;
             border-top-right-radius: 0px;
             border-bottom-right-radius: 0px;
@@ -48,29 +49,29 @@ $message-bubble-tringle-size: 6px;
             overflow-y: scroll;
             overflow-x: hidden;
             padding: 6px;
-            .messageBottomSpacer{
+            .messageBottomSpacer {
                 height: 95px;
             }
-            .messageContainer{
+            .messageContainer {
                 width: $message-bubble-width !important;
                 margin-top: 26px;
-                &.sent{
+                &.sent {
                     text-align: right;
                     position: relative;
                     right: 0px;
                     left: calc(100% - #{$message-bubble-width});
-                    .message_bubble{
+                    .message_bubble {
                         background-color: #396f8e;
-                        box-shadow: -4px 4px 15px rgba(0,0,0,.3);
+                        box-shadow: -4px 4px 15px rgba(0, 0, 0, .3);
                         right: $message-bubble-side-spacing;
-                        .messageAttachments{
-                            text-align: -webkit-right;
-                            // text-align: right;
-                            .attachmentFiles{
+                        .messageAttachments {
+                            text-align: -webkit-right; // text-align: right;
+                            .attachmentFiles {
                                 text-align: right;
+                                border: solid 1px #ddd;
                             }
                         }
-                        &::after{
+                        &::after {
                             content: ' ';
                             position: absolute;
                             border-left: $message-bubble-tringle-size solid #396f8e;
@@ -81,28 +82,28 @@ $message-bubble-tringle-size: 6px;
                             right: calc(#{$message-bubble-tringle-size} * -2);
                         }
                     }
-                    .messageDate{
+                    .messageDate {
                         color: rgba(85, 85, 119, .7);
                     }
                 }
-                &.received{
+                &.received {
                     text-align: left;
-                    .message_bubble{
+                    .message_bubble {
                         background-color: #bdbdbd;
-                        box-shadow: 4px 4px 15px rgba(0,0,0,.3);
+                        box-shadow: 4px 4px 15px rgba(0, 0, 0, .3);
                         left: $message-bubble-side-spacing;
-                        .messageText{
+                        .messageText {
                             color: #444;
                             font-style: normal;
                         }
-                        .messageAttachments{
-                            text-align: -webkit-left;
-                            // text-align: left;
-                            .attachmentFiles{
+                        .messageAttachments {
+                            text-align: -webkit-left; // text-align: left;
+                            .attachmentFiles {
                                 text-align: left;
+                                border: solid 1px #aaa;
                             }
                         }
-                        &::after{
+                        &::after {
                             content: ' ';
                             position: absolute;
                             border-right: $message-bubble-tringle-size solid #bdbdbd;
@@ -113,42 +114,47 @@ $message-bubble-tringle-size: 6px;
                             left: calc(#{$message-bubble-tringle-size} * -2);
                         }
                     }
-                    .messageDate{
+                    .messageDate {
                         color: rgba(102, 102, 119, .7);
                     }
                 }
-                .message_bubble{
+                .message_bubble {
                     background-color: #667;
                     border-radius: 3px;
                     width: $message-bubble-width !important;
                     padding: 4px;
                     position: relative;
-                    .messageText{
+                    .messageText {
                         font-size: 14px;
                         line-height: 1.1em;
                         padding-top: 5px;
                     }
-                    .attachmentFiles{
+                    .attachmentFiles {
                         cursor: pointer;
                         width: fit-content;
                         padding: 15px 10px 5px 10px;
-                        border: solid 1px #ddd;
-                        border-radius: 4px;
-                        border-width: 2px;
-                        border-style: dashed;
-                        background-color: rgba(255,255,255,0.1);
-                        &:hover{
-                            box-shadow: 0px 0px 2px 2px rgba(255,255,255,0.5);
-                            p{
-                                color:rgb(255, 208, 0);
+                        border-radius: 4px !important;
+                        border-width: 2px !important;
+                        border-style: dashed !important;
+                        background-color: rgba(255, 255, 255, 0.4);
+                        &:hover {
+                            box-shadow: 0px 0px 2px 2px rgba(255, 255, 255, 0.5);
+                            p {
+                                color: orange;
                             }
                         }
-                        p{
-                            color: orange;
+                        p {
+                            color: #ff7b00;
+                            strong {
+                                text-shadow : -#{$message-txt-shadow} -#{$message-txt-shadow} 0 $message-txt-shadow-color,
+                                #{$message-txt-shadow} -#{$message-txt-shadow} 0 $message-txt-shadow-color,
+                                -#{$message-txt-shadow} #{$message-txt-shadow} 0 $message-txt-shadow-color,
+                                #{$message-txt-shadow} #{$message-txt-shadow} 0 $message-txt-shadow-color
+                            }
                         }
                     }
                 }
-                .messageDate{
+                .messageDate {
                     font-size: 11px;
                     font-weight: bold;
                     font-style: normal;
@@ -163,8 +169,10 @@ $message-bubble-tringle-size: 6px;
         left: calc( #{$messages-width} + #{$userbox-left});
         width: 307px;
         height: calc(100% - 27px);
-        background-color: rgba(100, 100, 100, 0.2);
-        border-radius: $border-radius-messages;
+        // background-color: rgba(100, 100, 100, 0.2);
+        background-color: rgba(255,255, 255, 0.85);
+        border-top-right-radius: $border-radius-messages;
+        border-bottom-right-radius: $border-radius-messages;
         ul {
             padding-left: 0px;
             position: relative;
@@ -193,7 +201,7 @@ $message-bubble-tringle-size: 6px;
                         height: 10px;
                         border-radius: 10px;
                         &.activeUser {
-                            background-color: green;
+                            background-color: #13c300;
                         }
                         &.inactiveUser {
                             background-color: darkgrey;
@@ -202,9 +210,12 @@ $message-bubble-tringle-size: 6px;
                     .userTextWrap {
                         margin-left: 5px;
                         .nicknameText {
-                            color: lightgray;
+                            color: #334;
                         }
                     }
+                }
+                &:hover{
+                    background-color: rgb(255, 255, 255) !important;
                 }
             }
         }
@@ -215,9 +226,8 @@ $message-bubble-tringle-size: 6px;
     position: absolute;
     bottom: 15px;
     width: $message-box-width;
-    height: calc(#{$send-button-width} + #{$spacing} * 3);
-    // background-color: rgba(234, 245, 247, 0.89);
-    .attachButton{
+    height: calc(#{$send-button-width} + #{$spacing} * 3); // background-color: rgba(234, 245, 247, 0.89);
+    .attachButton {
         position: absolute;
         cursor: pointer;
         top: $spacing;
@@ -237,7 +247,7 @@ $message-bubble-tringle-size: 6px;
     }
     #typeBoxInput {
         position: absolute;
-        top:0px;
+        top: 0px;
         left: calc((#{$send-button-width} / 2) + #{$spacing});
         margin: 8px !important;
         width: calc( 536px - (#{$send-button-width} / 2) - #{$spacing}) !important;
@@ -250,7 +260,7 @@ $message-bubble-tringle-size: 6px;
         background-color: rgba(255, 255, 255, 0.86);
         border: solid 2px darkgray;
     }
-    .attachIcon{
+    .attachIcon {
         position: relative;
         top: 22px;
         left: -2px;

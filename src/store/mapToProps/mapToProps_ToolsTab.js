@@ -11,7 +11,8 @@ const mapStateToProps = (state) => { // use this also to select what propsApp sh
 const mapDispatchToProps = (dispatch) => {
     // console.log('@@ TOOL -> applyLoadedStateQueryToStore');
     return {
-        applyLoadedStateQueryToStore: (loadedContent) => {
+        applyLoadedStateQueryToStore: (result) => {
+            let loadedContent = JSON.parse(result);
             // console.log(loadedContent);
             const apply_config = {
                 type: constants.SET_CONFIG_OBJECT,

@@ -65,7 +65,10 @@ class TypeBox extends React.Component {
 
     uploadFileToSend(e){
         console.log(e.target.files[0]);
-        handleFilesSelect(this,e, 'resultMessage', 'false', ()=>{console.log(this.state);},'message');
+        const acceptableFileFormats=[
+            '.bab','.csv','.js','.json'
+        ];
+        handleFilesSelect(this,e, 'resultMessage', true, (state)=>{console.log(state);},'message', acceptableFileFormats);
     }
 
     render() {
