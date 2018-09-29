@@ -15,7 +15,7 @@ class TypeBox extends React.Component {
         this.state = {
             message: {
                 content: '',
-                attachment:'',
+                attachment:[],
                 date: '',
                 userTo: {
                     customId: '5b8b583e3b30be0bfc50f7ab',
@@ -56,21 +56,16 @@ class TypeBox extends React.Component {
 
     sendMessage() {
         const content = this.state.message.content;
-        if (content && content !== '') {
+        const attachment = this.state.attachment;
+        if (content !== '' || attachment.length > 0) {
             emitMessage(this.props.storeUser.ID,this.props.storeUser.nickName,this.state.message);
         }
-        this.setState({ message: { ...this.state.message, content: '', date: '' } });
-    }
-
-    saveAttachment(files){
-        this.setState({ message: { ...this.state.message, attachment: files} });
+        this.setState({ message: { ...this.state.message, content: '', date: '',attachment:[] } });
     }
 
     uploadFileToSend(e){
-        // console.log(e.target.files[0]);
-        // const files =  e.target.files;
-        handleFilesSelect(this,e, 'resultMessage', 'false', ()=>{},'message');
-        // this.setState({ message: { ...this.state.message, attachment: files} });
+        console.log(e.target.files[0]);
+        handleFilesSelect(this,e, 'resultMessage', 'false', ()=>{console.log(this.state);},'message');
     }
 
     render() {

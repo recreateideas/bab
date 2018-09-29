@@ -17,28 +17,142 @@
 @import 'components/Tooltip.scss';
 @import 'components/Querybox.scss';
 @import 'components/Chat.scss';
-
-::-webkit-scrollbar {
-    background-color: transparent;
-    width: 5px;
-}
-
-::-webkit-scrollbar-thumb {
-    background:rgba(0,0,0,0.3) !important; // manage scrollbar thumb background color here
-    border-radius: 6px;
-    &:hover{
-        background:rgba(0,0,0,0.45) !important;
-        transition: 1s;
+// app css
+$message-bubble-width: 310px;
+$messages-width: 630px;
+$typebox-width: 207px;
+$userbox-left: 27px;
+$border-radius-messages: 5px;
+$send-button-width: 70px;
+$spacing: 8px;
+$message-box-width: calc( #{$messages-width} + 15px);;
+#chatContainer {
+    display: flex;
+    flex-direction: row;
+    #messagesAndUsers {
+        display: flex;
+        flex-direction: column;
+        #messageBox {
+            position: absolute;
+            width: $message-box-width;
+            height: calc(100% - (#{$send-button-width} - 5px + #{$spacing} * 7));
+            background-color: rgba(234, 245, 247, 0.89);
+            border-radius: $border-radius-messages;
+            border-top-right-radius: 0px;
+            border-bottom-right-radius: 0px;
+            border-bottom-left-radius: 0px;
+            overflow-y: scroll;
+            padding: 6px;
+            .messageContainer{
+                width: $message-bubble-width !important;
+                margin-top: 26px;
+                &.sent{
+                    text-align: right;
+                    position: relative;
+                    right: 0px;
+                    left: calc(100% - #{$message-bubble-width});
+                    .message_bubble{
+                        background-color: #396f8e;
+                        box-shadow: -4px 4px 15px rgba(0,0,0,.3);
+                    }
+                    .messageDate{
+                        color: rgba(85, 85, 119, .7);
+                    }
+                }
+                &.received{
+                    text-align: left;
+                    .message_bubble{
+                        background-color: #bdbdbd;
+                        box-shadow: 4px 4px 15px rgba(0,0,0,.3);
+                        .messageText{
+                            color: #444;
+                            font-style: normal;
+                        }
+                    }
+                    .messageDate{
+                        color: rgba(102, 102, 119, .7);
+                    }
+                }
+                .message_bubble{
+                    background-color: #667;
+                    border-radius: 3px;
+                    width: $message-bubble-width !important;
+                    padding: 4px;
+                    .messageText{
+                        font-size: 14px;
+                        line-height: 1.1em;
+                        padding-top: 5px;
+                    }
+                }
+                .messageDate{
+                    font-size: 11px;
+                    font-weight: bold;
+                    font-style: normal;
+                    top: 10px;
+                    position: relative;
+                }
+            }
+        }
     }
-  }
+    #usersBox {
+        position: absolute;
+        left: calc( #{$messages-width} + #{$userbox-left});
+        width: 307px;
+        height: calc(100% - 27px);
+        background-color: rgba(100, 100, 100, 0.2);
+        border-radius: $border-radius-messages;
+        ul {
+            padding-left: 0px;
+            position: relative;
+            top: 10px;
+            padding-right: 0px;
+            li {
+                cursor: pointer;
+                padding: 0px 7px;
+                &.firstUser {
+                    border-top: solid 1px #444;
+                }
+                &.oddUser {
+                    background-color: rgba(150, 150, 150, 0.2);
+                }
+                &.evenUser {
+                    background-color: rgba(206, 204, 204, 0.2);
+                }
+                .userContainer {
+                    display: flex;
+                    flex-direction: row;
+                    border-bottom: solid 1px #444;
+                    margin-top: 5px; // padding-top: 15px;
+                    height: 40px;
+                    .connectedCircle {
+                        width: 10px;
+                        height: 10px;
+                        border-radius: 10px;
+                        &.activeUser {
+                            background-color: green;
+                        }
+                        &.inactiveUser {
+                            background-color: darkgrey;
+                        }
+                    }
+                    .userTextWrap {
+                        margin-left: 5px;
+                        .nicknameText {
+                            color: lightgray;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
 
 #typeBox {
     position: absolute;
     bottom: 15px;
-    width: calc( #{$messages-width} + #{$userbox-left} - 26px);
-    height: calc(#{$send-button-width} + #{$spacing} * 2);
-    background-color: rgba(57, 111, 142, 0.445);
-    border-radius: $border-radius-messages;
+    width: $message-box-width;
+    height: calc(#{$send-button-width} + #{$spacing} * 3);
+    background-color: rgba(234, 245, 247, 0.89);
     .attachButton{
         position: absolute;
         cursor: pointer;
@@ -70,6 +184,7 @@
         border-radius: 3px;
         resize: none;
         background-color: rgba(255, 255, 255, .7);
+        border: solid 2px darkgray;
     }
     .attachIcon{
         position: relative;

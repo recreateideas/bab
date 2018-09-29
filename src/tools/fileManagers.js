@@ -1,5 +1,7 @@
 import OBJtoCSVConverter from './OBJtoCSVConverter';
 import * as r from 'jsrsasign';
+import 'regenerator-runtime';
+import 'babel-polyfill';
 // require('jsrsasign')[RSAKey];
 // var r = require('jsrsasign-util');
 
@@ -56,7 +58,7 @@ const downloadFile = args => {
 
     saveResultsToCSV = QueryResults => {
         let fileContent = OBJtoCSVConverter(QueryResults);
-        console.log(fileContent);
+        // console.log(fileContent);
         downloadFile({
             content: fileContent,
             extension: 'csv',
@@ -66,13 +68,13 @@ const downloadFile = args => {
 
     testFileExtension = fileName => {
         var matches = fileName && fileName.match(/\.([^.]+)$/);
-        if (/\.bab/.test(matches)) {
+        if (/\.bab|\.csv|\.js/.test(matches)) {
             return true;
         }
         return false;
     },
 
-    handleFilesSelect = (component, e, resultText, saveToState, callback, type) => {
+    handleFilesSelect = async (component, e, resultText, saveToState, callback, type) => {
         const files = e.target.files; // FileList object
         [...files].forEach(file => {
             const reader = new FileReader();
@@ -80,8 +82,8 @@ const downloadFile = args => {
                 if (testFileExtension(file.name)) {
                     let text = reader.result;
                     let newState = JSON.parse(text);
-                    console.log(newState);
-                    saveFileToState(component, resultText, file, type);
+                    // console.log(newState);
+                    await saveFileToState(component, resultText, file, text, type);
                     callback(newState);
                 }
                 else {
@@ -98,19 +100,20 @@ const downloadFile = args => {
         e.target.value = '';
     },
 
-    saveFileToState = (component, resultText, file, type) => {
+    saveFileToState = async (component, resultText, file, text, type) => {
         let output = [];
-        console.log(file);
+        console.log(text);
         output.push({
+            attachment: text,
             name: file.name,
             size: Math.round(file.size * 0.001),
             type: file.type === '' || /\.bab$/.test(file.name) ? 'baboon.query.file' : 'n/a', // or json
             lastModified: file.lastModifiedDate ? file.lastModifiedDate.toLocaleDateString() : file.lastModified ? file.lastModified : 'n/a'
         })
         if(type && type === 'message'){
-            component.setState({ message: { ...component.state.message, attachment: output} });
+            await component.setState({ message: { ...component.state.message, attachment: output} });
         } else {
-            component.setState({
+            await component.setState({
                 [resultText]: '',
                 error: '',
                 uploadedFiles: output

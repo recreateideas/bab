@@ -44,3 +44,17 @@ body {
     box-shadow: 0px 0px 2 0px #545454;
   }
 }
+
+::-webkit-scrollbar {
+  background-color: transparent;
+  width: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  background:rgba(0,0,0,0.3) !important; // manage scrollbar thumb background color here
+  border-radius: 6px;
+  &:hover{
+      background:rgba(0,0,0,0.45) !important;
+      transition: 1s;
+  }
+}
