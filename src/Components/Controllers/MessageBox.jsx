@@ -16,13 +16,27 @@ class MessageBox extends React.Component {
         this.scrollToBottom();
     }
 
+    renderAttachment(attachment, key, direction){
+    console.log(direction); //direction -> sent received
+        return (
+            <div key={key} id={`attachment_${key}`} className={`attachmentFiles`}>
+                <p className='attachmentText'><strong>{`${attachment.name}`}</strong></p>
+                <p className='attachmentText'>{`${attachment.type} - ${attachment.size}kb`}</p>
+            </div>
+        );
+    }
 
     renderMessage(message, key) {
         const messageTypeClass = `message_bubble ${message.direction}`;
+        console.log(message);
+        console.log(message.attachment);
         return (
             <div key={key} className={`messageContainer $${messageTypeClass}`}>
                 <div className={`message ${messageTypeClass}`}>
                     <p className='h7 messageText'>{`${message.content}`}</p>
+                    <div className='messageAttachments'>
+                        {message.attachment ? message.attachment.map((attachment, key) => this.renderAttachment(attachment, key,message.direction)) :''}
+                    </div>
                 </div>
                 <p className='messageDate'>{`${message.date}`}</p>
             </div>

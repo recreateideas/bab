@@ -102,9 +102,9 @@ const downloadFile = args => {
 
     saveFileToState = async (component, resultText, file, text, type) => {
         let output = [];
-        console.log(text);
+        // console.log(text);
         output.push({
-            attachment: text,
+            fileContent: text,
             name: file.name,
             size: Math.round(file.size * 0.001),
             type: file.type === '' || /\.bab$/.test(file.name) ? 'baboon.query.file' : 'n/a', // or json

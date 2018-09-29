@@ -18,6 +18,7 @@ const share = (share = initialState.share, action) => {
                         direction: action.direction,
                         content: singleMess.content,
                         date: singleMess.dateSent,
+                        attachment: singleMess.attachment,
                     }
                     messageHistory.push(newMessage);
                 });
@@ -27,6 +28,7 @@ const share = (share = initialState.share, action) => {
                     direction: action.direction,
                     content: action.message.content,
                     date: action.message.dateSent,
+                    attachment: action.message.attachment,
                 }
                 messageHistory.push(newMessage);
             }
