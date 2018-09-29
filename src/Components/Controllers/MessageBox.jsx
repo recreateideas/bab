@@ -31,7 +31,7 @@ class MessageBox extends React.Component {
         console.log(message);
         console.log(message.attachment);
         return (
-            <div key={key} className={`messageContainer $${messageTypeClass}`}>
+            <div key={key} className={`messageContainer ${messageTypeClass}`}>
                 <div className={`message ${messageTypeClass}`}>
                     <p className='h7 messageText'>{`${message.content}`}</p>
                     <div className='messageAttachments'>

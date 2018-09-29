@@ -25,7 +25,10 @@ $userbox-left: 27px;
 $border-radius-messages: 5px;
 $send-button-width: 70px;
 $spacing: 8px;
-$message-box-width: calc( #{$messages-width} + 15px);;
+$message-box-width: calc( #{$messages-width} + 15px);
+$message-bubble-side-spacing: 5px;
+$message-bubble-tringle-size: 6px;
+
 #chatContainer {
     display: flex;
     flex-direction: row;
@@ -54,12 +57,23 @@ $message-box-width: calc( #{$messages-width} + 15px);;
                     .message_bubble{
                         background-color: #396f8e;
                         box-shadow: -4px 4px 15px rgba(0,0,0,.3);
+                        right: $message-bubble-side-spacing;
                         .messageAttachments{
                             text-align: -webkit-right;
                             // text-align: right;
                             .attachmentFiles{
                                 text-align: right;
                             }
+                        }
+                        &::after{
+                            content: ' ';
+                            position: absolute;
+                            border-left: $message-bubble-tringle-size solid #396f8e;
+                            border-right: $message-bubble-tringle-size solid transparent;
+                            border-top: $message-bubble-tringle-size solid transparent;
+                            border-bottom: $message-bubble-tringle-size solid transparent;
+                            bottom: $message-bubble-tringle-size;
+                            right: calc(#{$message-bubble-tringle-size} * -2);
                         }
                     }
                     .messageDate{
@@ -71,6 +85,7 @@ $message-box-width: calc( #{$messages-width} + 15px);;
                     .message_bubble{
                         background-color: #bdbdbd;
                         box-shadow: 4px 4px 15px rgba(0,0,0,.3);
+                        left: $message-bubble-side-spacing;
                         .messageText{
                             color: #444;
                             font-style: normal;
@@ -82,6 +97,16 @@ $message-box-width: calc( #{$messages-width} + 15px);;
                                 text-align: left;
                             }
                         }
+                        &::after{
+                            content: ' ';
+                            position: absolute;
+                            border-right: $message-bubble-tringle-size solid #bdbdbd;
+                            border-left: $message-bubble-tringle-size solid transparent;
+                            border-top: $message-bubble-tringle-size solid transparent;
+                            border-bottom: $message-bubble-tringle-size solid transparent;
+                            bottom: $message-bubble-tringle-size;
+                            left: calc(#{$message-bubble-tringle-size} * -2);
+                        }
                     }
                     .messageDate{
                         color: rgba(102, 102, 119, .7);
@@ -92,6 +117,7 @@ $message-box-width: calc( #{$messages-width} + 15px);;
                     border-radius: 3px;
                     width: $message-bubble-width !important;
                     padding: 4px;
+                    position: relative;
                     .messageText{
                         font-size: 14px;
                         line-height: 1.1em;
@@ -100,9 +126,11 @@ $message-box-width: calc( #{$messages-width} + 15px);;
                     .attachmentFiles{
                         cursor: pointer;
                         width: fit-content;
-                        padding: 10px 5px 0px 5px;
-                        border: solid 1px white;
+                        padding: 15px 10px 5px 10px;
+                        border: solid 1px #ddd;
                         border-radius: 4px;
+                        border-width: 2px;
+                        border-style: dashed;
                         background-color: rgba(255,255,255,0.1);
                         &:hover{
                             box-shadow: 0px 0px 2px 2px rgba(255,255,255,0.5);
