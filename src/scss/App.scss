@@ -69,7 +69,7 @@ $message-txt-shadow-color: #555;
                 }
             }
             .messageBottomSpacer {
-                height: 95px;
+                height: 105px;
             }
             .messageContainer {
                 width: $message-bubble-width !important;
@@ -93,7 +93,7 @@ $message-txt-shadow-color: #555;
                         &::after {
                             content: ' ';
                             position: absolute;
-                            border-left: $message-bubble-tringle-size solid #396f8e;
+                            border-left: $message-bubble-tringle-size solid #436ac1;
                             border-right: $message-bubble-tringle-size solid transparent;
                             border-top: $message-bubble-tringle-size solid transparent;
                             border-bottom: $message-bubble-tringle-size solid transparent;
@@ -156,6 +156,8 @@ $message-txt-shadow-color: #555;
                         border-width: 2px !important;
                         border-style: dashed !important;
                         background-color: rgba(255, 255, 255, 0.4);
+                        word-break: break-word;
+                        line-height: .9em;
                         &:hover {
                             box-shadow: 0px 0px 2px 2px rgba(255, 255, 255, 0.5);
                             p {
@@ -253,6 +255,32 @@ $message-txt-shadow-color: #555;
             border: solid .5px #444;
         }
     }
+    .attachmentFile{
+        width: fit-content;
+        height: 30px;
+        z-index: 100;
+        left: 165px;
+        position: relative;
+        background-color: powderblue;
+        padding: 5px;
+        border-radius: 5px;
+        border: solid 1px rgb(140, 0, 255);
+        top: -33px;
+        .deleteAttachmentFileWrapper{
+            position: absolute;
+            left: -9px;
+            top: -14px;
+            .deleteAttachmentIcon{
+                color: rgb(255, 64, 64);
+                cursor: pointer;
+            }
+        }
+        p{
+            color: #0d5a9c;
+            top: 5px;
+            position: relative;
+        }
+    }
 }
 
 #typeBox {
@@ -277,8 +305,12 @@ $message-txt-shadow-color: #555;
         padding-left: 10px;
         span {
             text-shadow: rgba(0, 0, 0, .6) 0px 1px 0px !important;
-            color: rgba(0, 0, 0, 0);
+            color: rgb(142, 126, 255);
+            &:hover{
+                color: rgb(92, 71, 255);
+            }
         }
+
     }
     .sendButton {
         width: 45px !important;
@@ -300,6 +332,9 @@ $message-txt-shadow-color: #555;
         span {
             text-shadow: rgba(0, 0, 0, .6) 0px 1px 0px !important; // color:rgba(0, 0, 0, 0);
             color: #36b536;
+            &:hover{
+                color: #24794a;
+            }
         }
     }
     #typeBoxInput {

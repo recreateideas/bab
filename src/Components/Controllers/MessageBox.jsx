@@ -20,7 +20,7 @@ class MessageBox extends React.Component {
     }
 
     downloadAttachment(attachment) {
-        console.log(attachment);
+        // console.log(attachment);
         downloadFile({
             content: attachment.fileContent,
             filename: attachment.name
@@ -60,7 +60,7 @@ class MessageBox extends React.Component {
     }
 
     render() {
-        console.log(this.props.storeUserTo);
+        // console.log(this.props.storeUserTo);
         const activeUser = this.isUserActive(this.props.storeUserTo.customId) ? 'activeUser' : 'inactiveUser';
         return (
             <div className='messageBoxWrapper'>
@@ -83,6 +83,7 @@ class MessageBox extends React.Component {
 MessageBox.propTypes = {
     storeActiveUsers: PropTypes.array,
     storeUserTo: PropTypes.object,
+    storeChats: PropTypes.object,
 };
 
 export default connect(mapStateToProps)(MessageBox);

@@ -71,7 +71,15 @@ class TypeBox extends React.Component {
         handleFilesSelect(this,e, 'resultMessage', true, (state)=>{console.log(state);},'message', acceptableFileFormats);
     }
 
+    deleteAttachmentFile(){
+        console.log('delete');
+    }
+
     render() {
+        const attachmentName = this.state.message.attachment && this.state.message.attachment[0] ? this.state.message.attachment[0].name : '';
+        const attachmentType = this.state.message.attachment && this.state.message.attachment[0] ? this.state.message.attachment[0].type : '';
+        const attachmentSize = this.state.message.attachment && this.state.message.attachment[0] ? this.state.message.attachment[0].size : '';
+        const displayAttachment = this.state.message.attachment && this.state.message.attachment.length > 0 ? 'show' : 'hidden'; 
         return (
             <div id="typeBox" className="typeBox">
 
@@ -97,6 +105,13 @@ class TypeBox extends React.Component {
                     buttonId='sendMessage'
                     value={<FontAwesome name='paper-plane' /*size='2x'*/ /*spin*/ className={`sendIcon`} />}
                 />
+                <div id='attachmentFile' className={`${displayAttachment} attachmentFile`}>
+                    <div className={`deleteAttachmentFileWrapper ${displayAttachment}`} onClick={this.deleteAttachmentFile.bind(this)}>
+                        <FontAwesome className='deleteAttachmentIcon' name='times-circle' />
+                    </div>
+                    <p className={`h7 attachmentName`}>{attachmentName}</p>
+                    {/* <p className={`h7 attachmentDetails`}>{`${attachmentType} - ${attachmentSize}kb`}</p> */}
+                </div>
             </div>
         )
     }
