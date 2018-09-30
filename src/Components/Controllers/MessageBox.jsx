@@ -52,10 +52,10 @@ class MessageBox extends React.Component {
         )
     }
 
-    isUserActive(id){
+    isUserActive(id) {
         const activeUsers = this.props.storeActiveUsers;
         let found = null;
-        activeUsers.filter(user => user.customId === id).forEach(user => {found = true});
+        activeUsers.filter(user => user.customId === id).forEach(user => { found = true });
         return found;
     }
 
@@ -64,11 +64,11 @@ class MessageBox extends React.Component {
         const activeUser = this.isUserActive(this.props.storeUserTo.customId) ? 'activeUser' : 'inactiveUser';
         return (
             <div className='messageBoxWrapper'>
+                      <div className='userTo'>
+                        <div className={`connectedCircle big ${activeUser}`}></div>
+                        <p className={`h7 userToTitle`}>{this.props.storeUserTo ? this.props.storeUserTo.nickname : 'unknown'}</p>
+                    </div>
                 <div id="messageBox" className={`${this.props.addClass} messageBox`}>
-                <div className='userTo'>
-                    <div className={`connectedCircle big ${activeUser}`}></div>
-                    <p className={`h7 userToTitle`}>{this.props.storeUserTo ? this.props.storeUserTo.nickname : 'unknown'}</p>
-                </div>
                     {this.props.messages.map((message, key) => this.renderMessage(message, key))}
                     <div style={{ float: "left", clear: "both" }} className={`messageBottomSpacer`}
                         ref={(el) => { this.messagesEnd = el; }}>

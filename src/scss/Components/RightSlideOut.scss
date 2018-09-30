@@ -65,7 +65,7 @@ $transition-rules: right 0.2s ease-in-out;
 }
 
 #rightSlideOut:hover {
-    right: 0px;
+    right: 0px !important;
     #rightSlideOut_toggle {
         background: #8354EC;
     }

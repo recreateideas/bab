@@ -37,37 +37,38 @@ $message-txt-shadow-color: #555;
     #messagesAndUsers {
         display: flex;
         flex-direction: column;
+        .userTo{
+            background-color: #E7F1F5;
+            width: $message-box-width;
+            border-radius: $border-radius-messages;
+            border-top-right-radius: 0px;
+            border-bottom-right-radius: 0px;
+            border-bottom-left-radius: 0px;
+            position: absolute;
+            // top: 101px;
+            height: 50px;
+            // left: 34px;
+            box-shadow: 0 11px 6px -6px #E7F1F5;
+            z-index: 100;
+            padding-top: 20px;
+            padding-left: 10px;
+            display: flex;
+            .userToTitle{
+                padding-left: 10px;
+                color: #665;
+                font-size: 22px;
+            }
+        }
         #messageBox {
             position: absolute;
             width: $message-box-width; // height: calc(100% - (#{$send-button-width} - 5px + #{$spacing} * 7));
             height: calc( 100% - 77px);
-            background-color: rgba(239, 252, 255, 0.95); // background-color: rgba(255, 255, 255, 0.95);
+            background-color: #E7F1F5; // background-color: rgba(255, 255, 255, 0.95);
             overflow-y: scroll;
             overflow-x: hidden;
             padding: 6px;
+            padding-top: 30px;
             top: 62px;
-            .userTo{
-                background-color: inherit;
-                width: inherit;
-                border-radius: $border-radius-messages;
-                border-top-right-radius: 0px;
-                border-bottom-right-radius: 0px;
-                border-bottom-left-radius: 0px;
-                position: fixed;
-                top: 101px;
-                height: 50px;
-                left: 34px;
-                box-shadow: 0 11px 6px -6px #E7F1F5;
-                z-index: 100;
-                padding-top: 20px;
-                padding-left: 10px;
-                display: flex;
-                .userToTitle{
-                    padding-left: 10px;
-                    color: #665;
-                    font-size: 22px;
-                }
-            }
             .messageBottomSpacer {
                 height: 105px;
             }
