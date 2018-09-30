@@ -78,7 +78,7 @@ class TypeBox extends React.Component {
                 <FileLoader
                     buttonIcon={'plus'}
                     iconClass='attachIcon'
-                    addClass={'button2 attachButton'}
+                    addClass={'attachButton'}
                     inputID={'attachButton'}
                     change={this.uploadFileToSend.bind(this)}
                     fileAccepted='.bab, .json, .csv, .js'
@@ -95,7 +95,7 @@ class TypeBox extends React.Component {
                     click={this.sendMessage.bind(this)}
                     addClass='sendButton'
                     buttonId='sendMessage'
-                    value={<FontAwesome name='paper-plane' size='2x' /*spin*/ className={`sendIcon`} />}
+                    value={<FontAwesome name='paper-plane' /*size='2x'*/ /*spin*/ className={`sendIcon`} />}
                 />
             </div>
         )

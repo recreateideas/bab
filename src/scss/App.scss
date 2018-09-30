@@ -23,6 +23,7 @@ $messages-width: 630px;
 $typebox-width: 207px;
 $userbox-left: 27px;
 $border-radius-messages: 5px;
+$message-bubble-shadow: rgba(0, 0, 0, .4);
 $send-button-width: 70px;
 $spacing: 8px;
 $message-box-width: calc( #{$messages-width} + 15px);
@@ -41,7 +42,7 @@ $message-txt-shadow-color: #555;
             width: $message-box-width; // height: calc(100% - (#{$send-button-width} - 5px + #{$spacing} * 7));
             height: calc( 100% - 27px);
             // background-color: rgba(234, 245, 247, 0.89);
-            background-color: rgba(255, 255, 255, 0.85);
+            background-color: rgba(255, 255, 255, 0.95);
             border-radius: $border-radius-messages;
             border-top-right-radius: 0px;
             border-bottom-right-radius: 0px;
@@ -62,7 +63,7 @@ $message-txt-shadow-color: #555;
                     left: calc(100% - #{$message-bubble-width});
                     .message_bubble {
                         background-color: #396f8e;
-                        box-shadow: -4px 4px 15px rgba(0, 0, 0, .3);
+                        box-shadow: -4px 4px 15px $message-bubble-shadow;
                         right: $message-bubble-side-spacing;
                         .messageAttachments {
                             text-align: -webkit-right; // text-align: right;
@@ -90,7 +91,7 @@ $message-txt-shadow-color: #555;
                     text-align: left;
                     .message_bubble {
                         background-color: #bdbdbd;
-                        box-shadow: 4px 4px 15px rgba(0, 0, 0, .3);
+                        box-shadow: 4px 4px 15px $message-bubble-shadow;
                         left: $message-bubble-side-spacing;
                         .messageText {
                             color: #444;
@@ -233,32 +234,60 @@ $message-txt-shadow-color: #555;
         top: $spacing;
         left: $spacing;
         height: $send-button-width !important;
-        width: calc(#{$send-button-width} / 2) !important;
+        min-width: $send-button-width !important;
         min-width: calc(#{$send-button-width} / 2) !important;
+        border-left: solid 2px darkgray;
+        border-top: solid 2px darkgray;
+        border-bottom: solid 2px darkgray;
+        border-top-left-radius: 5px;
+        border-bottom-left-radius: 5px;
+        background-color: rgba(255, 255, 255, 0.86);
+        padding-left: 10px;
+        span{
+            text-shadow: rgba(0, 0, 0, .6) 0px 1px 0px !important;
+            color:rgba(0, 0, 0, 0);
+        }
     }
     .sendButton {
-        width: $send-button-width !important;
-        max-width: $send-button-width !important;
-        min-width: $send-button-width !important;
+        width: 45px !important;
+        max-width: 45px !important;
+        min-width: 45px !important;
         height: $send-button-width;
-        left: calc( 100% - #{$send-button-width} - #{$spacing});
+        left: calc( 100% - 65px);
         top: $spacing;
         position: absolute;
+        background-color: rgba(255, 255, 255, 0.86);
+        border-bottom: solid 2px darkgray;
+        border-top: solid 2px darkgray;
+        border-right: solid 2px darkgray;
+        border-left:0px;
+        border-top-left-radius: 0px;
+        border-bottom-left-radius: 0px;
+        border-top-right-radius: 5px;
+        border-bottom-right-radius: 5px;
+        span{
+            text-shadow: rgba(0, 0, 0, .6) 0px 1px 0px !important;
+            color:rgba(0, 0, 0, 0);
+        }
     }
     #typeBoxInput {
         position: absolute;
         top: 0px;
-        left: calc((#{$send-button-width} / 2) + #{$spacing});
+        left: calc((#{$send-button-width} / 2));
         margin: 8px !important;
-        width: calc( 536px - (#{$send-button-width} / 2) - #{$spacing}) !important;
+        // width: calc( 536px - (#{$send-button-width} / 2) + #{$spacing}) !important;
+        width: calc(100% - 108px);
         height: 70px !important;
         color: #420b75;
         padding: 5px;
         border: transparent;
-        border-radius: 3px;
         resize: none;
         background-color: rgba(255, 255, 255, 0.86);
         border: solid 2px darkgray;
+        border-right: 0px !important;
+        border-left: 0px !important;
+        // border-top-right-radius: 3px;
+        // border-bottom-right-radius: 3px;
     }
     .attachIcon {
         position: relative;
