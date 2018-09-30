@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { downloadFile } from '../../tools/fileManagers';
 // const FontAwesome = require('react-fontawesome');
 class MessageBox extends React.Component {
 
@@ -16,10 +17,18 @@ class MessageBox extends React.Component {
         this.scrollToBottom();
     }
 
+    downloadAttachment(attachment){
+        console.log(attachment);
+        downloadFile({
+            content: attachment.fileContent,
+            filename: attachment.name
+        });
+    }
+
     renderAttachment(attachment, key, direction){
     // console.log(direction); //direction -> sent received
         return (
-            <div key={key} id={`attachment_${key}`} className={`attachmentFiles`}>
+            <div key={key} id={`attachment_${key}`} className={`attachmentFiles`} onClick={()=>{this.downloadAttachment(attachment)}}>
                 <p className='attachmentText'><strong>{`${attachment.name}`}</strong></p>
                 <p className='attachmentText'>{`${attachment.type} - ${attachment.size}kb`}</p>
             </div>

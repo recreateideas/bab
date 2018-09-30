@@ -14,27 +14,6 @@ class ToolsTab extends React.Component {
         }
     }
 
-
-    componentWillMount() {
-        this.fileAPICheck();
-    }
-    
-    fileAPICheck() {
-        if (window.File && window.FileReader && window.FileList && window.Blob) {
-            console.log('File APIs fully supported in this browser!');
-            this.setState({
-                message: '',
-                error: '',
-            });
-        } else {
-            console.log('Attention: The File APIs are not fully supported in this browser.');
-            this.setState({
-                error: 'The File APIs are not fully supported in this browser.Something went wrong',
-                message: ''
-            });
-        }
-    }
-
     handleFilesSelect(e){
         const acceptableFileFormats =['.bab'];
         handleFilesSelect(this,e, 'message',true, this.props.applyLoadedStateQueryToStore,'queryLoad',acceptableFileFormats);
@@ -50,19 +29,14 @@ class ToolsTab extends React.Component {
                 filename: `baboon_query${+new Date()}.bab`
             });
         }
-        // console.log(fileContent);
     }
 
      prepareStateForExport(object) {
         let fullState = Object.assign({},object);
         if (fullState) {
-            // delete fullState.config;
-            delete fullState.greeting;
-            delete fullState.isDBConnected;
-            delete fullState.DBcollections;
-            delete fullState.connectionMessage;
-            delete fullState.db;
-            delete fullState.mongo_results;
+            delete fullState.config;
+            delete fullState.connection;
+            delete fullState.share;
             delete fullState.user;
             return JSON.stringify(fullState);
         }

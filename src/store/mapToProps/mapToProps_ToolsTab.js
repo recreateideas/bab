@@ -12,8 +12,10 @@ const mapDispatchToProps = (dispatch) => {
     // console.log('@@ TOOL -> applyLoadedStateQueryToStore');
     return {
         applyLoadedStateQueryToStore: (result) => {
-            let loadedContent = JSON.parse(result);
-            // console.log(loadedContent);
+            console.log(result);
+            console.log(JSON.parse(result));
+            const loadedContent = JSON.parse(result);
+            console.log(loadedContent);
             const apply_config = {
                 type: constants.SET_CONFIG_OBJECT,
                 config: loadedContent.config

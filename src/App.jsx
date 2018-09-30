@@ -8,6 +8,7 @@ import ShareTab from './Components/Sidebar/Tabs/ShareTab';
 import SettingsTab from './Components/Sidebar/Tabs/SettingsTab';
 import ReactTooltip from 'react-tooltip';
 import PropTypes from 'prop-types';
+import { fileAPICheck} from './tools/fileManagers';
 
 import { connectToSocket, storeClientInfo } from './tools/DBClientUtils/socketIOClientUtils';
 
@@ -18,6 +19,7 @@ class App extends React.Component {
 
     componentWillMount() {
         printConsoleLogo();
+        fileAPICheck(this);
         const user = JSON.parse(localStorage.getItem('user'));
         if (user) {
             console.log('welcome back chimp!');

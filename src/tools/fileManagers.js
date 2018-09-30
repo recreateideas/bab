@@ -5,21 +5,35 @@ import 'babel-polyfill';
 // require('jsrsasign')[RSAKey];
 // var r = require('jsrsasign-util');
 
+    
+const fileAPICheck = (component)=> {
+    if (window.File && window.FileReader && window.FileList && window.Blob) {
+        console.log('File APIs fully supported in this browser!');
+        component.setState({
+            message: '',
+            error: '',
+        });
+    } else {
+        console.log('Attention: The File APIs are not fully supported in this browser.');
+        component.setState({
+            error: 'The File APIs are not fully supported in this browser.Something went wrong',
+            message: ''
+        });
+    }
+}
+
 const downloadFile = args => {
     var data, filename, link;
     var content = args.content;
     if (content == null) return;
-    // var file = new Blob([csv],{
-    //     type: csv
-    // });
-    // if (window.navigator.msSaveOrOpenBlob) // IE10+
-    //     window.navigator.msSaveOrOpenBlob(file, fileName);
-    filename = args.filename || `baboon_exports${+new Date()}.${args.extension}`;
+    let extension = args.extension || args.filename.replace(/(\.)([^.]+)$/,"$2");
 
-    if (/csv/i.test(args.extension)) {
+    filename = args.filename || `baboon_exports${+new Date()}.${extension}`;
+
+    if (/csv/i.test(extension)) {
         content = 'data:text/csv;charset=utf-8,' + content;
     }
-    else if (/txt/i.test(args.extension)) {
+    else if (/txt/i.test(extension)) {
         content = 'data:text;charset=utf-8,' + content;
     }
     else {
@@ -88,7 +102,7 @@ const downloadFile = args => {
                 if (testFileExtension(file.name,acceptableFileFormats)) {
                     let text = reader.result;
                     // let newState = JSON.parse(text);
-                    // console.log(newState);
+                    // console.log(text);
                     await saveFileToState(component, resultText, file, text, type);
                     callback(text);
                 }
@@ -127,4 +141,4 @@ const downloadFile = args => {
         }
     };
 
-export { downloadFile, saveResultsToCSV, testFileExtension, validateFile, validateContent, handleFilesSelect, saveFileToState };
+export { fileAPICheck,downloadFile, saveResultsToCSV, testFileExtension, validateFile, validateContent, handleFilesSelect, saveFileToState };
