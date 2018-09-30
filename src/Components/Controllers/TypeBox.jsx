@@ -72,7 +72,7 @@ class TypeBox extends React.Component {
     }
 
     deleteAttachmentFile(){
-        console.log('delete');
+        this.setState({ message: { ...this.state.message, attachment:[] } });
     }
 
     render() {
