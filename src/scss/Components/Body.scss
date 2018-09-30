@@ -45,10 +45,10 @@ body {
   }
 }
 
-::-webkit-scrollbar {
-  background-color: transparent;
-  width: 5px;
-}
+// ::-webkit-scrollbar {
+//   background-color: transparent;
+//   width: 5px;
+// }
 
 ::-webkit-scrollbar-thumb {
   background:rgba(0,0,0,0.3) !important; // manage scrollbar thumb background color here
