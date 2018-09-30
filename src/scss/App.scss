@@ -29,7 +29,7 @@ $spacing: 8px;
 $message-box-width: calc( #{$messages-width} + 15px);
 $message-bubble-side-spacing: 5px;
 $message-bubble-tringle-size: 6px;
-$message-txt-shadow: .2px;
+$message-txt-shadow: .3px;
 $message-txt-shadow-color: #555;
 #chatContainer {
     display: flex;
@@ -40,16 +40,34 @@ $message-txt-shadow-color: #555;
         #messageBox {
             position: absolute;
             width: $message-box-width; // height: calc(100% - (#{$send-button-width} - 5px + #{$spacing} * 7));
-            height: calc( 100% - 27px);
-            // background-color: rgba(234, 245, 247, 0.89);
-            background-color: rgba(255, 255, 255, 0.95);
-            border-radius: $border-radius-messages;
-            border-top-right-radius: 0px;
-            border-bottom-right-radius: 0px;
-            border-bottom-left-radius: 0px;
+            height: calc( 100% - 77px);
+            background-color: rgba(239, 252, 255, 0.95); // background-color: rgba(255, 255, 255, 0.95);
             overflow-y: scroll;
             overflow-x: hidden;
             padding: 6px;
+            top: 62px;
+            .userTo{
+                background-color: inherit;
+                width: inherit;
+                border-radius: $border-radius-messages;
+                border-top-right-radius: 0px;
+                border-bottom-right-radius: 0px;
+                border-bottom-left-radius: 0px;
+                position: fixed;
+                top: 101px;
+                height: 50px;
+                left: 34px;
+                box-shadow: 0 11px 6px -6px #E7F1F5;
+                z-index: 100;
+                padding-top: 20px;
+                padding-left: 10px;
+                display: flex;
+                .userToTitle{
+                    padding-left: 10px;
+                    color: #665;
+                    font-size: 22px;
+                }
+            }
             .messageBottomSpacer {
                 height: 95px;
             }
@@ -62,7 +80,7 @@ $message-txt-shadow-color: #555;
                     right: 0px;
                     left: calc(100% - #{$message-bubble-width});
                     .message_bubble {
-                        background-color: #396f8e;
+                        background-color: #436ac1;
                         box-shadow: -4px 4px 15px $message-bubble-shadow;
                         right: $message-bubble-side-spacing;
                         .messageAttachments {
@@ -141,13 +159,13 @@ $message-txt-shadow-color: #555;
                         &:hover {
                             box-shadow: 0px 0px 2px 2px rgba(255, 255, 255, 0.5);
                             p {
-                                color: orange;
+                                color: #0056e0;
                             }
                         }
                         p {
-                            color: #ff7b00;
+                            color: #045a00;
                             strong {
-                                text-shadow : -#{$message-txt-shadow} -#{$message-txt-shadow} 0 $message-txt-shadow-color,
+                                text-shadow: -#{$message-txt-shadow} -#{$message-txt-shadow} 0 $message-txt-shadow-color,
                                 #{$message-txt-shadow} -#{$message-txt-shadow} 0 $message-txt-shadow-color,
                                 -#{$message-txt-shadow} #{$message-txt-shadow} 0 $message-txt-shadow-color,
                                 #{$message-txt-shadow} #{$message-txt-shadow} 0 $message-txt-shadow-color
@@ -170,8 +188,7 @@ $message-txt-shadow-color: #555;
         left: calc( #{$messages-width} + #{$userbox-left});
         width: 307px;
         height: calc(100% - 27px);
-        // background-color: rgba(100, 100, 100, 0.2);
-        background-color: rgba(255,255, 255, 0.85);
+        background-color: rgba(77, 79, 150, 0.85); // background-color: rgba(255,255, 255, 0.85);
         border-top-right-radius: $border-radius-messages;
         border-bottom-right-radius: $border-radius-messages;
         ul {
@@ -181,12 +198,12 @@ $message-txt-shadow-color: #555;
             padding-right: 0px;
             li {
                 cursor: pointer;
-                padding: 0px 7px;
+                // padding: 0px 7px;
                 &.firstUser {
                     border-top: solid 1px #444;
                 }
                 &.oddUser {
-                    background-color: rgba(150, 150, 150, 0.2);
+                    background-color: rgba(150, 150, 150, 0.25);
                 }
                 &.evenUser {
                     background-color: rgba(206, 204, 204, 0.2);
@@ -197,28 +214,43 @@ $message-txt-shadow-color: #555;
                     border-bottom: solid 1px #444;
                     margin-top: 5px; // padding-top: 15px;
                     height: 40px;
-                    .connectedCircle {
-                        width: 10px;
-                        height: 10px;
-                        border-radius: 10px;
-                        &.activeUser {
-                            background-color: #13c300;
-                        }
-                        &.inactiveUser {
-                            background-color: darkgrey;
-                        }
-                    }
+                    padding: 0px 7px;
                     .userTextWrap {
                         margin-left: 5px;
+                        .nicknameText {
+                            // color: #334;
+                            color: white;
+                        }
+                    }
+                }
+                &:hover {
+                    background-color: rgba(255, 255, 255,.5) !important;
+                    .userTextWrap {
                         .nicknameText {
                             color: #334;
                         }
                     }
                 }
-                &:hover{
-                    background-color: rgb(255, 255, 255) !important;
-                }
             }
+        }
+    }
+    .connectedCircle {
+        width: 10px;
+        height: 10px;
+        border-radius: 10px;
+        &.big{
+            width: 15px;
+            height: 15px;
+            position: relative;
+            bottom: 2px;
+        }
+        &.activeUser {
+            background-color: #13c300;
+            border: solid .5px #031b00;
+        }
+        &.inactiveUser {
+            background-color: darkgrey;
+            border: solid .5px #444;
         }
     }
 }
@@ -239,13 +271,13 @@ $message-txt-shadow-color: #555;
         border-left: solid 2px darkgray;
         border-top: solid 2px darkgray;
         border-bottom: solid 2px darkgray;
-        border-top-left-radius: 5px;
-        border-bottom-left-radius: 5px;
+        border-top-left-radius: 15px;
+        border-bottom-left-radius: 15px;
         background-color: rgba(255, 255, 255, 0.86);
         padding-left: 10px;
-        span{
+        span {
             text-shadow: rgba(0, 0, 0, .6) 0px 1px 0px !important;
-            color:rgba(0, 0, 0, 0);
+            color: rgba(0, 0, 0, 0);
         }
     }
     .sendButton {
@@ -253,30 +285,29 @@ $message-txt-shadow-color: #555;
         max-width: 45px !important;
         min-width: 45px !important;
         height: $send-button-width;
-        left: calc( 100% - 65px);
+        left: calc( 100% - 55px);
         top: $spacing;
         position: absolute;
         background-color: rgba(255, 255, 255, 0.86);
         border-bottom: solid 2px darkgray;
         border-top: solid 2px darkgray;
         border-right: solid 2px darkgray;
-        border-left:0px;
+        border-left: 0px;
         border-top-left-radius: 0px;
         border-bottom-left-radius: 0px;
-        border-top-right-radius: 5px;
-        border-bottom-right-radius: 5px;
-        span{
-            text-shadow: rgba(0, 0, 0, .6) 0px 1px 0px !important;
-            color:rgba(0, 0, 0, 0);
+        border-top-right-radius: 15px;
+        border-bottom-right-radius: 15px;
+        span {
+            text-shadow: rgba(0, 0, 0, .6) 0px 1px 0px !important; // color:rgba(0, 0, 0, 0);
+            color: #36b536;
         }
     }
     #typeBoxInput {
         position: absolute;
         top: 0px;
         left: calc((#{$send-button-width} / 2));
-        margin: 8px !important;
-        // width: calc( 536px - (#{$send-button-width} / 2) + #{$spacing}) !important;
-        width: calc(100% - 108px);
+        margin: 8px !important; // width: calc( 536px - (#{$send-button-width} / 2) + #{$spacing}) !important;
+        width: calc(100% - 98px);
         height: 70px !important;
         color: #420b75;
         padding: 5px;
@@ -285,8 +316,7 @@ $message-txt-shadow-color: #555;
         background-color: rgba(255, 255, 255, 0.86);
         border: solid 2px darkgray;
         border-right: 0px !important;
-        border-left: 0px !important;
-        // border-top-right-radius: 3px;
+        border-left: 0px !important; // border-top-right-radius: 3px;
         // border-bottom-right-radius: 3px;
     }
     .attachIcon {

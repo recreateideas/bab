@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { downloadFile } from '../../tools/fileManagers';
+import { mapStateToProps } from '../../store/mapToProps/mapToProps_MessageBox';
 // const FontAwesome = require('react-fontawesome');
 class MessageBox extends React.Component {
 
@@ -17,7 +19,7 @@ class MessageBox extends React.Component {
         this.scrollToBottom();
     }
 
-    downloadAttachment(attachment){
+    downloadAttachment(attachment) {
         console.log(attachment);
         downloadFile({
             content: attachment.fileContent,
@@ -25,11 +27,11 @@ class MessageBox extends React.Component {
         });
     }
 
-    renderAttachment(attachment, key, direction){
-    // console.log(direction); //direction -> sent received
+    renderAttachment(attachment, key, direction) {
+        // console.log(direction); //direction -> sent received
         return (
-            <div key={key} id={`attachment_${key}`} className={`attachmentFiles`} onClick={()=>{this.downloadAttachment(attachment)}}>
-                <p className='attachmentText'><strong>{`${attachment.name}`}</strong></p>
+            <div key={key} id={`attachment_${key}`} className={`attachmentFiles`} onClick={() => { this.downloadAttachment(attachment) }}>
+                <p className='attachmentText'>{`${attachment.name}`}</p>
                 <p className='attachmentText'>{`${attachment.type} - ${attachment.size}kb`}</p>
             </div>
         );
@@ -37,14 +39,12 @@ class MessageBox extends React.Component {
 
     renderMessage(message, key) {
         const messageTypeClass = `message_bubble ${message.direction}`;
-        // console.log(message);
-        // console.log(message.attachment);
         return (
             <div key={key} className={`messageContainer ${messageTypeClass}`}>
                 <div className={`message ${messageTypeClass}`}>
                     <p className='h7 messageText'>{`${message.content}`}</p>
                     <div className='messageAttachments'>
-                        {message.attachment ? message.attachment.map((attachment, key) => this.renderAttachment(attachment, key,message.direction)) :''}
+                        {message.attachment ? message.attachment.map((attachment, key) => this.renderAttachment(attachment, key, message.direction)) : ''}
                     </div>
                 </div>
                 <p className='messageDate'>{`${message.date}`}</p>
@@ -52,12 +52,27 @@ class MessageBox extends React.Component {
         )
     }
 
+    isUserActive(id){
+        const activeUsers = this.props.storeActiveUsers;
+        let found = null;
+        activeUsers.filter(user => user.customId === id).forEach(user => {found = true});
+        return found;
+    }
+
     render() {
+        console.log(this.props.storeUserTo);
+        const activeUser = this.isUserActive(this.props.storeUserTo.customId) ? 'activeUser' : 'inactiveUser';
         return (
-            <div id="messageBox" className={`${this.props.addClass} messageBox`}>
-                {this.props.messages.map((message, key) => this.renderMessage(message, key))}
-                <div style={{ float: "left", clear: "both" }} className={`messageBottomSpacer`}
-                    ref={(el) => { this.messagesEnd = el; }}>
+            <div className='messageBoxWrapper'>
+                <div id="messageBox" className={`${this.props.addClass} messageBox`}>
+                <div className='userTo'>
+                    <div className={`connectedCircle big ${activeUser}`}></div>
+                    <p className={`h7 userToTitle`}>{this.props.storeUserTo ? this.props.storeUserTo.nickname : 'unknown'}</p>
+                </div>
+                    {this.props.messages.map((message, key) => this.renderMessage(message, key))}
+                    <div style={{ float: "left", clear: "both" }} className={`messageBottomSpacer`}
+                        ref={(el) => { this.messagesEnd = el; }}>
+                    </div>
                 </div>
             </div>
         )
@@ -66,7 +81,8 @@ class MessageBox extends React.Component {
 };
 
 MessageBox.propTypes = {
-    storeChats: PropTypes.object,
+    storeActiveUsers: PropTypes.array,
+    storeUserTo: PropTypes.object,
 };
 
-export default MessageBox;
+export default connect(mapStateToProps)(MessageBox);

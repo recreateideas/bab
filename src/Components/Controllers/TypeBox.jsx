@@ -57,7 +57,7 @@ class TypeBox extends React.Component {
     sendMessage() {
         const content = this.state.message.content;
         const attachment = this.state.attachment;
-        if (content !== '' || attachment.length > 0) {
+        if (content !== '' || (attachment && attachment.length > 0)) {
             emitMessage(this.props.storeUser.ID,this.props.storeUser.nickName,this.state.message);
         }
         this.setState({ message: { ...this.state.message, content: '', date: '', attachment:[] } });

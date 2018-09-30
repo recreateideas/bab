@@ -37,8 +37,10 @@ const connectToSocket = (component, customId, nickname) => {
         // console.log(component);
     });
 
+    socket.on('disconnect', ()=>{console.log('Emit Event: disconnected')})
+
     socket.on('error', function () {
-        socket.connect();
+        socket = connect();
     });
 };
 

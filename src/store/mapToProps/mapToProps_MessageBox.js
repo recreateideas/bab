@@ -1,7 +1,9 @@
 
 const mapStateToProps = (state) => {
+    // console.log(state.share);
     return {
-        storeChats: state.share.chats,
+        storeActiveUsers: state.share.activeUsers,
+        storeUserTo: state.share.userTo,
     }
 }
 
