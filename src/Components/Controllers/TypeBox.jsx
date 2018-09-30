@@ -105,7 +105,7 @@ class TypeBox extends React.Component {
                     click={this.sendMessage.bind(this)}
                     addClass='sendButton'
                     buttonId='sendMessage'
-                    value={<FontAwesome name='paper-plane' /*size='2x'*/ /*spin*/ className={`sendIcon`} />}
+                    value={<FontAwesome name='dove' /*size='2x'*/ /*spin*/ className={`sendIcon`} />}
                 />
                 <div id='attachmentFile' className={`${displayAttachment} attachmentFile`}>
                     <div className={`deleteAttachmentFileWrapper ${displayAttachment}`} onClick={this.deleteAttachmentFile.bind(this)}>
