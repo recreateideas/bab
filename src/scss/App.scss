@@ -31,6 +31,7 @@ $message-bubble-side-spacing: 5px;
 $message-bubble-tringle-size: 6px;
 $message-txt-shadow: .3px;
 $message-txt-shadow-color: #555;
+
 #chatContainer {
     display: flex;
     flex-direction: row;
@@ -38,7 +39,8 @@ $message-txt-shadow-color: #555;
         display: flex;
         flex-direction: column;
         .userTo{
-            background-color: #E7F1F5;
+            // background-color: #E7F1F5;
+            background-color: #484D84;
             width: $message-box-width;
             border-radius: $border-radius-messages;
             border-top-right-radius: 0px;
@@ -46,29 +48,30 @@ $message-txt-shadow-color: #555;
             border-bottom-left-radius: 0px;
             position: absolute;
             // top: 101px;
-            height: 50px;
+            height: 55px;
             // left: 34px;
-            box-shadow: 0 11px 6px -6px #E7F1F5;
+            box-shadow: 0 5px 7px -6px #E7F1F5;
             z-index: 100;
             padding-top: 20px;
             padding-left: 10px;
             display: flex;
             .userToTitle{
                 padding-left: 10px;
-                color: #665;
+                color: white;
                 font-size: 22px;
             }
         }
         #messageBox {
             position: absolute;
             width: $message-box-width; // height: calc(100% - (#{$send-button-width} - 5px + #{$spacing} * 7));
-            height: calc( 100% - 77px);
+            height: calc( 100% - 82px);
             background-color: #E7F1F5; // background-color: rgba(255, 255, 255, 0.95);
             overflow-y: scroll;
             overflow-x: hidden;
             padding: 6px;
             padding-top: 30px;
-            top: 62px;
+            top: 67px;
+            // box-shadow: inset 10px 0px 10px -7px #E7F1F5;
             .messageBottomSpacer {
                 height: 105px;
             }
@@ -191,7 +194,7 @@ $message-txt-shadow-color: #555;
         left: calc( #{$messages-width} + #{$userbox-left});
         width: 307px;
         height: calc(100% - 27px);
-        background-color: rgba(77, 79, 150, 0.85); // background-color: rgba(255,255, 255, 0.85);
+        background-color: rgba(77, 79, 150, 0.851); // background-color: rgba(255,255, 255, 0.85);
         border-top-right-radius: $border-radius-messages;
         border-bottom-right-radius: $border-radius-messages;
         ul {
