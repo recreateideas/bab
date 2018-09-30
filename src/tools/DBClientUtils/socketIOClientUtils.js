@@ -54,6 +54,7 @@ const emitUserTyping = (sender,receiver) => {
 };
 
 const emitMessage = (senderId, senderNickname, message) => {
+    console.log(message);
     socket.emit('sendMessageToClient', { senderId, senderNickname, message });
 };
 

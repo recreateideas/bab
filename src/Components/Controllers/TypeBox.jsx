@@ -56,19 +56,21 @@ class TypeBox extends React.Component {
 
     sendMessage() {
         const content = this.state.message.content;
-        const attachment = this.state.attachment;
-        if (content !== '' || (attachment && attachment.length > 0)) {
+        const attachment = this.state.message.attachment;
+    // console.log(attachment[0]);
+        if (content !== '' || (attachment && attachment[0])) {
+            console.log('send');
             emitMessage(this.props.storeUser.ID,this.props.storeUser.nickName,this.state.message);
         }
         this.setState({ message: { ...this.state.message, content: '', date: '', attachment:[] } });
     }
 
     uploadFileToSend(e){
-        console.log(e.target.files[0]);
+        // console.log(e.target.files[0]);
         const acceptableFileFormats=[
             '.bab','.csv','.js','.json'
         ];
-        handleFilesSelect(this,e, 'resultMessage', true, (state)=>{console.log(state);},'message', acceptableFileFormats);
+        handleFilesSelect(this,e, 'resultMessage', true, ()=>{},'message', acceptableFileFormats);
     }
 
     deleteAttachmentFile(){
