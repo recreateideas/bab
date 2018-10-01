@@ -33,7 +33,7 @@ class MessageBox extends React.Component {
         return (
             <div key={key} id={`attachment_${key}`} className={`attachmentFiles`} onClick={(e) => { this.downloadAttachment(e,attachment) }}>
                 {this.renderFileIcon(attachment)}
-                <p className='attachmentText'>{`${attachment.name}`}</p>
+                <p className='attachmentText title'>{`${attachment.name}`}</p>
                 <p className='attachmentText'>{`${attachment.type} - ${attachment.size}kb`}</p>
             </div>
         );

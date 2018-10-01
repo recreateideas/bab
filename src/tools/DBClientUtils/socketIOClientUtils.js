@@ -38,13 +38,19 @@ const connectToSocket = (component, customId, nickname) => {
     });
 
     socket.on('disconnect', ()=>{
-        console.log('Emit Event: disconnected')
+        console.log('EVENT: disconnected')
         socket = connect();
     })
-
+ 
     socket.on('error', function () {
+        console.log('EVENT: error');
         socket = connect();
     });
+
+    socket.on('shouldReconnect',()=>{
+        console.log('EVENT: shouldReconnect');
+        socket = connect();
+    })
 };
 
 const connect = () => {
