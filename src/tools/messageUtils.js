@@ -4,49 +4,51 @@ const formatMessages = (userId, messageHistory) => {
     let formattedMessages = {}, direction = '', chatId = '';
     console.log(messageHistory);
     // let newId='',newDirection='';
-    messageHistory.forEach(message => {
-        if (!formattedMessages.hasOwnProperty(message.receiverId) && message.receiverId !== userId) {
-            formattedMessages[message.receiverId] = {
-                messages: [
+    if(messageHistory && messageHistory.length > 0){
+        messageHistory.forEach(message => {
+            if (!formattedMessages.hasOwnProperty(message.receiverId) && message.receiverId !== userId) {
+                formattedMessages[message.receiverId] = {
+                    messages: [
+                        {
+                            direction: 'sent',
+                            content: message.content,
+                            date: message.dateSent,
+                            attachment: message.attachment,
+                        }
+                    ]
+                };
+            } else if (!formattedMessages.hasOwnProperty(message.senderId) && message.senderId !== userId) {
+                formattedMessages[message.senderId] = {
+                    messages: [
+                        {
+                            direction: 'received',
+                            content: message.content,
+                            date: message.dateSent,
+                            attachment: message.attachment,
+                        }
+                    ]
+                };
+            } else if (formattedMessages.hasOwnProperty(message.receiverId) && message.receiverId !== userId) {
+                formattedMessages[message.receiverId].messages.push(
                     {
                         direction: 'sent',
                         content: message.content,
                         date: message.dateSent,
                         attachment: message.attachment,
                     }
-                ]
-            };
-        } else if (!formattedMessages.hasOwnProperty(message.senderId) && message.senderId !== userId) {
-            formattedMessages[message.senderId] = {
-                messages: [
+                )
+            } else if (formattedMessages.hasOwnProperty(message.senderId) && message.senderId !== userId) {
+                formattedMessages[message.senderId].messages.push(
                     {
-                        direction: 'received',
+                        direction:'received',
                         content: message.content,
                         date: message.dateSent,
                         attachment: message.attachment,
                     }
-                ]
-            };
-        } else if (formattedMessages.hasOwnProperty(message.receiverId) && message.receiverId !== userId) {
-            formattedMessages[message.receiverId].messages.push(
-                {
-                    direction: 'sent',
-                    content: message.content,
-                    date: message.dateSent,
-                    attachment: message.attachment,
-                }
-            )
-        } else if (formattedMessages.hasOwnProperty(message.senderId) && message.senderId !== userId) {
-            formattedMessages[message.senderId].messages.push(
-                {
-                    direction:'received',
-                    content: message.content,
-                    date: message.dateSent,
-                    attachment: message.attachment,
-                }
-            )
-        }
-    });
+                )
+            }
+        });
+    }
     return formattedMessages;
 };
 

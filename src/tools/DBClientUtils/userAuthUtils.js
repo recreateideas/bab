@@ -21,6 +21,7 @@ const loginProcess = async(component,{id, email, nickname}) =>{
     loginUser(component, id, email, nickname);
     await connectToSocket(component, id, nickname);
     const messageHistory = await getMessageHistory(component, id);
+    //check here
     return messageHistory;
 };
 
@@ -74,7 +75,6 @@ const sendRegisterRequest = async (e,component, validated) => {
                 email: res.data.email,
                 nickname: res.data.nickname,
             };
-            // if (userInserted) loginUser(component, userInfo);
             if (userInserted) loginProcess(component,userInfo);
         }
         catch (err) {
