@@ -17,10 +17,10 @@ const handleLoginRejection = () => {
     console.log('rejected');
 };
 
-const loginProcess = async(component,res) =>{
-    loginUser(component, res.data.userDetails[0]._id, res.data.userDetails[0].email, res.data.userDetails[0].nickname);
-    await connectToSocket(component, res.data.userDetails[0]._id,res.data.userDetails[0].nickname);
-    const messageHistory = await getMessageHistory(component,res.data.userDetails[0]._id);
+const loginProcess = async(component,{id, email, nickname}) =>{
+    loginUser(component, id, email, nickname);
+    await connectToSocket(component, id, nickname);
+    const messageHistory = await getMessageHistory(component, id);
     return messageHistory;
 };
 
@@ -35,7 +35,12 @@ const sendLoginRequest = async (e, component, validated) => {
         try {
             const res = await axios.post(`${process.env.REMOTE_HOST}:${process.env.REMOTE_PORT}/users/login`,{details: loginDetails})
             if (res.data.userFound) {
-                return await loginProcess(component,res);
+                const userInfo = {
+                    id: res.data.userDetails[0]._id,
+                    email: res.data.userDetails[0].email,
+                    nickname: res.data.userDetails[0].nickname,
+                };
+                return await loginProcess(component,userInfo);
             }
             else handleLoginRejection();
         }
@@ -64,7 +69,13 @@ const sendRegisterRequest = async (e,component, validated) => {
                 })
             console.log(res.data);
             const userInserted = res.data.userInserted;
-            if (userInserted) loginUser(component, res.data._id, res.data.email, res.data.nickname);
+            const userInfo = {
+                id: res.data._id,
+                email: res.data.email,
+                nickname: res.data.nickname,
+            };
+            // if (userInserted) loginUser(component, userInfo);
+            if (userInserted) loginProcess(component,userInfo);
         }
         catch (err) {
             console.log(err);

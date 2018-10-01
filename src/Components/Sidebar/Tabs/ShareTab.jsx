@@ -8,15 +8,18 @@ import { mapStateToProps, mapDispatchToProps } from '../../../store/mapToProps/m
 class ShareTab extends React.Component {
 
     renderMessageBoxes(chat, receiver,index) {
-        let isActiveBox = this.props.storeUserTo.customId === receiver ? 'show' : 'hidden';
-        return (
-            <MessageBox
-                key={index}
-                addClass={`${isActiveBox}`}
-                messages={chat.messages}
-                receiver={receiver}
-            />
-        )
+        // if(receiver !== '' && receiver !== undefined){
+            let isActiveBox = this.props.storeUserTo.customId === receiver ? 'show' : 'hidden';
+            // console.log(receiver);
+            return (
+                <MessageBox
+                    key={index}
+                    addClass={`${isActiveBox}`}
+                    messages={chat.messages}
+                    receiver={receiver}
+                />
+            )
+        // }
     }
 
     render() {
