@@ -25,7 +25,7 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(action);
         },
         pushMessageToHistory: (direction,message) => {
-            console.log('MESSAGE:', message);
+            // console.log('MESSAGE:', message);
             const action = {
                 type: constants.PUSH_MESSAGE,
                 direction,

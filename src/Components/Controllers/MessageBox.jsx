@@ -51,10 +51,11 @@ class MessageBox extends React.Component {
 
     renderMessage(message, key) {
         const messageTypeClass = `message_bubble ${message.direction}`;
+        const displayText = message.content !== '' ? '' : 'hidden';
         return (
-            <div key={key} className={`messageContainer ${messageTypeClass}`}>
+            <div key={key} className={`messageContainer ${message.direction}`}>
                 <div className={`message ${messageTypeClass}`}>
-                    <p className='h7 messageText'>{`${message.content}`}</p>
+                    <p className={`h7 messageText ${displayText}`}>{`${message.content}`}</p>
                     <div className='messageAttachments'>
                         {message.attachment ? message.attachment.map((attachment, key) => this.renderAttachment(attachment, key, message.direction)) : ''}
                     </div>

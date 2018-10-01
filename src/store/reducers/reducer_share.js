@@ -32,7 +32,7 @@ const share = (share = initialState.share, action) => {
                 }
                 messageHistory.push(newMessage);
             }
-            console.log(messageHistory);
+            // console.log(messageHistory);
             const newState = Object.assign({}, share, { ...share, chats: { ...share.chats, [action.message.receiverId]: {...share.chats[action.message.receiverId], messages: messageHistory}} });
             localStorage.setItem('chats',JSON.stringify(newState.chats));
             return  Object.assign({}, share, newState);

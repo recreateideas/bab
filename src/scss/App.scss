@@ -27,11 +27,11 @@ $message-bubble-shadow: rgba(0, 0, 0, .4);
 $send-button-width: 70px;
 $spacing: 8px;
 $message-box-width: calc( #{$messages-width} + 15px);
-$message-bubble-side-spacing: 5px;
+$message-bubble-side-spacing: 15px;
 $message-bubble-tringle-size: 6px;
 $message-txt-shadow: .3px;
 $message-txt-shadow-color: #555;
-
+$message-sent-color: #6746b7;
 #chatContainer {
     display: flex;
     flex-direction: row;
@@ -40,7 +40,8 @@ $message-txt-shadow-color: #555;
         flex-direction: column;
         .userTo{
             // background-color: #E7F1F5;
-            background-color: #484D84;
+            // background-color: #484D84;
+            background-color: #30324A;
             width: $message-box-width;
             border-radius: $border-radius-messages;
             border-top-right-radius: 0px;
@@ -76,28 +77,40 @@ $message-txt-shadow-color: #555;
                 height: 105px;
             }
             .messageContainer {
-                width: $message-bubble-width !important;
+                // width: $message-bubble-width !important;
                 margin-top: 26px;
                 &.sent {
                     text-align: right;
                     position: relative;
                     right: 0px;
-                    left: calc(100% - #{$message-bubble-width} - 5px);
+                    // left: calc(100% - #{$message-bubble-width} - 5px);
                     .message_bubble {
-                        background-color: #436ac1;
+                        // background-color: #436ac1;
+                        background-color: $message-sent-color;
                         box-shadow: -4px 4px 15px $message-bubble-shadow;
                         right: $message-bubble-side-spacing;
+                        display: inline-block;
+                        text-align: left;
                         .messageAttachments {
                             text-align: -webkit-right; // text-align: right;
                             .attachmentFiles {
+                                background-color: rgba(196, 206, 253, 0.92);;
                                 text-align: right;
-                                border: solid 1px #ddd;
+                                border: solid 1px #fff;
+                                &:hover {
+                                    p {
+                                        color: #3100e0;
+                                    }
+                                }
+                                p {
+                                    color: #ce0095;
+                                }
                             }
                         }
                         &::after {
                             content: ' ';
                             position: absolute;
-                            border-left: $message-bubble-tringle-size solid #436ac1;
+                            border-left: $message-bubble-tringle-size solid $message-sent-color;
                             border-right: $message-bubble-tringle-size solid transparent;
                             border-top: $message-bubble-tringle-size solid transparent;
                             border-bottom: $message-bubble-tringle-size solid transparent;
@@ -107,6 +120,8 @@ $message-txt-shadow-color: #555;
                     }
                     .messageDate {
                         color: rgba(85, 85, 119, .7);
+                        position: relative;
+                        right: 11px;
                     }
                 }
                 &.received {
@@ -122,8 +137,17 @@ $message-txt-shadow-color: #555;
                         .messageAttachments {
                             text-align: -webkit-left; // text-align: left;
                             .attachmentFiles {
+                                background-color: rgba(255, 255, 255, 0.7);
                                 text-align: left;
                                 border: solid 1px #aaa;
+                                &:hover {
+                                    p {
+                                        color: #ff6333;
+                                    }
+                                }
+                                p {
+                                    color: #bd7500;;
+                                }
                             }
                         }
                         &::after {
@@ -139,18 +163,28 @@ $message-txt-shadow-color: #555;
                     }
                     .messageDate {
                         color: rgba(102, 102, 119, .7);
+                        left: 11px;
                     }
                 }
                 .message_bubble {
                     background-color: #667;
-                    border-radius: 3px;
-                    width: $message-bubble-width !important;
+                    border-radius: 6px;
+                    // width: $message-bubble-width !important;
+                    width: fit-content;
+                    max-width: 400px;
                     padding: 4px;
                     position: relative;
+                    .message{
+                        right: 0px;
+                        position: absolute;
+                    }
                     .messageText {
                         font-size: 14px;
-                        line-height: 1.1em;
+                        line-height: 1.3em;
                         padding-top: 5px;
+                        padding-left: 5px;
+                        padding-right: 5px;
+                        letter-spacing: .2px;
                     }
                     .attachmentIconWrapper{
                         position: relative;
@@ -162,7 +196,7 @@ $message-txt-shadow-color: #555;
                             background-color: grey; 
                             padding: 3px;
                             width: fit-content;
-                            top: -23px;
+                            top: -32px;
                             left: 100%;
                             position: relative;
                             &:hover{
@@ -180,21 +214,17 @@ $message-txt-shadow-color: #555;
                     .attachmentFiles {
                         cursor: pointer;
                         width: fit-content;
-                        padding: 15px 10px 5px 10px;
+                        padding: 15px 10px 0px 10px;
                         border-radius: 4px !important;
                         border-width: 2px !important;
                         border-style: dashed !important;
-                        background-color: rgba(255, 255, 255, 0.4);
-                        word-break: break-word;
-                        line-height: .9em;
+                        margin-top: 23px;
                         &:hover {
                             box-shadow: 0px 0px 2px 2px rgba(255, 255, 255, 0.5);
-                            p {
-                                color: #0056e0;
-                            }
                         }
                         p {
-                            color: #045a00;
+                            line-height: 1em;
+                            word-break: break-word;
                             strong {
                                 text-shadow: -#{$message-txt-shadow} -#{$message-txt-shadow} 0 $message-txt-shadow-color,
                                 #{$message-txt-shadow} -#{$message-txt-shadow} 0 $message-txt-shadow-color,
@@ -219,7 +249,8 @@ $message-txt-shadow-color: #555;
         left: calc( #{$messages-width} + #{$userbox-left});
         width: 307px;
         height: calc(100% - 27px);
-        background-color: rgba(77, 79, 150, 0.851); // background-color: rgba(255,255, 255, 0.85);
+        background-color: rgba(48, 49, 78, 0.851);
+        // background-color: rgba(77, 79, 150, 0.851); // background-color: rgba(255,255, 255, 0.85);
         border-top-right-radius: $border-radius-messages;
         border-bottom-right-radius: $border-radius-messages;
         ul {
