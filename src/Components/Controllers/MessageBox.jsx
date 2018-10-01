@@ -76,11 +76,13 @@ class MessageBox extends React.Component {
     render() {
         // console.log(this.props.storeUserTo);
         const activeUser = this.isUserActive(this.props.storeUserTo.customId) ? 'activeUser' : 'inactiveUser';
+        const status = this.isUserActive(this.props.storeUserTo.customId) ? '(online)' : '(offline)';
         return (
             <div className='messageBoxWrapper'>
                 <div className='userTo'>
                     <div className={`connectedCircle big ${activeUser}`}></div>
                     <p className={`h7 userToTitle`}>{this.props.storeUserTo ? this.props.storeUserTo.nickname : 'unknown'}</p>
+                    <p className='statusTitle'>{` ${status}`}</p>
                 </div>
                 <div id="messageBox" className={`${this.props.addClass} messageBox`}>
                     {this.props.messages.map((message, key) => this.renderMessage(message, key))}

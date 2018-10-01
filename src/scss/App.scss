@@ -62,6 +62,13 @@ $message-received-color: #bcd0cd;
                 color: white;
                 font-size: 22px;
             }
+            .statusTitle{
+                position: relative;
+                left: 10px;
+                font-size: 16px;
+                top: 3px;
+            }
+
         }
         #messageBox {
             position: absolute;
