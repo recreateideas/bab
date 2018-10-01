@@ -5,19 +5,6 @@ import { findAllUsers, getMessageHistory } from './DBClientUtils';
 
 let socket;
 
-const performConnectionToSocket = async (socket, component, customId, nickname) => {
-    try{
-        console.log('performing connection to socket...');
-        await findAllUsers(component);
-        await getMessageHistory(component);
-        socket.emit('updateClientInfo', { customId, nickname });        /* TEST --> socket.emit('updateClientInfo', { customId:'123456789', nickname: 'second_test_user2' }); */
-        socket.emit('getActiveUsers');
-    }
-    catch(err){
-        console.log(`Error while performing connection to socket -> ${err}`);
-    }
-};
-
 const connectToSocket = (component, customId, nickname) => {
     socket = connect();
 
@@ -61,6 +48,19 @@ const connectToSocket = (component, customId, nickname) => {
         console.log('EVENT: shouldReconnect');
         performConnectionToSocket(socket, component, customId, nickname);
     })
+};
+
+const performConnectionToSocket = async (socket, component, customId, nickname) => {
+    try{
+        console.log('performing connection to socket...');
+        await findAllUsers(component);
+        await getMessageHistory(component);
+        await socket.emit('updateClientInfo', { customId, nickname });        /* TEST --> socket.emit('updateClientInfo', { customId:'123456789', nickname: 'second_test_user2' }); */
+        await socket.emit('getActiveUsers');
+    }
+    catch(err){
+        console.log(`Error while performing connection to socket -> ${err}`);
+    }
 };
 
 const connect = () => {

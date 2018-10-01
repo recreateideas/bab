@@ -68,6 +68,7 @@ class MessageBox extends React.Component {
     isUserActive(id) {
         const activeUsers = this.props.storeActiveUsers;
         let found = null;
+        // console.log(activeUsers);
         activeUsers.filter(user => user.customId === id).forEach(user => { found = true });
         return found;
     }
