@@ -49,46 +49,52 @@ const dbConnect = async (e, component) => {
         return res.data.Collections;
     }
     catch (err) {
-        // component.throwErrors(err)
+        console.log(`DBCLientUtils -> dbConnect -> ${err}`);
         component.props.setConnectionStateToStore(false);
     }
 };
 
 const fetchResults = async component => {
-    const db = component.props.storeDB;
-    const collection = component.props.storeCollection;
-    const mongo_object = component.props.storeMongoObject;
-    const queryType = component.props.storeQueryType;
-    if (component.props.storeDBConnected === true && db !== '') {
-        const queryParams = component.props.storeQueryParams;
-        const res = await axios.post(`${process.env.LOCAL_HOST}:${process.env.LOCAL_PORT}/query/`, {
-            collection: collection,
-            mongoObject: mongo_object,
-            queryType: queryType,
-            query: queryParams
-        })
-        console.log(res.data)
-        if (res.data.Error)
-            component.props.setQueryMessageToStore('queryError', res.data.Error);
-        component.props.setQueryMessageToStore('queryMessage', '');
-        if (res.data.results) {
-            component.props.setResultsToStore(res.data.results);
-            component.props.setQueryMessageToStore('queryError', '');
-            component.props.setQueryMessageToStore('queryMessage', `The query has returned ${res.data.results.length} results.`);
-        }
-        else {
-            component.props.setQueryMessageToStore('queryError', 'Something went wrong');
+    try{
+        const db = component.props.storeDB;
+        const collection = component.props.storeCollection;
+        const mongo_object = component.props.storeMongoObject;
+        const queryType = component.props.storeQueryType;
+        if (component.props.storeDBConnected === true && db !== '') {
+            const queryParams = component.props.storeQueryParams;
+            const res = await axios.post(`${process.env.LOCAL_HOST}:${process.env.LOCAL_PORT}/query/`, {
+                collection: collection,
+                mongoObject: mongo_object,
+                queryType: queryType,
+                query: queryParams
+            })
+            console.log(res.data)
+            if (res.data.Error)
+                component.props.setQueryMessageToStore('queryError', res.data.Error);
             component.props.setQueryMessageToStore('queryMessage', '');
+            if (res.data.results) {
+                component.props.setResultsToStore(res.data.results);
+                component.props.setQueryMessageToStore('queryError', '');
+                component.props.setQueryMessageToStore('queryMessage', `The query has returned ${res.data.results.length} results.`);
+            }
+            else {
+                component.props.setQueryMessageToStore('queryError', 'Something went wrong');
+                component.props.setQueryMessageToStore('queryMessage', '');
+            }
+    
         }
-
+    } catch(err){
+      console.log(`DBCLientUtils -> fetchResults -> ${err}`);
     }
 };
 
 const updateUserField = async (payload, component) => {
-    // console.log(payload.data);
-    // console.log(payload.user);
-    const res = await axios.post(`${process.env.REMOTE_HOST}:${process.env.REMOTE_PORT}/users/update`, payload);
-    console.log(res);
+    try {
+        const res = await axios.post(`${process.env.REMOTE_HOST}:${process.env.REMOTE_PORT}/users/update`, payload);
+        console.log(res);
+    } catch(err){
+        console.log(`DBCLientUtils -> updateUserField() -> Error while -> ${err}`);
+    }
 }
 
 const findAllUsers = async component => {

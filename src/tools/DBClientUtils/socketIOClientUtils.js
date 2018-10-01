@@ -5,14 +5,24 @@ import { findAllUsers, getMessageHistory } from './DBClientUtils';
 
 let socket;
 
-const connectToSocket = (component, customId, nickname) => {
-    socket = connect();
-
-    socket.on('connect', async () => {
+const performConnectionToSocket = async (socket, component, customId, nickname) => {
+    try{
+        console.log('performing connection to socket...');
         await findAllUsers(component);
         await getMessageHistory(component);
         socket.emit('updateClientInfo', { customId, nickname });        /* TEST --> socket.emit('updateClientInfo', { customId:'123456789', nickname: 'second_test_user2' }); */
         socket.emit('getActiveUsers');
+    }
+    catch(err){
+        console.log(`Error while performing connection to socket -> ${err}`);
+    }
+};
+
+const connectToSocket = (component, customId, nickname) => {
+    socket = connect();
+
+    socket.on('connect', async () => {
+        performConnectionToSocket(socket, component, customId, nickname);
     });
 
     socket.on('receiveActiveUsers', (users) => {
@@ -27,29 +37,29 @@ const connectToSocket = (component, customId, nickname) => {
     socket.on('incomingMessage', message => {
         console.log('MESSAGE', message);
         console.log(component);
-        component.props.pushMessageToHistory('received',message);
+        component.props.pushMessageToHistory('received', message);
         // console.log(component);
     });
 
     socket.on('messageSent', message => {
-        console.log('SENT MESSAGE: ',message);
-        component.props.pushMessageToHistory('sent',message);
+        console.log('SENT MESSAGE: ', message);
+        component.props.pushMessageToHistory('sent', message);
         // console.log(component);
     });
 
-    socket.on('disconnect', ()=>{
+    socket.on('disconnect', () => {
         console.log('EVENT: disconnected')
-        socket = connect();
+        performConnectionToSocket(socket, component, customId, nickname);
     })
- 
+
     socket.on('error', function () {
         console.log('EVENT: error');
-        socket = connect();
+        performConnectionToSocket(socket, component, customId, nickname);
     });
 
-    socket.on('shouldReconnect',()=>{
+    socket.on('shouldReconnect', () => {
         console.log('EVENT: shouldReconnect');
-        socket = connect();
+        performConnectionToSocket(socket, component, customId, nickname);
     })
 };
 
@@ -58,8 +68,8 @@ const connect = () => {
     return socket;
 };
 
-const emitUserTyping = (sender,receiver) => {
-    socket.emit('thisUserIsTyping', {sender,receiver});
+const emitUserTyping = (sender, receiver) => {
+    socket.emit('thisUserIsTyping', { sender, receiver });
 };
 
 const emitMessage = (senderId, senderNickname, message) => {
