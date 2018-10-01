@@ -8,6 +8,16 @@ class UsersBox extends React.Component {
 
     constructor(props) {
         super(props);
+        this.state={
+            isUserTo: '',
+            customId: '',
+        };
+    }
+
+    componentWillReceiveProps(nextProps){
+        if(nextProps.isUserTo){
+            this.setState({isUserTo: nextProps.isUserTo});
+        }
     }
 
     userOnClick(e){
@@ -17,7 +27,7 @@ class UsersBox extends React.Component {
             nickname: e.currentTarget.dataset.nickname,
         }
         this.props.setUserToToStore(userTo);
-        // set active chatId
+        this.setState({isUserTo: 'selectedUser'});
         // add CSS
     }
 
@@ -32,8 +42,9 @@ class UsersBox extends React.Component {
         let rowClass = index === 0 ? 'firstUser' : '';
         rowClass = (index % 2) === 1 ? (rowClass+' oddUser') : (rowClass+' evenUser');
         const activeUser = this.isUserActive(user.customId) ? 'activeUser' : 'inactiveUser';
+        const isSelected = user.customId === this.props.storeUserTo.customId ? 'selectedUser' : '';
         return (
-            <li key={index} className={rowClass}>
+            <li key={index} className={`${rowClass} ${isSelected}`}>
                 <UserContainer
                     containerId={`user_${index}`}
                     chatId={this.props.storeChatId}
@@ -65,6 +76,7 @@ class UsersBox extends React.Component {
 UsersBox.propTypes = {
     storeAllUsers: PropTypes.array,
     storeActiveUsers: PropTypes.array,
+    storeUserTo: PropTypes.object,
 }
 
 

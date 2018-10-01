@@ -80,6 +80,7 @@ $message-received-color: #bcd0cd;
             padding: 6px;
             padding-top: 30px;
             top: 67px;
+            border-bottom-left-radius: 5px;
             // box-shadow: inset 10px 0px 10px -7px #E7F1F5;
             .messageBottomSpacer {
                 height: 105px;
@@ -280,7 +281,7 @@ $message-received-color: #bcd0cd;
                     background-color: rgba(150, 150, 150, 0.25);
                 }
                 &.evenUser {
-                    background-color: rgba(206, 204, 204, 0.2);
+                    background-color: rgba(206, 204, 204, 0.438);
                 }
                 .userContainer {
                     display: flex;
@@ -303,6 +304,14 @@ $message-received-color: #bcd0cd;
                         .nicknameText {
                             color: #334;
                         }
+                    }
+                }
+                &.selectedUser{
+                    background-color: blueviolet;
+                    &:active,
+                    &:hover,
+                    &:focus {
+                        background-color: rgb(192, 125, 255) !important;
                     }
                 }
             }
@@ -360,6 +369,7 @@ $message-received-color: #bcd0cd;
     bottom: 15px;
     width: $message-box-width;
     height: calc(#{$send-button-width} + #{$spacing} * 3); // background-color: rgba(234, 245, 247, 0.89);
+    border-bottom-left-radius: 5px;
     .attachButton {
         position: absolute;
         cursor: pointer;

@@ -27,7 +27,7 @@ class ShareTab extends React.Component {
                         {Object.keys(this.props.storeChats).map((chat, index) => this.renderMessageBoxes(this.props.storeChats[chat], chat,index))}
                         <TypeBox />
                     </div>
-                    <UsersBox />
+                    <UsersBox/>
                 </div>
             </div>
         )
