@@ -82,7 +82,7 @@ $message-txt-shadow-color: #555;
                     text-align: right;
                     position: relative;
                     right: 0px;
-                    left: calc(100% - #{$message-bubble-width});
+                    left: calc(100% - #{$message-bubble-width} - 5px);
                     .message_bubble {
                         background-color: #436ac1;
                         box-shadow: -4px 4px 15px $message-bubble-shadow;
@@ -151,6 +151,31 @@ $message-txt-shadow-color: #555;
                         font-size: 14px;
                         line-height: 1.1em;
                         padding-top: 5px;
+                    }
+                    .attachmentIconWrapper{
+                        position: relative;
+                        height: 0px;
+                        .attachmentIconFrame{
+                            cursor: pointer;
+                            border: solid 1px #bbb; 
+                            border-radius: 3px; 
+                            background-color: grey; 
+                            padding: 3px;
+                            width: fit-content;
+                            top: -23px;
+                            left: 100%;
+                            position: relative;
+                            &:hover{
+                                background-color: rgb(120, 120, 120);
+                                box-shadow: 0px 0px 10px white;
+                            }
+                            .attachmentIcon{
+                                color: #eee;
+                                &:hover{
+                                    color: white; 
+                                }
+                            }  
+                        }
                     }
                     .attachmentFiles {
                         cursor: pointer;

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { downloadFile } from '../../tools/fileManagers';
 import { mapStateToProps } from '../../store/mapToProps/mapToProps_MessageBox';
-// const FontAwesome = require('react-fontawesome');
+const FontAwesome = require('react-fontawesome');
 class MessageBox extends React.Component {
 
     scrollToBottom() {
@@ -19,7 +19,9 @@ class MessageBox extends React.Component {
         this.scrollToBottom();
     }
 
-    downloadAttachment(attachment) {
+    downloadAttachment(e,attachment) {
+        // console.log(e);
+        e.stopPropagation();
         // console.log(attachment);
         downloadFile({
             content: attachment.fileContent,
@@ -28,13 +30,23 @@ class MessageBox extends React.Component {
     }
 
     renderAttachment(attachment, key, direction) {
-        // console.log(direction); //direction -> sent received
         return (
-            <div key={key} id={`attachment_${key}`} className={`attachmentFiles`} onClick={() => { this.downloadAttachment(attachment) }}>
+            <div key={key} id={`attachment_${key}`} className={`attachmentFiles`} onClick={(e) => { this.downloadAttachment(e,attachment) }}>
+                {this.renderFileIcon(attachment)}
                 <p className='attachmentText'>{`${attachment.name}`}</p>
                 <p className='attachmentText'>{`${attachment.type} - ${attachment.size}kb`}</p>
             </div>
         );
+    }
+
+    renderFileIcon(attachment) {
+        return (
+            <div className={`attachmentIconWrapper`}>
+                <div className={`attachmentIconFrame`} onClick={(e) => { this.downloadAttachment(e,attachment) }}>
+                    <FontAwesome name='file-download' size={`2x`} className={`attachmentIcon`} />
+                </div>
+            </div>
+        )
     }
 
     renderMessage(message, key) {
@@ -64,10 +76,10 @@ class MessageBox extends React.Component {
         const activeUser = this.isUserActive(this.props.storeUserTo.customId) ? 'activeUser' : 'inactiveUser';
         return (
             <div className='messageBoxWrapper'>
-                      <div className='userTo'>
-                        <div className={`connectedCircle big ${activeUser}`}></div>
-                        <p className={`h7 userToTitle`}>{this.props.storeUserTo ? this.props.storeUserTo.nickname : 'unknown'}</p>
-                    </div>
+                <div className='userTo'>
+                    <div className={`connectedCircle big ${activeUser}`}></div>
+                    <p className={`h7 userToTitle`}>{this.props.storeUserTo ? this.props.storeUserTo.nickname : 'unknown'}</p>
+                </div>
                 <div id="messageBox" className={`${this.props.addClass} messageBox`}>
                     {this.props.messages.map((message, key) => this.renderMessage(message, key))}
                     <div style={{ float: "left", clear: "both" }} className={`messageBottomSpacer`}
