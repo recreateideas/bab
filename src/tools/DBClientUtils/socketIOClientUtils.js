@@ -35,6 +35,8 @@ const connectToSocket = (component, customId, nickname) => {
 
     socket.on('messageSent', message => {
         console.log('SENT MESSAGE: ', message);
+        clearTimeout(userFinishedTyping);
+        typingCount = 0;
         component.props.pushMessageToHistory('sent', message);
         // console.log(component);
     });
@@ -85,9 +87,11 @@ const emitUserTyping = (sender, receiver) => {
     },5000);
 };
 
-const emitMessage = (senderId, senderNickname, message) => {
+const emitMessage = (sender, message) => {
     console.log(message);
-    socket.emit('sendMessageToClient', { senderId, senderNickname, message });
+    console.log(sender);
+    socket.emit('thisUserIsTyping', { sender, receiver: message.userTo, activity: 'finished' });
+    socket.emit('sendMessageToClient', { senderId: sender.customId, senderNickname: sender.nickname, message });
 };
 
 const storeClientInfo = (customId, nickname) => {
