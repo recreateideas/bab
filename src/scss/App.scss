@@ -444,12 +444,12 @@ $message-received-color: #bcd0cd;
     .userTyping{
         position: relative;
         left: 10px;
-        top: -23px;
+        top: -26px;
         .typingText{
-            font-size: 12px;
-            font-style: normal;
-            font-weight: 900;
+            font-size: 14px;
+            font-style: italic;
             color: #667;
+            letter-spacing: .5px;
         }
     }
 }

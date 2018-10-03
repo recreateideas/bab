@@ -82,7 +82,7 @@ const emitUserTyping = (sender, receiver) => {
     userFinishedTyping = setTimeout(()=>{
         typingCount = 0;
         socket.emit('thisUserIsTyping', { sender, receiver, activity: 'finished' });
-    },1500);
+    },5000);
 };
 
 const emitMessage = (senderId, senderNickname, message) => {
