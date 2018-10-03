@@ -39,6 +39,16 @@ const mapDispatchToProps = (dispatch) => {
                 type: constants.LOAD_LOCALSTORAGE_MESSASGES,
                 chats
             }   
+            dispatch(action);
+        },
+        setTypingStatusToStore: (sender, activity) => {
+            console.log(`${sender.nickname},${sender.customId} has ${activity} typing...`);
+            const typing = activity === 'started' ? true : false; 
+            const action = {
+                type: constants.SET_TYPING_STATUS,
+                sender,
+                typing,
+            }
             dispatch(action)
         }
     }

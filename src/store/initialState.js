@@ -65,6 +65,7 @@ const initialState = {
         userTo:{
             customId: '',
             nickname: '',
+            typing: false,
         }
     }
 }

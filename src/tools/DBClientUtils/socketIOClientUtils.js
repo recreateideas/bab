@@ -4,11 +4,15 @@ import 'babel-polyfill';
 import { findAllUsers, getMessageHistory } from './DBClientUtils';
 
 let socket;
+let userFinishedTyping;
+let typingCount = 0;
 
 const connectToSocket = (component, customId, nickname) => {
     socket = connect();
 
+
     socket.on('connect', async () => {
+        console.log('EVENT: connect');
         performConnectionToSocket(socket, component, customId, nickname);
     });
 
@@ -18,12 +22,13 @@ const connectToSocket = (component, customId, nickname) => {
 
     socket.on('otherUserIsTyping', (data) => {
         // console.log(data.sender.nickname);
-        console.log(`${data.sender.nickname} is typing...`);
+        // console.log(`${data.sender.nickname} has ${data.activity} typing...`);
+        component.props.setTypingStatusToStore(data.sender, data.activity);
     });
 
     socket.on('incomingMessage', message => {
         console.log('MESSAGE', message);
-        console.log(component);
+        // console.log(component);
         component.props.pushMessageToHistory('received', message);
         // console.log(component);
     });
@@ -35,7 +40,7 @@ const connectToSocket = (component, customId, nickname) => {
     });
 
     socket.on('disconnect', () => {
-        console.log('EVENT: disconnected')
+        console.log('EVENT: disconnected');
         performConnectionToSocket(socket, component, customId, nickname);
     })
 
@@ -69,7 +74,15 @@ const connect = () => {
 };
 
 const emitUserTyping = (sender, receiver) => {
-    socket.emit('thisUserIsTyping', { sender, receiver });
+    if(typingCount === 0){
+        socket.emit('thisUserIsTyping', { sender, receiver, activity: 'started' });
+    }
+    typingCount++;
+    clearTimeout(userFinishedTyping);
+    userFinishedTyping = setTimeout(()=>{
+        typingCount = 0;
+        socket.emit('thisUserIsTyping', { sender, receiver, activity: 'finished' });
+    },1500);
 };
 
 const emitMessage = (senderId, senderNickname, message) => {

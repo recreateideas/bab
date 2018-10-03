@@ -441,4 +441,15 @@ $message-received-color: #bcd0cd;
         top: 22px;
         left: -2px;
     }
+    .userTyping{
+        position: relative;
+        left: 10px;
+        top: -23px;
+        .typingText{
+            font-size: 12px;
+            font-style: normal;
+            font-weight: 900;
+            color: #667;
+        }
+    }
 }

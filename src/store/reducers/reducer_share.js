@@ -38,6 +38,8 @@ const share = (share = initialState.share, action) => {
             return  Object.assign({}, share, newState);
         case constants.LOAD_LOCALSTORAGE_MESSASGES:
             return Object.assign({}, share, { ...share, chats: action.chats });
+        case constants.SET_TYPING_STATUS:
+            return Object.assign({}, share, { ...share, userTo: {...share.userTo, typing: action.typing }});
         default:
             return Object.assign({}, share, obj);
     }

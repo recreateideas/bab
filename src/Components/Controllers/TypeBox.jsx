@@ -79,9 +79,10 @@ class TypeBox extends React.Component {
 
     render() {
         const attachmentName = this.state.message.attachment && this.state.message.attachment[0] ? this.state.message.attachment[0].name : '';
-        const attachmentType = this.state.message.attachment && this.state.message.attachment[0] ? this.state.message.attachment[0].type : '';
+        // const attachmentType = this.state.message.attachment && this.state.message.attachment[0] ? this.state.message.attachment[0].type : '';
         const attachmentSize = this.state.message.attachment && this.state.message.attachment[0] ? this.state.message.attachment[0].size : '';
         const displayAttachment = this.state.message.attachment && this.state.message.attachment.length > 0 ? 'show' : 'hidden'; 
+        const displayTyping = this.props.storeUserTo.typing === true ? 'show' : 'hidden'; 
         return (
             <div id="typeBox" className="typeBox">
 
@@ -111,9 +112,11 @@ class TypeBox extends React.Component {
                     <div className={`deleteAttachmentFileWrapper ${displayAttachment}`} onClick={this.deleteAttachmentFile.bind(this)}>
                         <FontAwesome className='deleteAttachmentIcon' name='times-circle' />
                     </div>
-                    <p className={`h7 attachmentName`}>{attachmentName}</p>
+                    <p className={`h7 attachmentName`}>{`${attachmentName} - ${attachmentSize}kb`}`}</p>
                     {/* <p className={`h7 attachmentDetails`}>{`${attachmentType} - ${attachmentSize}kb`}</p> */}
                 </div>
+                {/* <div className={`userTyping`}><p className='typingText'>{`Tizio is typing...`}</p></div> */}
+                <div className={`${displayTyping} userTyping`}><p className='h7 typingText'>{`${this.props.storeUserTo.nickname} is typing...`}</p></div>
             </div>
         )
     }
