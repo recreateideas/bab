@@ -8,10 +8,10 @@ const mapStateToProps = (state) => {
         storeUser: state.user,
         _emptyUser: {
             loggedIn: false,
-            ID:'',
+            customId:'',
             loginEmail:'',
             loginPassword:'',
-            nickName: '',
+            nickname: '',
             registerEmail:'',
             passWord:'',
             confirmPassWord:'',

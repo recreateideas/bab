@@ -39,7 +39,7 @@ $message-received-color: #bcd0cd;
     #messagesAndUsers {
         display: flex;
         flex-direction: column;
-        .userTo{
+        .receiver{
             // background-color: #E7F1F5;
             // background-color: #484D84;
             background-color: #30324A;
@@ -57,7 +57,7 @@ $message-received-color: #bcd0cd;
             padding-top: 20px;
             padding-left: 10px;
             display: flex;
-            .userToTitle{
+            .receiverTitle{
                 padding-left: 10px;
                 color: white;
                 font-size: 22px;

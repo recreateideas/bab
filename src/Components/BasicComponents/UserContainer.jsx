@@ -9,7 +9,7 @@ class UserContainer extends React.Component {
 
     render() {
         return (
-            <div id={this.props.containerId} className={`${this.props.addClass} userContainer`} onClick={this.props.click} data-customid={this.props.customID} data-nickname={this.props.nickname}>
+            <div id={this.props.containerId} className={`${this.props.addClass} userContainer`} onClick={this.props.click} data-customid={this.props.customId} data-nickname={this.props.nickname}>
                 <div className='connectedBadge'>
                     <div className={`connectedCircle ${this.props.activeUser}`}></div>
                 </div>
@@ -28,6 +28,7 @@ UserContainer.propTypes = {
     nickname: PropTypes.string,
     lastActive: PropTypes.string,
     click: PropTypes.func,
+    customId: PropTypes.string
 };
 
 

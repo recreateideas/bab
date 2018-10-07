@@ -8,19 +8,19 @@ import { dbDisconnect,getMessageHistory } from './DBClientUtils';
 const loginUser = (component, id, email, nickname) => {
     console.log('log me in');
     component.props.loginUserToStore(true);
-    component.props.recordUserDetailsToStore('ID', id);
+    component.props.recordUserDetailsToStore('customId', id);
     component.props.recordUserDetailsToStore('loginEmail', email);
-    component.props.recordUserDetailsToStore('nickName', nickname);
+    component.props.recordUserDetailsToStore('nickname', nickname);
 };
 
 const handleLoginRejection = () => {
     console.log('rejected');
 };
 
-const loginProcess = async(component,{id, email, nickname}) =>{
-    loginUser(component, id, email, nickname);
-    await connectToSocket(component, id, nickname);
-    const messageHistory = await getMessageHistory(component, id);
+const loginProcess = async(component,{customId, email, nickname}) =>{
+    loginUser(component, customId, email, nickname);
+    await connectToSocket(component, customId, nickname);
+    const messageHistory = await getMessageHistory(component, customId);
     //check here
     return messageHistory;
 };
@@ -37,10 +37,11 @@ const sendLoginRequest = async (e, component, validated) => {
             const res = await axios.post(`${process.env.REMOTE_HOST}:${process.env.REMOTE_PORT}/users/login`,{details: loginDetails})
             if (res.data.userFound) {
                 const userInfo = {
-                    id: res.data.userDetails[0]._id,
+                    customId: res.data.userDetails[0]._id,
                     email: res.data.userDetails[0].email,
                     nickname: res.data.userDetails[0].nickname,
                 };
+                console.log(userInfo);
                 return await loginProcess(component,userInfo);
             }
             else handleLoginRejection();

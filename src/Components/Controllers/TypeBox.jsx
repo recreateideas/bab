@@ -17,7 +17,7 @@ class TypeBox extends React.Component {
                 content: '',
                 attachment:[],
                 date: '',
-                userTo: {
+                receiver: {
                     customId: '5b8b583e3b30be0bfc50f7ab',
                     nickname: 'massimilianoazzolini',
                 }
@@ -26,9 +26,9 @@ class TypeBox extends React.Component {
     }
 
     componentWillReceiveProps(nextProps){
-        if(nextProps.storeUserTo){
+        if(nextProps.storeReceiver){
             this.setState({
-                message: {...this.state.message, userTo : Object.assign({}, nextProps.storeUserTo)}
+                message: {...this.state.message, receiver : Object.assign({}, nextProps.storeReceiver)}
             });
         }
     }
@@ -47,10 +47,10 @@ class TypeBox extends React.Component {
             this.sendMessage();
         } else {
             const sender = {
-                customId: this.props.storeUser.ID,
-                nickname: this.props.storeUser.nickName,
+                customId: this.props.storeUser.customId,
+                nickname: this.props.storeUser.nickname,
             }
-            emitUserTyping(sender,this.props.storeUserTo);
+            emitUserTyping(sender,this.props.storeReceiver);
         }
     }
 
@@ -60,7 +60,8 @@ class TypeBox extends React.Component {
     // console.log(attachment[0]);
         if (content !== '' || (attachment && attachment[0])) {
             console.log('send');
-            emitMessage({customId: this.props.storeUser.ID, nickname: this.props.storeUser.nickName},this.state.message);
+            
+            emitMessage({customId: this.props.storeUser.customId, nickname: this.props.storeUser.nickname},this.state.message);
         }
         this.setState({ message: { ...this.state.message, content: '', date: '', attachment:[] } });
     }
@@ -82,7 +83,7 @@ class TypeBox extends React.Component {
         // const attachmentType = this.state.message.attachment && this.state.message.attachment[0] ? this.state.message.attachment[0].type : '';
         const attachmentSize = this.state.message.attachment && this.state.message.attachment[0] ? this.state.message.attachment[0].size : '';
         const displayAttachment = this.state.message.attachment && this.state.message.attachment.length > 0 ? 'show' : 'hidden'; 
-        const displayTyping = this.props.storeUserTo.typing === true ? 'show' : 'hidden'; 
+        const displayTyping = this.props.storeReceiver.typing === true ? 'show' : 'hidden'; 
         return (
             <div id="typeBox" className="typeBox">
 
@@ -116,14 +117,14 @@ class TypeBox extends React.Component {
                     {/* <p className={`h7 attachmentDetails`}>{`${attachmentType} - ${attachmentSize}kb`}</p> */}
                 </div>
                 {/* <div className={`userTyping`}><p className='typingText'>{`Tizio is typing...`}</p></div> */}
-                <div className={`${displayTyping} userTyping`}><p className='h7 typingText'>{`${this.props.storeUserTo.nickname} is typing...`}</p></div>
+                <div className={`${displayTyping} userTyping`}><p className='h7 typingText'>{`${this.props.storeReceiver.nickname} is typing...`}</p></div>
             </div>
         )
     }
 };
 
 TypeBox.propTypes = {
-    storeUserTo: PropTypes.object,
+    storeReceiver: PropTypes.object,
     storeUser: PropTypes.object,
     pushMessageToHistory: PropTypes.func,
 };

@@ -8,7 +8,7 @@ const share = (share = initialState.share, action) => {
         case constants.SET_USERS:
             return Object.assign({}, share, { ...share, [action.usersType]: action.data });
         case constants.SET_USER_TO:
-            return Object.assign({}, share, { ...share, userTo: action.userTo });
+            return Object.assign({}, share, { ...share, receiver: action.receiver });
         case constants.PUSH_MESSAGE:
             if(action.message.length && action.message.length > 0){
                 messageHistory = share.chats && share.chats[action.message[0].receiverId] ? share.chats[action.message[0].receiverId].messages : [];
@@ -39,7 +39,7 @@ const share = (share = initialState.share, action) => {
         case constants.LOAD_LOCALSTORAGE_MESSASGES:
             return Object.assign({}, share, { ...share, chats: action.chats });
         case constants.SET_TYPING_STATUS:
-            return Object.assign({}, share, { ...share, userTo: {...share.userTo, typing: action.typing }});
+            return Object.assign({}, share, { ...share, receiver: {...share.receiver, typing: action.typing }});
         default:
             return Object.assign({}, share, obj);
     }

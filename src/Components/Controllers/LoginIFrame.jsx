@@ -40,7 +40,7 @@ class LoginIFrame extends React.Component {
     async Login(e) {
         const validated = this.validateLoginForSubmission();
         const messageHistory = await sendLoginRequest(e, this, validated);
-        const formattedMessages = formatMessages(this.props.storeUser.ID, messageHistory);
+        const formattedMessages = formatMessages(this.props.storeUser.customId, messageHistory);
         console.log(formattedMessages);
         localStorage.setItem('chats', JSON.stringify(formattedMessages));
         this.props.loadLocalStorageMessagesToStore();
@@ -276,7 +276,7 @@ class LoginIFrame extends React.Component {
                                                 <FontAwesome name='user' size='2x' /*spin*/ className='registerFieldImg' />
                                             </div>
                                             <TextInput
-                                                inputId={'nickName'}
+                                                inputId={'nickname'}
                                                 change={this.recordUserDetails.bind(this)}
                                                 value={this.props.storeUser.nickName || ''}
                                                 label={'nickname'}

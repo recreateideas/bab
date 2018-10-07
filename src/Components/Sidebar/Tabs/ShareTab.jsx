@@ -9,7 +9,7 @@ class ShareTab extends React.Component {
 
     renderMessageBoxes(chat, receiver,index) {
         // if(receiver !== '' && receiver !== undefined){
-            let isActiveBox = this.props.storeUserTo.customId === receiver ? 'show' : 'hidden';
+            let isActiveBox = this.props.storeReceiver.customId === receiver ? 'show' : 'hidden';
             // console.log(receiver);
             return (
                 <MessageBox
@@ -40,7 +40,7 @@ class ShareTab extends React.Component {
 
 ShareTab.propTypes = {
     storeChats: PropTypes.oneOfType([PropTypes.object,PropTypes.array]),
-    storeUserTo: PropTypes.object,
+    storeReceiver: PropTypes.object,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ShareTab);

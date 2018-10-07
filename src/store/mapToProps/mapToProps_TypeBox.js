@@ -3,7 +3,7 @@ import constants from '../constants';
 const mapStateToProps = (state) => {
     return {
         storeUser: state.user,
-        storeUserTo: state.share.userTo,
+        storeReceiver: state.share.receiver,
     }
 }
 

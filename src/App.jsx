@@ -24,7 +24,7 @@ class App extends React.Component {
         if (user) {
             console.log('welcome back chimp!');
             this.props.recordUserObjectToStore(user);
-            connectToSocket(this, user.ID,user.nickName);
+            connectToSocket(this, user.customId, user.nickname);
             this.props.loadLocalStorageMessagesToStore();
             // update messages with waitingRoom
         }

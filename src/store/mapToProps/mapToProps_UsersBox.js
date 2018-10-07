@@ -5,17 +5,17 @@ const mapStateToProps = (state) => {
     return {
         storeAllUsers: state.share.allUsers,
         storeActiveUsers: state.share.activeUsers,
-        storeUserTo: state.share.userTo,
+        storeReceiver: state.share.receiver,
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     
     return {
-        setUserToToStore: (userTo) => {
+        setReceiverToStore: (receiver) => {
             const action = {
                 type: constants.SET_USER_TO,
-                userTo
+                receiver
             }
             dispatch(action) 
         }

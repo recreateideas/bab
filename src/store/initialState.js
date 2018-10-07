@@ -42,10 +42,10 @@ const initialState = {
     },
     user:{
         loggedIn: false,
-        ID:'',
+        customId:'',
         loginEmail:'',
         loginPassword:'',
-        nickName: '',
+        nickname: '',
         registerEmail:'',
         passWord:'',
         confirmPassWord:'',
@@ -62,7 +62,7 @@ const initialState = {
         chats:[],
         activeChatId:'',
         chatRooms:[],
-        userTo:{
+        receiver:{
             customId: '',
             nickname: '',
             typing: false,

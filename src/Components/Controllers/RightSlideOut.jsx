@@ -118,7 +118,7 @@ class RightSlideOut extends Component {
                             </li>
                             <li>
                                 <div id='nicknameWrapper' className={`${hideLoggedIn}`}>
-                                    <p id='nickname'>{this.props.storeUser.nickName}</p>
+                                    <p id='nickname'>{this.props.storeUser.nickname}</p>
                                 </div>
                             </li>
                         </ul>
@@ -184,6 +184,7 @@ RightSlideOut.propTypes = {
     decreaseFont: PropTypes.func,
     increaseFont: PropTypes.func,
     fontSize: PropTypes.number,
+    storeUser: PropTypes.object,
 };
 
 export default connect(

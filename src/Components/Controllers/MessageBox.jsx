@@ -74,14 +74,14 @@ class MessageBox extends React.Component {
     }
 
     render() {
-        // console.log(this.props.storeUserTo);
-        const activeUser = this.isUserActive(this.props.storeUserTo.customId) ? 'activeUser' : 'inactiveUser';
-        const status = this.isUserActive(this.props.storeUserTo.customId) ? '(online)' : '(offline)';
+        // console.log(this.props.storeReceiver);
+        const activeUser = this.isUserActive(this.props.storeReceiver.customId) ? 'activeUser' : 'inactiveUser';
+        const status = this.isUserActive(this.props.storeReceiver.customId) ? '(online)' : '(offline)';
         return (
             <div className='messageBoxWrapper'>
-                <div className='userTo'>
+                <div className='receiver'>
                     <div className={`connectedCircle big ${activeUser}`}></div>
-                    <p className={`h7 userToTitle`}>{this.props.storeUserTo ? this.props.storeUserTo.nickname : 'unknown'}</p>
+                    <p className={`h7 receiverTitle`}>{this.props.storeReceiver ? this.props.storeReceiver.nickname : 'unknown'}</p>
                     <p className='statusTitle'>{` ${status}`}</p>
                 </div>
                 <div id="messageBox" className={`${this.props.addClass} messageBox`}>
@@ -98,7 +98,7 @@ class MessageBox extends React.Component {
 
 MessageBox.propTypes = {
     storeActiveUsers: PropTypes.array,
-    storeUserTo: PropTypes.object,
+    storeReceiver: PropTypes.object,
     storeChats: PropTypes.object,
 };
 

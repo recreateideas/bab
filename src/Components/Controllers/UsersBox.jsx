@@ -9,25 +9,26 @@ class UsersBox extends React.Component {
     constructor(props) {
         super(props);
         this.state={
-            isUserTo: '',
+            isReceiver: '',
             customId: '',
         };
     }
 
     componentWillReceiveProps(nextProps){
-        if(nextProps.isUserTo){
-            this.setState({isUserTo: nextProps.isUserTo});
+        if(nextProps.isReceiver){
+            this.setState({isReceiver: nextProps.isReceiver});
         }
     }
 
     userOnClick(e){
         e.stopPropagation();
-        const userTo = {
+        const receiver = {
             customId: e.currentTarget.dataset.customid,
             nickname: e.currentTarget.dataset.nickname,
         }
-        this.props.setUserToToStore(userTo);
-        this.setState({isUserTo: 'selectedUser'});
+        console.log('RECEIVER --> ',receiver);
+        this.props.setReceiverToStore(receiver);
+        this.setState({isReceiver: 'selectedUser'});
         // add CSS
     }
 
@@ -42,7 +43,7 @@ class UsersBox extends React.Component {
         let rowClass = index === 0 ? 'firstUser' : '';
         rowClass = (index % 2) === 1 ? (rowClass+' oddUser') : (rowClass+' evenUser');
         const activeUser = this.isUserActive(user.customId) ? 'activeUser' : 'inactiveUser';
-        const isSelected = user.customId === this.props.storeUserTo.customId ? 'selectedUser' : '';
+        const isSelected = user.customId === this.props.storeReceiver.customId ? 'selectedUser' : '';
         return (
             <li key={index} className={`${rowClass} ${isSelected}`}>
                 <UserContainer
@@ -53,7 +54,7 @@ class UsersBox extends React.Component {
                     nickname={user.nickname}
                     lastActive={``}
                     activeUser={activeUser}
-                    customID={user.customId}
+                    customId={user.customId}
                 />
             </li>
         )
@@ -76,7 +77,7 @@ class UsersBox extends React.Component {
 UsersBox.propTypes = {
     storeAllUsers: PropTypes.array,
     storeActiveUsers: PropTypes.array,
-    storeUserTo: PropTypes.object,
+    storeReceiver: PropTypes.object,
 }
 
 

@@ -23,6 +23,7 @@ const connectToSocket = (component, customId, nickname) => {
     socket.on('otherUserIsTyping', (data) => {
         // console.log(data.sender.nickname);
         // console.log(`${data.sender.nickname} has ${data.activity} typing...`);
+        console.log(component);
         component.props.setTypingStatusToStore(data.sender, data.activity);
     });
 
@@ -60,6 +61,8 @@ const connectToSocket = (component, customId, nickname) => {
 const performConnectionToSocket = async (socket, component, customId, nickname) => {
     try{
         console.log('performing connection to socket...');
+        console.log(customId);
+        console.log(nickname);
         await findAllUsers(component);
         await getMessageHistory(component);
         await socket.emit('updateClientInfo', { customId, nickname });        /* TEST --> socket.emit('updateClientInfo', { customId:'123456789', nickname: 'second_test_user2' }); */
@@ -89,8 +92,9 @@ const emitUserTyping = (sender, receiver) => {
 
 const emitMessage = (sender, message) => {
     console.log(message);
-    console.log(sender);
-    socket.emit('thisUserIsTyping', { sender, receiver: message.userTo, activity: 'finished' });
+    console.log('sender --> ',sender);
+    console.log('receiver ->>', message.receiver);
+    socket.emit('thisUserIsTyping', { sender, receiver: message.receiver, activity: 'finished' });
     socket.emit('sendMessageToClient', { senderId: sender.customId, senderNickname: sender.nickname, message });
 };
 
