@@ -141,7 +141,7 @@ class QueryTab extends React.Component {
                             <Col xs={6} className='selectcollectionWrapper'>
                                 <SelectCollection id='selectcollection' change={this.updateCollection.bind(this)} />
                             </Col>
-                            <Col xs={6}>
+                            <Col xs={6} style={{width: 'fit-content'}}>
                                 <QueryType
                                     id='querytype'
                                     change={this.updateQueryType.bind(this)}

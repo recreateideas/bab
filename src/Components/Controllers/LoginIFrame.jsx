@@ -258,7 +258,6 @@ class LoginIFrame extends React.Component {
                                         />
                                     </li>
                                 </ul>
-                                {/* </div> */}
                             </Col>
                             <Col id='registerCol' className='iframeCol' xs={6} md={6}>
                                 <div className='iframeColHeader'>
@@ -357,7 +356,6 @@ class LoginIFrame extends React.Component {
                                         </div>
                                     </li>
                                 </ul>
-                                {/* </div> */}
                             </Col>
                         </Row>
                     </Grid>
