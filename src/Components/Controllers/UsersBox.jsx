@@ -48,7 +48,6 @@ class UsersBox extends React.Component {
             <li key={index} className={`${rowClass} ${isSelected}`}>
                 <UserContainer
                     containerId={`user_${index}`}
-                    chatId={this.props.storeChatId}
                     addClass=''
                     click={this.userOnClick.bind(this)}
                     nickname={user.nickname}

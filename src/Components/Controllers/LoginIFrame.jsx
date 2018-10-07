@@ -367,7 +367,7 @@ class LoginIFrame extends React.Component {
                                 <Col xs={12} id='loggedInCol'>
                                     <ul>
                                         <li>
-                                            <h4>You're Logged in as <div className='greenText'>{this.props.storeUser.nickName}</div></h4>
+                                            <h4>You're logged in as <div className='greenText'>{this.props.storeUser.nickname}</div></h4>
                                         </li>
                                         <li>
                                             <img src={loggedInImage} className='loggedInImage' />

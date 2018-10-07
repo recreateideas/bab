@@ -1,5 +1,4 @@
 import constants from '../constants';
-import store from '../../store';
 
 const mapStateToProps = (state) => {
     // console.log('@@ CURSOR -> mapStateToProps');
