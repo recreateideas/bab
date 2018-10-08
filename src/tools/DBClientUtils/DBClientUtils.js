@@ -23,6 +23,7 @@ const dbDisconnect = async (e, component) => {
 
 const dbConnect = async (e, component) => {
     e.stopPropagation();
+    let DBcollections = [];
     const dbConnectParams = {
         connection: component.props.storeConnection
     };
@@ -37,16 +38,21 @@ const dbConnect = async (e, component) => {
                 connectionType: 'connect',
                 params: dbConnectParams
             })
-        const DBcollections = component.mapToArray(res.data.Collections, 'name');
+        console.log(res.data);
+        if (res.data && res.data.Collections) {
+            DBcollections = component.mapToArray(res.data.Collections, 'name');
+        }
         console.log(DBcollections);
+        component.props.setCollectionConfigToStore(DBcollections);
+        component.props.setCollectionToStore(DBcollections[0]);
         component.props.setConnectionParametersToStore('connectionStatus', res.data.status);
         component.props.setConnectionParametersToStore('connectionMessage', res.data.message);
         component.props.setConnectionParametersToStore('connectionWarning', res.data.warning);
-        component.props.setCollectionConfigToStore(DBcollections);
-        component.props.setCollectionToStore(DBcollections[0]);
+
         if (res.data) component.props.setConnectionStateToStore(res.data.isConnected);
         else component.props.setConnectionStateToStore(false);
-        return res.data.Collections;
+        // return res.data.Collections;
+        return DBcollections;
     }
     catch (err) {
         console.log(`DBCLientUtils -> dbConnect -> ${err}`);
@@ -55,7 +61,7 @@ const dbConnect = async (e, component) => {
 };
 
 const fetchResults = async component => {
-    try{
+    try {
         const db = component.props.storeDB;
         const collection = component.props.storeCollection;
         const mongo_object = component.props.storeMongoObject;
@@ -81,10 +87,10 @@ const fetchResults = async component => {
                 component.props.setQueryMessageToStore('queryError', 'Something went wrong');
                 component.props.setQueryMessageToStore('queryMessage', '');
             }
-    
+
         }
-    } catch(err){
-      console.log(`DBCLientUtils -> fetchResults -> ${err}`);
+    } catch (err) {
+        console.log(`DBCLientUtils -> fetchResults -> ${err}`);
     }
 };
 
@@ -92,7 +98,7 @@ const updateUserField = async (payload, component) => {
     try {
         const res = await axios.post(`${process.env.REMOTE_HOST}:${process.env.REMOTE_PORT}/users/update`, payload);
         console.log(res);
-    } catch(err){
+    } catch (err) {
         console.log(`DBCLientUtils -> updateUserField() -> Error while -> ${err}`);
     }
 }
@@ -107,17 +113,17 @@ const findAllUsers = async component => {
     }
 };
 
-const getMessageHistory = async (component,userId) => {
+const getMessageHistory = async (component, userId) => {
     try {
-        if(userId){
-            console.log({userId});
+        if (userId) {
+            console.log({ userId });
             console.log(component);
-            const res = await axios.post(`${process.env.REMOTE_HOST}:${process.env.REMOTE_PORT}/messages/find/`, {userId});
-            if(res.data.messagesFound){
+            const res = await axios.post(`${process.env.REMOTE_HOST}:${process.env.REMOTE_PORT}/messages/find/`, { userId });
+            if (res.data.messagesFound) {
                 // console.log(res.data);
                 return res.data.messages;
             }
-            return; 
+            return;
         }
     }
     catch (err) {
