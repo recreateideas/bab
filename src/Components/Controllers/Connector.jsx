@@ -294,13 +294,28 @@ class Connector extends React.Component {
                             <Col xs={12} sm={7}><p className='h7'>SSH Private Key</p></Col>
                         </Row>
 
-                        <Row className='connectorRow'><Col xs={12} sm={5}><p className='h7'>Username</p></Col><Col xs={12} sm={7}></Col></Row>
+                        <Row className='connectorRow'>
+                            <Col xs={12} sm={5}>
+                            <TextInput
+                                    inputId={'remoteMongoUser'}
+                                    change={this.recordConnectionParams.bind(this)}
+                                    value={this.props.storeConnection.remoteMongoUser || ''}
+                                    label={'Username...'}
+                                    activeClass={enableInput}
+                                    disabled={this.props.storeConnection.isDBConnected}
+                                    // inputWidth={70}
+                                />
+                            </Col>
+                            <Col xs={12} sm={7}>
+                                <p className='h7'>DB Username</p>
+                            </Col>
+                        </Row>
                         <Row className='connectorRow'>
                             <Col xs={12} sm={5}>
                                 <TextInput
-                                    inputId={'userPassword'}
+                                    inputId={'remoteUserPassword'}
                                     change={this.recordConnectionParams.bind(this)}
-                                    value={this.props.storeConnection.userPassword || ''}
+                                    value={this.props.storeConnection.remoteUserPassword || ''}
                                     label={'User password...'}
                                     activeClass={enableInput}
                                     disabled={this.props.storeConnection.isDBConnected}
@@ -308,7 +323,7 @@ class Connector extends React.Component {
                                     autoComplete='current-password'
                                 />
                             </Col>
-                            <Col xs={12} sm={7}><p className='h7'>User password</p></Col>
+                            <Col xs={12} sm={7}><p className='h7'>DB User password</p></Col>
                         </Row>
                         <Row className='connectorRow'><Col xs={12} sm={6}><p className='h7'>SSH Username</p></Col><Col xs={12} sm={6}></Col></Row>
                         <Row className='connectorRow'>

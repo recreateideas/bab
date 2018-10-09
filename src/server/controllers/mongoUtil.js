@@ -3,58 +3,37 @@ const mongodb = require('mongodb'),
     Server = mongodb.Server,
     fs = require('fs'),
     exec = require("child_process").exec;
-    // http = require('http'),
-    // httpProxy = require('http-proxy'),
-    // url = require('url');
+assert = require('assert');
+// http = require('http'),
+// httpProxy = require('http-proxy'),
+// url = require('url');
 
-let _db, _dbName, _mongoClient, _mongoPort, _hostName;
+let _remoteMongoInstance, _db, _dbName, _mongoClient, _mongoPort, _hostName;
 
 module.exports = {
 
     connectToDB: (params, callback) => {
-        _dbName = params.connection.db;
-        _hostName = params.connection.remoteHostName;
-        _mongoPort = params.connection.remoteMongoPort;
-        const remoteMongoInstance = params.connection.remoteMongoInstance;
-        const mongoUrl = `${remoteMongoInstance}://${_hostName}:${_mongoPort}`;
-        // const key = [fs.readFileSync(`uploads/sshKeys/baboonUser11/sshKey`)];
-        // const key ='';
-        // createProxy();
-        // connectToVpn();
-
-        // const ssh = false;
-        // if (ssh === true) {
-        //     const configSSH = {
-        //         username: 'claudio',
-        //         passphrase: 'Oidualc2.',
-        //         host: '35.189.29.62',
-        //         port: 3306,
-        //         dstHost: '35.189.29.62',
-        //         dstPort: 27017,
-        //         localHost: '127.0.0.1',
-        //         localPort: 27000,
-        //         privateKey: key
-        //     };
-
-        //     tunnel = tunnel(configSSH, (err, server) => {
-        //         if (err) {
-        //             console.log("SSH connection error: " + err);
-        //         }
-        //         // console.log("Server: ", server);
-        //         mongoConnect(server,mongoUrl,callback);
-        //     });
-        // } else {
-
+        try {
+            _dbName = params.connection.db;
+            _hostName = params.connection.remoteHostName;
+            _mongoPort = params.connection.remoteMongoPort;
+            _mongoUser = params.connection.remoteMongoUser ? `${params.connection.remoteMongoUser}:` : '';
+            _mongoPassword = params.connection.remoteUserPassword ? `${params.connection.remoteUserPassword}@` : '';
+            _remoteMongoInstance = params.connection.remoteMongoInstance;
+            const mongoUrl = `${_remoteMongoInstance}://${_mongoUser}${_mongoPassword}${_hostName}:${_mongoPort}/${_dbName}`;
             const options = {
                 auto_reconnect: false,
                 ssl: false,
-                sslPass: 'Oidualc2.',
+                // SSH ??
+                // sslPass: 'Oidualc2.',
                 // sslKey: key,
             };
             const server = new Server(_hostName, _mongoPort, options)
-            mongoConnect(server,mongoUrl,callback);
-        // }
-
+            mongoConnect(server, mongoUrl, callback);
+        } catch (err) {
+            console.log(err);
+            callback(err);
+        }
     },
 
     getClient: () => {
@@ -78,16 +57,14 @@ module.exports = {
     }
 };
 
-const mongoConnect = (server,mongoUrl,callback) => {
+const mongoConnect = (server, mongoUrl, callback) => {
     try {
-        _mongoClient = new MongoClient(server);
-        // console.log(_mongoClient);
-        _mongoClient.connect((err, client) => {
+        _mongoClient = MongoClient;
+        _mongoClient.connect(mongoUrl, (err, client) => {
             if (client) {
                 _db = client.db(_dbName);
                 _mongoClient = client;
                 console.log(`Connected to db...${mongoUrl}`);
-                // return callback(err);
             }
             if (err) console.log(err);
             return callback(err);
@@ -97,6 +74,18 @@ const mongoConnect = (server,mongoUrl,callback) => {
         console.log(err);
     }
 };
+
+/*
+db.createUser( {
+    user: "claudio",
+    pwd: "Oidualc2.",
+    roles: [ { role: "root", db: "admin" } ]
+  }
+);
+*/
+
+
+
 
 // const createProxy = () =>{
 //     console.log('proxy');
@@ -136,7 +125,7 @@ const mongoConnect = (server,mongoUrl,callback) => {
 //     const conf = [fs.readFileSync(`uploads/client.ovpn`)];
 //     var cmd = `openvpn --config ${conf}&`;
 //     ovpnProcess = exec(cmd);
-    
+
 //     ovpnProcess.stdout.on('data', function(data) {
 //         console.log('stdout: ' + data);
 //     });
@@ -155,15 +144,15 @@ const mongoConnect = (server,mongoUrl,callback) => {
 //     //     console.log('DATA');
 //     //     console.log(data)
 //     // });
- 
+
 //     // openvpn.on('console-output', function(output) { //emits console output of openvpn instance as a line
 //     //     console.log('OUTPUT');
 //     //     console.log(output)
 //     // });
- 
+
 //     // openvpn.on('state-change', function(state) { //emits console output of openvpn state as a array
 //     //     console.log('STATE');
-        
+
 //     //     console.log(state)
 //     // });
 
