@@ -106,6 +106,7 @@ const updateUserField = async (payload, component) => {
 const findAllUsers = async component => {
     try {
         const res = await axios.get(`${process.env.REMOTE_HOST}:${process.env.REMOTE_PORT}/users/find/all`);
+        console.log(res.data.users);
         component.props.saveUsersToStore('allUsers', res.data.users);
     }
     catch (err) {
