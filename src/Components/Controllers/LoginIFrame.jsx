@@ -277,7 +277,7 @@ class LoginIFrame extends React.Component {
                                             <TextInput
                                                 inputId={'nickname'}
                                                 change={this.recordUserDetails.bind(this)}
-                                                value={this.props.storeUser.nickName || ''}
+                                                value={this.props.storeUser.nickname || ''}
                                                 label={'nickname'}
                                                 addClass='registerFields iframeFields'
                                             />

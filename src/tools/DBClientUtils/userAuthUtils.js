@@ -34,7 +34,8 @@ const sendLoginRequest = async (e, component, validated) => {
             password: userDetails.loginPassword
         }
         try {
-            const res = await axios.post(`${process.env.REMOTE_HOST}:${process.env.REMOTE_PORT}/users/login`,{details: loginDetails})
+            // console.log(`${process.env.REMOTE_HOST}:${process.env.REMOTE_PORT}/users/login`);
+            const res = await axios.post(`${process.env.REMOTE_HOST}:${process.env.REMOTE_PORT}/users/login`,{details: loginDetails});
             if (res.data.userFound) {
                 const userInfo = {
                     customId: res.data.userDetails[0]._id,
@@ -60,11 +61,12 @@ const sendRegisterRequest = async (e,component, validated) => {
     if (validated) {
         console.log(userDetails);
         const registerDetails = {
-            nickname: userDetails.nickName,
+            nickname: userDetails.nickname,
             email: userDetails.registerEmail,
             password: userDetails.passWord,
         }
         try {
+            console.log(`${process.env.REMOTE_HOST}:${process.env.REMOTE_PORT}/users/register`);
             const res = await axios.post(`${process.env.REMOTE_HOST}:${process.env.REMOTE_PORT}/users/register`,
                 {
                     details: registerDetails
@@ -72,7 +74,7 @@ const sendRegisterRequest = async (e,component, validated) => {
             console.log(res.data);
             const userInserted = res.data.userInserted;
             const userInfo = {
-                id: res.data._id,
+                customId: res.data._id,
                 email: res.data.email,
                 nickname: res.data.nickname,
             };

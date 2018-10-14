@@ -23,7 +23,7 @@ const connectToSocket = (component, customId, nickname) => {
     socket.on('otherUserIsTyping', (data) => {
         // console.log(data.sender.nickname);
         // console.log(`${data.sender.nickname} has ${data.activity} typing...`);
-        console.log(component);
+        // console.log(component);
         component.props.setTypingStatusToStore(data.sender, data.activity);
     });
 
@@ -74,7 +74,7 @@ const performConnectionToSocket = async (socket, component, customId, nickname) 
 };
 
 const connect = () => {
-    socket = io(`${process.env.REMOTE_HOST}:${process.env.REMOTE_SOCKET_PORT}`, { reconnection: true });
+    socket = io(`${process.env.REMOTE_SOCKET_HOST}:${process.env.REMOTE_SOCKET_PORT}`, { reconnection: true });
     return socket;
 };
 
